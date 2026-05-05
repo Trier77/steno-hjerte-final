@@ -1,15 +1,11 @@
-import krop from '../assets/kropudenbg.svg'
+import nyfront from "../assets/nyfront.png";
 
-function StartSide(){
-    return(
-        <>
-        <h1 className=" decoration-mist-600 decoration-2 text text[#fff]">do you see dis</h1>
-        <img src={krop} className="frontbg" width="1920px" height="1080px z-1" alt="" />
-        </>
-        
-        
-    )
+function StartSide() {
+  return (
+    <>
+      <h1 className="text-primary text-center text-4xl">Hjerteskærm</h1>
+    </>
+  );
 }
 
-
-export default StartSide
+export default StartSide;
