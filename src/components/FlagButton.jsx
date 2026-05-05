@@ -40,7 +40,7 @@ function FlagButton() {
     >
       <button
         onClick={() => handleSwitch(otherLang)}
-        className={`w-14 h-14 rounded-full overflow-hidden border-2 border-primary shadow-lg transition-all duration-500 ease-in-out
+        className={`w-14 h-14 rounded-full overflow-hidden  shadow-lg transition-all duration-500 ease-in-out
           ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"}`}
       >
         <img
@@ -52,7 +52,7 @@ function FlagButton() {
 
       <button
         onClick={() => setOpen(!open)}
-        className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary opacity-50 transition-opacity duration-500"
+        className="w-14 h-14 rounded-full overflow-hidden  opacity-50 transition-opacity duration-500"
       >
         <img
           src={flags[language]}
