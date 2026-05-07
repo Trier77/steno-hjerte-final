@@ -40,7 +40,7 @@ function StartSide() {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-bg">
       <FlagButton />
       {showVideo && (
         <VideoOverlay onClose={closeVideo} visible={videoVisible} />
@@ -89,7 +89,7 @@ function StartSide() {
         <NavButton   icon="play" label={t.hjerteknap.heading} onClick={openVideo} />
         <NavButton icon="quiz" label="Quiz" onClick={openQuiz} />
       </section>
-    </>
+    </div>
   );
 }
 
