@@ -1,11 +1,16 @@
 import BackButton from "../components/BackButton";
 import FlagButton from "../components/FlagButton";
+import TekstModul from "../components/TekstModul";
 
 function Blodsukker() {
-  <>
-    <h1>Du er havnet på blodsukker-siden</h1>
+  return(
+    <>
+    
     <FlagButton />
     <BackButton />
-  </>;
+    <TekstModul />
+  </>
+  );
+  
 }
 export default Blodsukker;
