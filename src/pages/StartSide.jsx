@@ -41,12 +41,16 @@ function StartSide() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <section className="left-0 top-0 relative">
+        <img src={krop} className="w-270 h-480" alt="" />
+
       <FlagButton />
       {showVideo && (
         <VideoOverlay onClose={closeVideo} visible={videoVisible} />
       )}
       {showQuiz && <QuizOverlay onClose={closeQuiz} visible={quizVisible} />}
-      <section className="flex flex-col items-center">
+
+      <section className="absolute top-20 left-1/2 -translate-x-1/2 flex flex-col items-center">
         <h1 key={language}
           style={{ animation: "fadeIn 0.6s ease" }}
           className="text-primary font-display text-center text-4xl font-semibold">
@@ -58,8 +62,7 @@ function StartSide() {
         key={language + "-body"}
         style={{ animation: "fadeIn 0.6s ease" }}>{t.startside.body}</p>
       </section>
-      <section className="left-0 top-0 relative">
-        <img src={krop} className="w-270 h-480" alt="" />
+      
         <HotspotButton
           className="depri-knap left-1/2 top-110"
           onClick={() => navigate("/depression")}
