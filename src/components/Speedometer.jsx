@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 const CX = 300;          // Centrum X
 const CY = 295;          // Centrum Y (bunden af halvkreds)
 const SEG_OUTER_R = 275; // Ydre kant af røde segmenter
-const SEG_INNER_R = 185; // Indre kant af røde segmenter
+const SEG_INNER_R = 177; // Indre kant af røde segmenter
 const TRACK_OUTER_R = 177; // Ydre kant af grå track
 const TRACK_INNER_R = 140; // Indre kant af grå track
 const DOT_R = 158;       // Radius hvor den blå cirkel kører
@@ -29,9 +29,9 @@ const arcPath = (cx, cy, outerR, innerR, startDeg, endDeg) => {
   const large = Math.abs(startDeg - endDeg) > 180 ? 1 : 0;
   return [
     `M ${fmt(oS.x)} ${fmt(oS.y)}`,
-    `A ${outerR} ${outerR} 0 ${large} 0 ${fmt(oE.x)} ${fmt(oE.y)}`,
+    `A ${outerR} ${outerR} 0 ${large} 1 ${fmt(oE.x)} ${fmt(oE.y)}`,
     `L ${fmt(iE.x)} ${fmt(iE.y)}`,
-    `A ${innerR} ${innerR} 0 ${large} 1 ${fmt(iS.x)} ${fmt(iS.y)}`,
+    `A ${innerR} ${innerR} 0 ${large} 0 ${fmt(iS.x)} ${fmt(iS.y)}`,
     "Z",
   ].join(" ");
 };
@@ -43,28 +43,27 @@ const labelArcD = (startDeg, endDeg) => {
   const s = polarToCart(CX, CY, LABEL_R, startDeg - margin);
   const e = polarToCart(CX, CY, LABEL_R, endDeg + margin);
   const fmt = (n) => n.toFixed(2);
-  return `M ${fmt(s.x)} ${fmt(s.y)} A ${LABEL_R} ${LABEL_R} 0 0 0 ${fmt(e.x)} ${fmt(e.y)}`;
+  return `M ${fmt(s.x)} ${fmt(s.y)} A ${LABEL_R} ${LABEL_R} 0 0 1 ${fmt(e.x)} ${fmt(e.y)}`;
 };
 
 // --- Segment-definitioner ---
 // startDeg > endDeg (vi bevæger os venstre mod højre = faldende grader)
 // Tilpas label og route til dit projekt
-// Opdater SEGMENTS fra 3 til 4
 const SEGMENTS = [
-  { id: 0, startDeg: 168, endDeg: 128, label: "Graviditet",              route: "/graviditet" },
-  { id: 1, startDeg: 122, endDeg: 80,  label: "Graviditetsdiabetes",     route: "/graviditetsdiabetes" },
-  { id: 2, startDeg: 74,  endDeg: 36,  label: "For tidlig fødsel",       route: "/foedsel" },
-  { id: 3, startDeg: 30,  endDeg: 8,   label: "Svangerskabsforgiftning", route: "/svangerskab" },
+  { id: 0, startDeg: 180, endDeg: 135, label: "Graviditet",              route: "/graviditet" },
+  { id: 1, startDeg: 135, endDeg: 90,  label: "Graviditetsdiabetes",     route: "/graviditetsdiabetes" },
+  { id: 2, startDeg: 90,  endDeg: 45,  label: "For tidlig fødsel",       route: "/foedsel" },
+  { id: 3, startDeg: 45,  endDeg: 0,   label: "Svangerskabsforgiftning", route: "/svangerskab" },
 ];
 
 // Flyt startpositionen til segment 0
-const [angle, setAngle] = useState(148);
+
 
 // --- Komponent ---
 function Speedometer()
  {
   const navigate = useNavigate();
-  const [angle, setAngle] = useState(137); // Startposition (i segment 0)
+  const [angle, setAngle] = useState(156); // Startposition (i segment 0)
   const svgRef = useRef(null);
   const isDragging = useRef(false);
 
@@ -83,7 +82,11 @@ function Speedometer()
     const svgY = ((clientY - rect.top) / rect.height) * 310;
     const a = Math.atan2(-(svgY - CY), svgX - CX) * (180 / Math.PI);
     // Klemmer til halvkredsens gyldige interval
-    return Math.max(5, Math.min(175, a));
+    return Math.max(6, Math.min(174, a));
+
+    //Sørger for at vi ikke kan komme v<->h uden forbi 0 og 180 grader
+  //   setAngle(prev => Math.abs(clamped - prev) > 90 ? prev : clamped);
+  // return null;
   }, []);
 
   const handleMouseDown = (e) => {
@@ -134,18 +137,29 @@ function Speedometer()
         ))}
       </defs>
 
-      {/* Grå cirkulær track – cirklens kørebane */}
-      <path
-        d={arcPath(CX, CY, TRACK_OUTER_R, TRACK_INNER_R, 175, 5)}
-        fill="#c8cdd6"
-      />
+            
 
+     {/* Grå track – 4 dele der matcher de røde segmenter */}
+      {SEGMENTS.map((seg) => (
+        <path
+          key={`track-${seg.id}`}
+          d={arcPath(CX, CY, TRACK_OUTER_R, TRACK_INNER_R, seg.startDeg, seg.endDeg)}
+          fill="#c8cdd6"
+          stroke="white" strokeWidth={2}
+        />
+      ))}
+      
+      
       {/* Koncentriske dekorationsringe i det indre område */}
-      <circle cx={CX} cy={CY} r={125} fill="none" stroke="#c8cdd6" strokeWidth="1.5" opacity="0.5" />
-      <circle cx={CX} cy={CY} r={110} fill="none" stroke="#c8cdd6" strokeWidth="1"   opacity="0.35" />
+      
+      {/* <circle cx={CX} cy={CY} r={275} fill="none" stroke="#9aa0b0" strokeWidth="2"   opacity="0.6" />
+      <circle cx={CX} cy={CY} r={177} fill="none" stroke="#9aa0b0" strokeWidth="1.5" opacity="0.4" />
+      <circle cx={CX} cy={CY} r={140} fill="none" stroke="#9aa0b0" strokeWidth="1"  opacity="0.3" /> */}
+
+      
 
       {/* Hvide skillelinjer ved gap-vinklerne */}
-      {[127, 121, 79, 73, 35, 29].map((deg) => {
+      {/* {[134, 90, 46].map((deg) => {
         const inner = polarToCart(CX, CY, TRACK_INNER_R, deg);
         const outer = polarToCart(CX, CY, SEG_OUTER_R, deg);
         return (
@@ -154,10 +168,10 @@ function Speedometer()
             x1={inner.x} y1={inner.y}
             x2={outer.x} y2={outer.y}
             stroke="white"
-            strokeWidth="2"
+            strokeWidth="3"
           />
         );
-      })}
+      })} */}
 
       {/* Røde segmenter – skifter farve når cirklen er inden for */}
       {SEGMENTS.map((seg) => (
@@ -165,6 +179,7 @@ function Speedometer()
           key={seg.id}
           d={arcPath(CX, CY, SEG_OUTER_R, SEG_INNER_R, seg.startDeg, seg.endDeg)}
           fill={activeSegment === seg.id ? "#f2efe0" : "#8b1e2d"}
+          stroke="white" strokeWidth={2}
           style={{ transition: "fill 0.35s ease", cursor: "pointer" }}
           onClick={() => navigate(seg.route)}
         />
