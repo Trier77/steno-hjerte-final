@@ -88,7 +88,7 @@ const translations = {
       ],
     },
     hormoner: {
-      dragHint: "← Træk →",
+      dragHint: "← Alder →",
       stages: [
         {
           heading: "Hormoner og kvinders hjerter",
@@ -306,7 +306,7 @@ const translations = {
       ],
     },
     hormoner: {
-      dragHint: "← Drag →",
+      dragHint: "← Age →",
       stages: [
         {
           heading: "Hormones and women's hearts",
