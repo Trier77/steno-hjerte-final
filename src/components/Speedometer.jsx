@@ -49,46 +49,53 @@ const labelArcD = (startDeg, endDeg) => {
 // --- Segment-definitioner ---
 // startDeg > endDeg (vi bevæger os venstre mod højre = faldende grader)
 // Tilpas label og route til dit projekt
-const SEGMENTS = [
-  {
-    id: 0,
-    startDeg: 180,
-    endDeg: 135,
-    label: "Graviditet",
-    route: "/graviditet",
-  },
-  {
-    id: 1,
-    startDeg: 135,
-    endDeg: 90,
-    label: "Graviditetsdiabetes",
-    route: "/graviditetsdiabetes",
-  },
-  {
-    id: 2,
-    startDeg: 90,
-    endDeg: 45,
-    label: "For tidlig fødsel",
-    route: "/foedsel",
-  },
-  {
-    id: 3,
-    startDeg: 45,
-    endDeg: 0,
-    label: "Svangerskabsforgiftning",
-    route: "/svangerskab",
-  },
-];
+// const SEGMENTS = [
+//   {
+//     id: 0,
+//     startDeg: 180,
+//     endDeg: 135,
+//     label: "Graviditet",
+//     route: "/graviditet",
+//   },
+//   {
+//     id: 1,
+//     startDeg: 135,
+//     endDeg: 90,
+//     label: "Graviditetsdiabetes",
+//     route: "/graviditetsdiabetes",
+//   },
+//   {
+//     id: 2,
+//     startDeg: 90,
+//     endDeg: 45,
+//     label: "For tidlig fødsel",
+//     route: "/foedsel",
+//   },
+//   {
+//     id: 3,
+//     startDeg: 45,
+//     endDeg: 0,
+//     label: "Svangerskabsforgiftning",
+//     route: "/svangerskab",
+//   },
+// ];
 
 // Flyt startpositionen til segment 0
 
 // --- Komponent ---
-function Speedometer() {
+function Speedometer({onSegmentChange, labels =[]}) {
   const navigate = useNavigate();
   const [angle, setAngle] = useState(156); // Startposition (i segment 0)
   const svgRef = useRef(null);
   const isDragging = useRef(false);
 
+  const SEGMENTS = [
+    { id: 0, startDeg: 180, endDeg: 135, label: labels[0] ?? "Graviditet",              route: "/graviditet" },
+    { id: 1, startDeg: 135, endDeg: 90,  label: labels[1] ?? "Graviditetsdiabetes",     route: "/graviditetsdiabetes" },
+    { id: 2, startDeg: 90,  endDeg: 45,  label: labels[2] ?? "For tidlig fødsel",       route: "/foedsel" },
+    { id: 3, startDeg: 45,  endDeg: 0,   label: labels[3] ?? "Svangerskabsforgiftning", route: "/svangerskab" },
+  ];
+  
   // Finder hvilket segment den blå cirkel er i (eller null)
   const activeSegment =
     SEGMENTS.find((s) => angle <= s.startDeg && angle >= s.endDeg)?.id ?? null;
@@ -96,7 +103,7 @@ function Speedometer() {
   // Omregner museposition til vinkel i SVG-koordinater
   const getAngleFromEvent = useCallback((e) => {
     const svg = svgRef.current;
-    if (!svg) return null;
+    if (!svg) return;
     const rect = svg.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -104,11 +111,11 @@ function Speedometer() {
     const svgY = ((clientY - rect.top) / rect.height) * 310;
     const a = Math.atan2(-(svgY - CY), svgX - CX) * (180 / Math.PI);
     // Klemmer til halvkredsens gyldige interval
-    return Math.max(6, Math.min(174, a));
+    const clamped = Math.max(6, Math.min(174, a));
 
     //Sørger for at vi ikke kan komme v<->h uden forbi 0 og 180 grader
-    //   setAngle(prev => Math.abs(clamped - prev) > 90 ? prev : clamped);
-    // return null;
+    setAngle(prev => Math.abs(clamped - prev) > 90 ? prev : clamped);
+  
   }, []);
 
   const handleMouseDown = (e) => {
@@ -116,11 +123,14 @@ function Speedometer() {
     isDragging.current = true;
   };
 
+  useEffect(()=> {
+     onSegmentChange?.(activeSegment);
+  },[activeSegment, onSegmentChange]);
+
   useEffect(() => {
-    const onMove = (e) => {
+      const onMove = (e) => {
       if (!isDragging.current) return;
-      const a = getAngleFromEvent(e);
-      if (a !== null) setAngle(a);
+      getAngleFromEvent(e);
     };
     const onUp = () => {
       isDragging.current = false;
@@ -137,7 +147,7 @@ function Speedometer() {
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("touchend", onUp);
     };
-  }, [getAngleFromEvent]);
+  }, [getAngleFromEvent,]); 
 
   const dotPos = polarToCart(CX, CY, DOT_R, angle);
 
@@ -157,10 +167,18 @@ function Speedometer() {
             d={labelArcD(seg.startDeg, seg.endDeg)}
           />
         ))}
+        <filter id="round-corners">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feColorMatrix in="blur" type="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+          result="rounded"/>
+        <feComposite in="SourceGraphic" in2="rounded" operator="atop"/>
+        </filter>
       </defs>
 
       {/* Grå track – 4 dele der matcher de røde segmenter */}
-      {SEGMENTS.map((seg) => (
+      <g filter="url(#round-corners)">
+{SEGMENTS.map((seg) => (
         <path
           key={`track-${seg.id}`}
           d={arcPath(
@@ -172,8 +190,9 @@ function Speedometer() {
             seg.endDeg,
           )}
           fill="#c8cdd6"
-          stroke="white"
-          strokeWidth={2}
+          // stroke="white"
+          // strokeWidth={2}
+           filter="url(#round-corners)"
         />
       ))}
       
@@ -191,12 +210,45 @@ function Speedometer() {
             seg.endDeg,
           )}
           fill={activeSegment === seg.id ? "#f2efe0" : "#8b1e2d"}
-          stroke="white"
-          strokeWidth={2}
+          // stroke="white"
+          // strokeWidth={2}
+           filter="url(#round-corners)"
           style={{ transition: "fill 0.35s ease", cursor: "pointer" }}
           onClick={() => navigate(seg.route)}
         />
       ))}
+
+      {/* Skillelinjer – tegnes ovenpå segmenterne */}
+      {[180, 135, 90, 45, 0].map((deg) => {
+        const inner = polarToCart(CX, CY, TRACK_INNER_R, deg);
+        const outer = polarToCart(CX, CY, SEG_OUTER_R, deg);
+        return (
+          <line
+            key={deg}
+            x1={inner.x} y1={inner.y}
+            x2={outer.x} y2={outer.y}
+            stroke="white"
+            strokeWidth="3"
+          />
+        );
+      })}
+      {/* Yderste bue */}
+      <path
+        d={`M ${polarToCart(CX, CY, SEG_OUTER_R, 180).x} ${polarToCart(CX, CY, SEG_OUTER_R, 180).y} A ${SEG_OUTER_R} ${SEG_OUTER_R} 0 0 1 ${polarToCart(CX, CY, SEG_OUTER_R, 0).x} ${polarToCart(CX, CY, SEG_OUTER_R, 0).y}`}
+        fill="none"
+        stroke="white"
+        strokeWidth="3"
+      />
+
+      {/* Inderste bue */}
+      <path
+        d={`M ${polarToCart(CX, CY, TRACK_INNER_R, 180).x} ${polarToCart(CX, CY, TRACK_INNER_R, 180).y} A ${TRACK_INNER_R} ${TRACK_INNER_R} 0 0 1 ${polarToCart(CX, CY, TRACK_INNER_R, 0).x} ${polarToCart(CX, CY, TRACK_INNER_R, 0).y}`}
+        fill="none"
+        stroke="white"
+        strokeWidth="3"
+      />
+      </g>
+      
 
       {/* Labels langs kurven */}
       {SEGMENTS.map((seg) => (
@@ -223,9 +275,7 @@ function Speedometer() {
         cx={dotPos.x}
         cy={dotPos.y}
         r="16"
-        fill="#2b6dd4"
-        stroke="white"
-        strokeWidth="2.5"
+        fill="var(--color-primary)"
         style={{ cursor: isDragging.current ? "grabbing" : "grab" }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}

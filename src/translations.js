@@ -116,27 +116,29 @@ const translations = {
         },
       ],
     },
-    graviditet: {
-      steps: [
-        {
-          heading: "Graviditet og kvinders hjerter",
-          body: "Hjerteforskning har historisk været fokuseret på mænd. Derfor er det først inden for de seneste 20-30 år, at forskere er begyndt at dykke ned i sammenhængen mellem kvinders graviditeter og hjerte-kar-sygodom senere i livet.\n\n9 ud",
-          link: "Prøv at trække i speedometeret",
-        },
-        {
-          heading: "Diabetes under graviditet kan gøre hjertet sygt",
-          body: "Omkring 3-4% af alle gravide udvikler diabetes under en graviditet. Sygdommen forsvinder som regel kort tid efter fødslen. Nyere forskning på, at graviditetsdiabetes kan være et vigtigt tegn på hjerte-kar-sygdom senere i livet.",
-        },
-        {
-          heading: "For tidlig fødsel og hjerte-kar-sygdom",
-          body: "Ny forskning har vist, at kvinder der føder 3 uger før termin, har cirka 40% øget risiko for senere at udvikle en hjerte-kar-sygdom. Risikoen bliver større jo tidligere fødslen sker.",
-        },
-        {
-          heading: "Svangerskabsforgiftning og hjertet",
-          body: "Svangerskabsforgiftning er en sygdom, man kan få som gravid. Symptomerne er blandt andet hovedpine og forhøjet blodtryk. Nyere forskning viser, at kvinder, der har haft svangerskabsforgiftning, har større risiko for atfå en hjerte-kar-sygdom senere i livet.",
-        },
-      ],
-    },
+      graviditet: {
+        labels:["Graviditet", "Graviditetsdiabetes", "For tidlig fødsel", "Svangerskabsforgiftning"],
+        steps: [
+          {
+            heading: "Graviditet og kvinders hjerter",
+            body: "Hjerteforskning har historisk været fokuseret på mænd. Derfor er det først inden for de seneste 20-30 år, at forskere er begyndt at dykke ned i sammenhængen mellem kvinders graviditeter og hjerte-kar-sygodom senere i livet.\n\n9 ud",
+            link: "Prøv at trække i speedometeret",
+          },
+          {
+            heading: "Diabetes under graviditet kan gøre hjertet sygt",
+            body: "Omkring 3-4% af alle gravide udvikler diabetes under en graviditet. Sygdommen forsvinder som regel kort tid efter fødslen. Nyere forskning på, at graviditetsdiabetes kan være et vigtigt tegn på hjerte-kar-sygdom senere i livet.",
+          },
+          {
+            heading: "For tidlig fødsel og hjerte-kar-sygdom",
+            body: "Ny forskning har vist, at kvinder der føder 3 uger før termin, har cirka 40% øget risiko for senere at udvikle en hjerte-kar-sygdom. Risikoen bliver større jo tidligere fødslen sker.",
+          },
+          {
+            heading: "Svangerskabsforgiftning og hjertet",
+            body: "Svangerskabsforgiftning er en sygdom, man kan få som gravid. Symptomerne er blandt andet hovedpine og forhøjet blodtryk. Nyere forskning viser, at kvinder, der har haft svangerskabsforgiftning, har større risiko for atfå en hjerte-kar-sygdom senere i livet.",
+          },
+        ],
+      },
+     
     quiz: {
       title: "Quiz",
       intro:
@@ -333,6 +335,7 @@ const translations = {
       ],
     },
     graviditet: {
+      labels:["Pregnancy", "Pregnancy diabetes", "Early births", "Svangerskabsforgiftning"],
       steps: [
         {
           heading: "Pregnancy and womens hearts",
