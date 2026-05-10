@@ -167,10 +167,18 @@ function Speedometer({onSegmentChange, labels =[]}) {
             d={labelArcD(seg.startDeg, seg.endDeg)}
           />
         ))}
+        <filter id="round-corners">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feColorMatrix in="blur" type="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+          result="rounded"/>
+        <feComposite in="SourceGraphic" in2="rounded" operator="atop"/>
+        </filter>
       </defs>
 
       {/* Grå track – 4 dele der matcher de røde segmenter */}
-      {SEGMENTS.map((seg) => (
+      <g filter="url(#round-corners)">
+{SEGMENTS.map((seg) => (
         <path
           key={`track-${seg.id}`}
           d={arcPath(
@@ -182,8 +190,9 @@ function Speedometer({onSegmentChange, labels =[]}) {
             seg.endDeg,
           )}
           fill="#c8cdd6"
-          stroke="white"
-          strokeWidth={2}
+          // stroke="white"
+          // strokeWidth={2}
+           filter="url(#round-corners)"
         />
       ))}
       
@@ -201,12 +210,45 @@ function Speedometer({onSegmentChange, labels =[]}) {
             seg.endDeg,
           )}
           fill={activeSegment === seg.id ? "#f2efe0" : "#8b1e2d"}
-          stroke="white"
-          strokeWidth={2}
+          // stroke="white"
+          // strokeWidth={2}
+           filter="url(#round-corners)"
           style={{ transition: "fill 0.35s ease", cursor: "pointer" }}
           onClick={() => navigate(seg.route)}
         />
       ))}
+
+      {/* Skillelinjer – tegnes ovenpå segmenterne */}
+      {[180, 135, 90, 45, 0].map((deg) => {
+        const inner = polarToCart(CX, CY, TRACK_INNER_R, deg);
+        const outer = polarToCart(CX, CY, SEG_OUTER_R, deg);
+        return (
+          <line
+            key={deg}
+            x1={inner.x} y1={inner.y}
+            x2={outer.x} y2={outer.y}
+            stroke="white"
+            strokeWidth="3"
+          />
+        );
+      })}
+      {/* Yderste bue */}
+      <path
+        d={`M ${polarToCart(CX, CY, SEG_OUTER_R, 180).x} ${polarToCart(CX, CY, SEG_OUTER_R, 180).y} A ${SEG_OUTER_R} ${SEG_OUTER_R} 0 0 1 ${polarToCart(CX, CY, SEG_OUTER_R, 0).x} ${polarToCart(CX, CY, SEG_OUTER_R, 0).y}`}
+        fill="none"
+        stroke="white"
+        strokeWidth="3"
+      />
+
+      {/* Inderste bue */}
+      <path
+        d={`M ${polarToCart(CX, CY, TRACK_INNER_R, 180).x} ${polarToCart(CX, CY, TRACK_INNER_R, 180).y} A ${TRACK_INNER_R} ${TRACK_INNER_R} 0 0 1 ${polarToCart(CX, CY, TRACK_INNER_R, 0).x} ${polarToCart(CX, CY, TRACK_INNER_R, 0).y}`}
+        fill="none"
+        stroke="white"
+        strokeWidth="3"
+      />
+      </g>
+      
 
       {/* Labels langs kurven */}
       {SEGMENTS.map((seg) => (
@@ -233,9 +275,7 @@ function Speedometer({onSegmentChange, labels =[]}) {
         cx={dotPos.x}
         cy={dotPos.y}
         r="16"
-        fill="#2b6dd4"
-        stroke="white"
-        strokeWidth="2.5"
+        fill="var(--color-primary)"
         style={{ cursor: isDragging.current ? "grabbing" : "grab" }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
