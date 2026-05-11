@@ -152,3 +152,8 @@ body {
 .animate-ripple {
   animation: ripple 2s ease-out infinite;
 }
+
+@keyframes sweepInward {
+  from { r: 275px; }
+  to   { r: 140px; }
+}
