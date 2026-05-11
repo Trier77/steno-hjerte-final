@@ -117,7 +117,7 @@ const translations = {
       ],
     },
       graviditet: {
-        labels:["Graviditet", "Graviditetsdiabetes", "For tidlig fødsel", "Svangerskabsforgiftning"],
+        labels:["Graviditet", "Graviditetsdiabetes", "Svangerskabsforgiftning", "For tidlig fødsel"],
         steps: [
           {
             heading: "Graviditet og kvinders hjerter",
@@ -129,12 +129,12 @@ const translations = {
             body: "Omkring 3-4% af alle gravide udvikler diabetes under en graviditet. Sygdommen forsvinder som regel kort tid efter fødslen. Nyere forskning på, at graviditetsdiabetes kan være et vigtigt tegn på hjerte-kar-sygdom senere i livet.",
           },
           {
-            heading: "For tidlig fødsel og hjerte-kar-sygdom",
-            body: "Ny forskning har vist, at kvinder der føder 3 uger før termin, har cirka 40% øget risiko for senere at udvikle en hjerte-kar-sygdom. Risikoen bliver større jo tidligere fødslen sker.",
-          },
-          {
             heading: "Svangerskabsforgiftning og hjertet",
             body: "Svangerskabsforgiftning er en sygdom, man kan få som gravid. Symptomerne er blandt andet hovedpine og forhøjet blodtryk. Nyere forskning viser, at kvinder, der har haft svangerskabsforgiftning, har større risiko for atfå en hjerte-kar-sygdom senere i livet.",
+          },
+          {
+            heading: "For tidlig fødsel og hjerte-kar-sygdom",
+            body: "Ny forskning har vist, at kvinder der føder 3 uger før termin, har cirka 40% øget risiko for senere at udvikle en hjerte-kar-sygdom. Risikoen bliver større jo tidligere fødslen sker.",
           },
         ],
       },
@@ -346,13 +346,13 @@ const translations = {
           heading: "Diabetes under pregnancy kan make the heart sick",
           body: "Omkring 3-4% af alle gravide udvikler diabetes under en graviditet. Sygdommen forsvinder som regel kort tid efter fødslen. Nyere forskning på, at graviditetsdiabetes kan være et vigtigt tegn på hjerte-kar-sygdom senere i livet.",
         },
+                {
+          heading: "Svangerskabsforgiftning and the heart",
+          body: "Svangerskabsforgiftning er en sygdom, man kan få som gravid. Symptomerne er blandt andet hovedpine og forhøjet blodtryk. Nyere forskning viser, at kvinder, der har haft svangerskabsforgiftning, har større risiko for atfå en hjerte-kar-sygdom senere i livet.",
+        },
         {
           heading: "Early birth and cardiovascular disease",
           body: "Ny forskning har vist, at kvinder der føder 3 uger før termin, har cirka 40% øget risiko for senere at udvikle en hjerte-kar-sygdom. Risikoen bliver større jo tidligere fødslen sker.",
-        },
-        {
-          heading: "Svangerskabsforgiftning and the heart",
-          body: "Svangerskabsforgiftning er en sygdom, man kan få som gravid. Symptomerne er blandt andet hovedpine og forhøjet blodtryk. Nyere forskning viser, at kvinder, der har haft svangerskabsforgiftning, har større risiko for atfå en hjerte-kar-sygdom senere i livet.",
         },
       ],
     },
