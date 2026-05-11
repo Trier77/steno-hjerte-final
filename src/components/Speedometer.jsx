@@ -4,11 +4,11 @@ import { useState, useRef, useEffect, useCallback } from "react";
 // --- Geometri-konstanter ---
 const CX = 300; // Centrum X
 const CY = 295; // Centrum Y (bunden af halvkreds)
-const SEG_OUTER_R = 275; // Ydre kant af røde segmenter
-const SEG_INNER_R = 177; // Indre kant af røde segmenter
-const TRACK_OUTER_R = 177; // Ydre kant af grå track
+const SEG_OUTER_R = 255; // Ydre kant af røde segmenter
+const SEG_INNER_R = 190; // Indre kant af røde segmenter
+const TRACK_OUTER_R = 190; // Ydre kant af grå track
 const TRACK_INNER_R = 140; // Indre kant af grå track
-const DOT_R = 158; // Radius hvor den blå cirkel kører
+const DOT_R = 164; // Radius hvor den blå cirkel kører
 
 // --- Hjælpefunktioner ---
 const toRad = (d) => (d * Math.PI) / 180;
@@ -57,8 +57,8 @@ function Speedometer({onSegmentChange, labels =[]}) {
   const SEGMENTS = [
     { id: 0, startDeg: 180, endDeg: 135, label: labels[0] ?? "Graviditet" },
     { id: 1, startDeg: 135, endDeg: 90,  label: labels[1] ?? "Graviditetsdiabetes" },
-    { id: 2, startDeg: 90,  endDeg: 45,  label: labels[2] ?? "For tidlig fødsel" },
-    { id: 3, startDeg: 45,  endDeg: 0,   label: labels[3] ?? "Svangerskabsforgiftning" },
+    { id: 2, startDeg: 90,  endDeg: 45,  label: labels[2] ?? "Svangerskabsforgiftning" },
+    { id: 3, startDeg: 45,  endDeg: 0,   label: labels[3] ?? "For tidlig fødsel" },
   ];
   
   // Finder hvilket segment den blå cirkel er i (eller null)
