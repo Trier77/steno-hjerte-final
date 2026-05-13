@@ -72,18 +72,20 @@ const translations = {
       sliderLow: "Normalt",
       sliderHigh: "Diabetes",
       stageLabels: ["Normalt blodsukker", "Forhøjet blodsukker", "Diabetes"],
+      bubbleText: "Diabetes giver mere sukker i blodet",
       steps: [
         {
           heading: "Diabetes og hjertet",
-          body: "Diabetes er en sygdom som gør, at man har for meget sukker i blodet. Sygdommen påvirker mænd og kvinders hjerter på forskellige måder.",
+          body: "Omkring de 50-60 år bliver flere mænd end kvinder ramt af hjerte-kar-sygdomme.",
+          hint: "Brug slideren og se hvad der sker med risikoen for hjerte-kar-sygdomme, hvis man får diabetes",
         },
         {
           heading: "Risikoen stiger",
-          body: "Når blodsukkeret stiger, begynder risikoen for hjerte-kar-sygdom at stige for begge køn.",
+          body: "Både flere kvinder og flere mænd bliver ramt af hjerte-kar-sygdom, hvis de får diabetes.",
         },
         {
-          heading: "Kvinders hjerter tager større skade",
-          body: "Begge køns risiko stiger meget ved diabetes. Kvinders risiko stiger mere end mænds. Forskere er ikke sikre på hvad årsagen er.",
+          heading: "Diabetes gør hjertet sygt",
+          body: 'Diabetes påvirker kvinders hjerter hårdere end mænds. Forskere er stadig ikke helt sikre på, hvad det er, som gør diabetes "farligere" for kvinder.',
         },
       ],
     },
@@ -171,7 +173,6 @@ const translations = {
       quitBody: "Hvis du forlader quizzen nu, mister du al din fremgang.",
       quitConfirm: "Forlad quiz",
       quitCancel: "Fortsæt quiz",
-      // Results screen strings
       resultsHeading: "Resultat",
       resultsBetterThan: "Du klarede dig bedre end",
       resultsOfVisitors: "af alle andre besøgende",
@@ -323,18 +324,20 @@ const translations = {
       sliderLow: "Normal",
       sliderHigh: "Diabetes",
       stageLabels: ["Normal blood sugar", "Elevated blood sugar", "Diabetes"],
+      bubbleText: "Diabetes causes more sugar in the blood",
       steps: [
         {
           heading: "Diabetes and the heart",
-          body: "Diabetes is a disease that causes too much sugar in the blood. The disease affects men's and women's hearts in different ways.",
+          body: "Around the age of 50-60, more men than women are affected by cardiovascular disease.",
+          hint: "Use the slider to see what happens to the risk of cardiovascular disease if you develop diabetes",
         },
         {
           heading: "The risk increases",
-          body: "As blood sugar rises, the risk of cardiovascular disease starts to increase for both sexes.",
+          body: "Both more women and more men are affected by cardiovascular disease if they develop diabetes.",
         },
         {
-          heading: "Women's hearts suffer more",
-          body: "The risk increases a lot for both sexes with diabetes. Women's risk increases more than men's. Researchers are not sure what the reason is.",
+          heading: "Diabetes makes the heart sick",
+          body: "Diabetes affects women's hearts harder than men's. Researchers are still not entirely sure what makes diabetes more \"dangerous\" for women.",
         },
       ],
     },
@@ -422,7 +425,6 @@ const translations = {
       quitBody: "If you leave the quiz now, you will lose all your progress.",
       quitConfirm: "Leave quiz",
       quitCancel: "Continue quiz",
-      // Results screen strings
       resultsHeading: "Result",
       resultsBetterThan: "You did better than",
       resultsOfVisitors: "of all other visitors",

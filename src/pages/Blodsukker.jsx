@@ -1,71 +1,152 @@
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import BackButton from "../components/BackButton";
 import FlagButton from "../components/FlagButton";
 import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";
+import { useFadeIn } from "../hooks/useFadeIn";
+import { useFadeNavigate } from "../hooks/useFadeNavigate";
+import BloodBackground from "../components/animated backgrounds/BloodBackground";
 
-function PersonIcon({ color, size = 32 }) {
+// ─── Constants ────────────────────────────────────────────────────────────────
+const PERSON_COUNT = 24;
+const SNAP_POSITIONS = [0, 50, 100];
+const PERCENTAGES = { men: 40, women: 55 };
+const PAGE_FADE_DURATION = 0.4;
+
+// ─── Sugar cube flow ──────────────────────────────────────────────────────────
+
+// Each cube gets fixed random traits generated once — stable across re-renders
+const CUBE_TRAITS = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  y: 5 + ((i * 37 + 11) % 85), // spread vertically 5–90%
+  duration: 6 + ((i * 13) % 10), // 6–16s to cross screen
+  delay: -((i * 3.7) % 16), // stagger start so they're not bunched
+  size: 24 + ((i * 7) % 20), // 24–44px
+  opacity: 0.5 + ((i * 11) % 40) / 100, // 0.5–0.9
+  wobble: ((i * 17) % 12) - 6, // slight vertical drift ±6px
+}));
+
+const STAGE_CUBE_COUNT = [0, 8, 20];
+
+// Inject keyframes once
+const FLOW_STYLE = `
+@keyframes sugarFlow {
+  0%   { transform: translateX(-60px) translateY(0px); }
+  50%  { transform: translateX(calc(50vw))  translateY(var(--wobble)); }
+  100% { transform: translateX(calc(100vw + 60px)) translateY(0px); }
+}`;
+if (
+  typeof document !== "undefined" &&
+  !document.getElementById("sugar-flow-style")
+) {
+  const tag = document.createElement("style");
+  tag.id = "sugar-flow-style";
+  tag.textContent = FLOW_STYLE;
+  document.head.appendChild(tag);
+}
+
+function SugarCube({ traits, entranceDelay }) {
+  const { y, duration, delay, size, opacity, wobble } = traits;
   return (
-    <svg
-      width={size}
-      height={size * 1.8}
-      viewBox="0 0 20 36"
-      fill={color}
-      xmlns="http://www.w3.org/2000/svg"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.3 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.3 }}
+      transition={{
+        duration: 0.5,
+        delay: entranceDelay,
+        ease: [0.34, 1.56, 0.64, 1],
+      }}
+      style={{
+        position: "absolute",
+        top: `${y}%`,
+        left: 0,
+        pointerEvents: "none",
+        // The inner div does the continuous drift
+      }}
     >
-      <circle cx="10" cy="4" r="4" />
-      <path d="M5 10 Q10 8 15 10 L16 22 H12 L11 30 H9 L8 22 H4 Z" />
-      <path
-        d="M7 22 L6 34 M13 22 L14 34"
-        strokeWidth="2.5"
-        stroke={color}
-        fill="none"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5 13 L2 20 M15 13 L18 20"
-        strokeWidth="2"
-        stroke={color}
-        fill="none"
-        strokeLinecap="round"
-      />
-    </svg>
+      <div
+        style={{
+          "--wobble": `${wobble}px`,
+          animation: `sugarFlow ${duration}s linear ${delay}s infinite`,
+          opacity,
+        }}
+      >
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 36 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polygon
+            points="18,2 34,10 18,18 2,10"
+            fill="#f9e4a0"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
+          <polygon
+            points="2,10 18,18 18,34 2,26"
+            fill="#e8c96e"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
+          <polygon
+            points="34,10 18,18 18,34 34,26"
+            fill="#d4a843"
+            stroke="#c9a84c"
+            strokeWidth="1"
+          />
+          <circle cx="20" cy="7" r="1.5" fill="white" opacity="0.6" />
+        </svg>
+      </div>
+    </motion.div>
   );
 }
 
-function AnimatedCounter({ target, suffix = "%" }) {
-  const [count, setCount] = useState(0);
-  const prev = useRef(target);
-  useEffect(() => {
-    const from = prev.current;
-    prev.current = target;
-    let start = null;
-    const animate = (ts) => {
-      if (!start) start = ts;
-      const p = Math.min((ts - start) / 300, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      setCount(Math.round(from + (target - from) * e));
-      if (p < 1) requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-  }, [target]);
+function SugarCubes({ stage }) {
+  const count = STAGE_CUBE_COUNT[stage] ?? 0;
   return (
-    <span>
-      {count}
-      {suffix}
-    </span>
+    <div
+      className="absolute inset-0"
+      style={{ pointerEvents: "none", zIndex: 5, overflow: "hidden" }}
+    >
+      <AnimatePresence>
+        {CUBE_TRAITS.slice(0, count).map((traits, i) => (
+          <SugarCube key={traits.id} traits={traits} entranceDelay={i * 0.05} />
+        ))}
+      </AnimatePresence>
+    </div>
   );
 }
 
-function GenderRow({
-  label,
-  baseCount,
-  currentCount,
-  color,
-  percent,
-  showPercent,
-}) {
-  const newCount = currentCount - baseCount;
+// ─── Person icon ──────────────────────────────────────────────────────────────
+function PersonIcon({ gender, size = 32 }) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size * 1.8,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <img
+        src={
+          gender === "man"
+            ? "/src/assets/icons/man.png"
+            : "/src/assets/icons/woman.png"
+        }
+        alt=""
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+      />
+    </div>
+  );
+}
+
+function GenderRow({ label, gender, stage, percent }) {
   return (
     <div className="flex flex-row items-center gap-3 w-full">
       <p className="font-display font-semibold text-primary text-2xl shrink-0 w-20">
@@ -75,177 +156,67 @@ function GenderRow({
         className="flex flex-row flex-wrap gap-1 items-end flex-1"
         style={{ minHeight: "60px" }}
       >
-        {Array.from({ length: baseCount }).map((_, i) => (
-          <PersonIcon key={`base-${i}`} color={color} size={32} />
-        ))}
-        {Array.from({ length: Math.max(0, newCount) }).map((_, i) => (
-          <div
-            key={`new-${i}`}
-            style={{ animation: `fadeInUp 0.3s ease ${i * 0.05}s both` }}
-          >
-            <PersonIcon color="#e05555" size={32} />
-          </div>
+        {Array.from({ length: PERSON_COUNT }).map((_, i) => (
+          <PersonIcon key={i} gender={gender} size={24} />
         ))}
       </div>
       <div
         className="shrink-0 w-24 flex flex-col items-end"
         style={{ minHeight: "60px" }}
       >
-        {showPercent && percent > 0 && (
-          <div className="flex items-center gap-1">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#e05555">
-              <path d="M12 4 L20 20 H4 Z" />
-            </svg>
-            <p
-              className="font-display font-semibold text-2xl"
-              style={{ color: "#e05555" }}
+        <AnimatePresence>
+          {stage === 2 && (
+            <motion.div
+              key="percent"
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="flex items-center gap-1"
             >
-              <AnimatedCounter target={percent} />
-            </p>
-          </div>
-        )}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#e05555">
+                <path d="M12 4 L20 20 H4 Z" />
+              </svg>
+              <p className="font-display font-semibold text-2xl">{percent}%</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
 }
 
-const MAN_COLOR = "#39516f";
-const WOMAN_COLOR = "#8b3a5a";
-const baselineMen = 10;
-const baselineWomen = 7;
-const diabetesMen = 24;
-const diabetesWomen = 20;
-
-const getStage = (v) => (v < 33 ? 0 : v < 66 ? 1 : 2);
-const getMenCount = (v) =>
-  Math.round(baselineMen + (diabetesMen - baselineMen) * (v / 100));
-const getWomenCount = (v) =>
-  Math.round(baselineWomen + (diabetesWomen - baselineWomen) * (v / 100));
-const getMenPercent = (v) => Math.round(v * 1.4);
-const getWomenPercent = (v) => Math.round(v * 1.85);
-
-// Blood cells spread across full height
-const BLOOD_CELLS = Array.from({ length: 18 }, (_, i) => ({
-  id: i,
-  yPercent: (i * 61) % 100,
-  r: 20 + (i % 4) * 12,
-  duration: 5 + (i % 5) * 1.5,
-  delay: -(i * 0.9),
-  color: i % 3 === 0 ? "#c0392b" : "#922b21",
-}));
-
-// Sugar cubes — spread evenly across y-axis
-const SUGAR_CUBES = Array.from({ length: 28 }, (_, i) => ({
-  id: i,
-  yPercent: ((i * 79) % 96) + 2,
-  size: 16 + (i % 3) * 8,
-  duration: 4 + (i % 6) * 1.2,
-  delay: -(i * 0.7),
-}));
-
-function BloodScene({ w, h, visibleCubes }) {
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none z-0"
-      viewBox={`0 0 ${w} ${h}`}
-      preserveAspectRatio="xMidYMid slice"
-    >
-      {/* Blood cells */}
-      {BLOOD_CELLS.map((cell) => {
-        const cy = h * (cell.yPercent / 100);
-        const path = `M -150 0 L ${w + 150} 0`;
-        return (
-          <ellipse
-            key={cell.id}
-            rx={cell.r}
-            ry={cell.r * 0.55}
-            fill={cell.color}
-            fillOpacity="0.18"
-          >
-            <animateMotion
-              dur={`${cell.duration}s`}
-              begin={`${cell.delay}s`}
-              repeatCount="indefinite"
-              path={`M -150 ${cy} L ${w + 150} ${cy}`}
-            />
-          </ellipse>
-        );
-      })}
-
-      {/* Sugar cubes */}
-      {SUGAR_CUBES.slice(0, visibleCubes).map((cube) => {
-        const s = cube.size;
-        const cy = h * (cube.yPercent / 100);
-        return (
-          <g key={cube.id}>
-            <g>
-              <animateMotion
-                dur={`${cube.duration}s`}
-                begin={`${cube.delay}s`}
-                repeatCount="indefinite"
-                path={`M -150 ${cy} L ${w + 150} ${cy}`}
-              />
-              {/* Bob animation using animateTransform */}
-              <rect
-                x={-s / 2}
-                y={-s / 2}
-                width={s}
-                height={s}
-                fill="white"
-                fillOpacity="0.9"
-                rx="3"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  type="translate"
-                  values="0,-6; 0,6; 0,-6"
-                  dur={`${cube.duration * 0.5}s`}
-                  begin={`${cube.delay}s`}
-                  repeatCount="indefinite"
-                />
-              </rect>
-              <path
-                d={`M${-s / 2},${-s / 2} L${-s / 2 + s * 0.3},${-s / 2 - s * 0.3} L${s / 2 + s * 0.3},${-s / 2 - s * 0.3} L${s / 2},${-s / 2} Z`}
-                fill="white"
-                fillOpacity="0.6"
-              />
-              <path
-                d={`M${s / 2},${-s / 2} L${s / 2 + s * 0.3},${-s / 2 - s * 0.3} L${s / 2 + s * 0.3},${s / 2 - s * 0.3} L${s / 2},${s / 2} Z`}
-                fill="white"
-                fillOpacity="0.4"
-              />
-              <line
-                x1={-s / 2}
-                y1={0}
-                x2={s / 2}
-                y2={0}
-                stroke="rgba(180,180,180,0.4)"
-                strokeWidth="0.8"
-              />
-              <line
-                x1={0}
-                y1={-s / 2}
-                x2={0}
-                y2={s / 2}
-                stroke="rgba(180,180,180,0.4)"
-                strokeWidth="0.8"
-              />
-            </g>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
+// ─── Main page ────────────────────────────────────────────────────────────────
 export default function Blodsukker() {
   const { language, visible } = useLanguage();
   const t = translations[language]?.blodsukker;
-  const [sugarLevel, setSugarLevel] = useState(0);
+  const fadeVisible = useFadeIn();
+  const { fadeNavigate, fading } = useFadeNavigate();
+
+  const [stage, setStage] = useState(0);
+  const [sliderY, setSliderY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isSnapping, setIsSnapping] = useState(false);
+
   const sliderRef = useRef(null);
   const containerRef = useRef(null);
-  const isDragging = useRef(false);
+  const startYRef = useRef(null);
+  const startSliderRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ w: 500, h: 900 });
+
+  const isDraggingRef = useRef(false);
+  const sliderYRef = useRef(0);
+  const stageRef = useRef(0);
+
+  useEffect(() => {
+    sliderYRef.current = sliderY;
+  }, [sliderY]);
+  useEffect(() => {
+    isDraggingRef.current = isDragging;
+  }, [isDragging]);
+  useEffect(() => {
+    stageRef.current = stage;
+  }, [stage]);
 
   useEffect(() => {
     const update = () => {
@@ -259,64 +230,90 @@ export default function Blodsukker() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const stage = getStage(sugarLevel);
-  const menCount = getMenCount(sugarLevel);
-  const womenCount = getWomenCount(sugarLevel);
-  const menPercent = getMenPercent(sugarLevel);
-  const womenPercent = getWomenPercent(sugarLevel);
-  const currentStep = t?.steps?.[stage] || {};
-  const sliderColor =
-    stage === 0 ? "#39516f" : stage === 1 ? "#e09030" : "#e05555";
-  const visibleCubes = Math.floor((sugarLevel / 100) * SUGAR_CUBES.length);
+  const sliderPercent = sliderY * 100;
 
   const getClientY = (e) => (e.touches ? e.touches[0].clientY : e.clientY);
-  const handleMove = (e) => {
-    if (!isDragging.current) return;
-    const slider = sliderRef.current;
-    if (!slider) return;
-    const rect = slider.getBoundingClientRect();
-    const ratio =
-      1 - Math.max(0, Math.min(1, (getClientY(e) - rect.top) / rect.height));
-    setSugarLevel(Math.round(ratio * 100));
+
+  const snapToIndex = (index) => {
+    const clamped = Math.max(0, Math.min(2, index));
+    setIsSnapping(true);
+    setSliderY(SNAP_POSITIONS[clamped] / 100);
+    if (clamped !== stageRef.current) {
+      setTimeout(() => {
+        setStage(clamped);
+        stageRef.current = clamped;
+      }, 150);
+    }
+    setTimeout(() => setIsSnapping(false), 400);
   };
-  const handleDown = (e) => {
-    isDragging.current = true;
-    handleMove(e);
-  };
-  const handleUp = () => {
-    isDragging.current = false;
+
+  const handlePointerDown = (e) => {
+    e.preventDefault();
+    isDraggingRef.current = true;
+    setIsDragging(true);
+    startYRef.current = getClientY(e);
+    startSliderRef.current = sliderYRef.current;
   };
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMove);
-    window.addEventListener("mouseup", handleUp);
-    window.addEventListener("touchmove", handleMove, { passive: true });
-    window.addEventListener("touchend", handleUp);
-    return () => {
-      window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("mouseup", handleUp);
-      window.removeEventListener("touchmove", handleMove);
-      window.removeEventListener("touchend", handleUp);
+    const onMove = (e) => {
+      if (!isDraggingRef.current) return;
+      e.preventDefault();
+      const height = sliderRef.current?.offsetHeight || 300;
+      const delta = startYRef.current - getClientY(e);
+      const newY = Math.max(
+        0,
+        Math.min(1, startSliderRef.current + delta / height),
+      );
+      sliderYRef.current = newY;
+      setSliderY(newY);
     };
+
+    const onUp = () => {
+      if (!isDraggingRef.current) return;
+      isDraggingRef.current = false;
+      setIsDragging(false);
+      const nearest = Math.round(sliderYRef.current * 2);
+      snapToIndex(nearest);
+    };
+
+    const track = sliderRef.current;
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    window.addEventListener("touchmove", onMove, { passive: false });
+    window.addEventListener("touchend", onUp);
+    track?.addEventListener("touchstart", handlePointerDown, {
+      passive: false,
+    });
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend", onUp);
+      track?.removeEventListener("touchstart", handlePointerDown);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const currentStep = t?.steps?.[stage] || {};
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden flex flex-col"
+      className={`relative w-full h-screen overflow-hidden flex flex-col page-fade-in ${fadeVisible ? "visible" : ""}`}
       style={{ backgroundColor: "#5c1a1a" }}
     >
       <FlagButton />
-      <BackButton />
+      <BackButton onClick={() => fadeNavigate("/")} />
 
-      {/* Full screen background */}
-      <BloodScene
-        w={containerSize.w}
-        h={containerSize.h}
-        visibleCubes={visibleCubes}
-      />
+      <BloodBackground w={containerSize.w} h={containerSize.h} />
 
-      {/* Upper area — slider */}
+      {/* Sugar cubes — rendered over the blood background, under the UI */}
+      <SugarCubes stage={stage} />
+
+      {/* Upper area — vertical slider on the left */}
       <div className="relative z-10 flex-1 flex flex-row px-8 gap-6">
         <div
           className="flex items-center justify-center w-20"
@@ -324,89 +321,184 @@ export default function Blodsukker() {
         >
           <div
             ref={sliderRef}
-            className="relative w-12 h-full rounded-full cursor-pointer"
-            style={{ backgroundColor: "rgba(241,241,241,0.15)" }}
-            onMouseDown={handleDown}
-            onTouchStart={handleDown}
+            className="relative w-6 h-full rounded-full select-none"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.2)",
+              cursor: isDragging ? "grabbing" : "grab",
+            }}
+            onMouseDown={handlePointerDown}
           >
+            {/* Fill — grows upward */}
             <div
-              className="absolute bottom-0 left-0 right-0 rounded-full"
+              className="absolute bottom-0 left-0 right-0 rounded-full bg-primary"
               style={{
-                height: `${sugarLevel}%`,
-                backgroundColor: sliderColor,
-                transition: "background-color 0.5s ease",
+                height: `${sliderPercent}%`,
+                transition: isSnapping
+                  ? "height 0.4s cubic-bezier(0.25, 1, 0.5, 1)"
+                  : isDragging
+                    ? "none"
+                    : undefined,
               }}
             />
+
+            {/* Handle */}
             <div
-              className="absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full shadow-xl flex items-center justify-center"
+              className="absolute left-1/2"
               style={{
-                bottom: `calc(${sugarLevel}% - 32px)`,
-                backgroundColor: "var(--color-ui-box)",
+                bottom: `${sliderPercent}%`,
+                transform: "translate(-50%, 50%)",
+                transition: isSnapping
+                  ? "bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1), width 0.2s ease, height 0.2s ease"
+                  : "width 0.2s ease, height 0.2s ease",
+                zIndex: 2,
               }}
             >
-              <div
-                className="w-6 h-6 rounded-full"
+              <motion.div
                 style={{
-                  backgroundColor: sliderColor,
-                  transition: "background-color 0.5s ease",
+                  width: isDragging ? "65px" : "50px",
+                  height: isDragging ? "65px" : "50px",
+                  position: "relative",
                 }}
-              />
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.6,
+                  delay: PAGE_FADE_DURATION + 0.4,
+                  ease: [0.34, 1.56, 0.64, 1],
+                }}
+              >
+                {stage === 0 && (
+                  <span className="absolute inset-0 rounded-full bg-primary opacity-40 animate-ping" />
+                )}
+                <div
+                  className="absolute inset-0 rounded-full bg-primary shadow-lg"
+                  style={{ cursor: isDragging ? "grabbing" : "grab" }}
+                  onMouseDown={handlePointerDown}
+                />
+              </motion.div>
             </div>
           </div>
         </div>
-        <div className="flex-1" />
+
+        {/* Stage label */}
+        <div className="flex items-end pb-4" style={{ marginBottom: "4vh" }}>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={stage}
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 8 }}
+              transition={{ duration: 0.25 }}
+              className="font-display font-semibold text-white text-xl"
+            >
+              {t?.stageLabels?.[stage] || ""}
+            </motion.p>
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* UI Infobox */}
+      {/* Infobox */}
       <div
         className="relative z-10 w-full rounded-t-4xl px-8 pt-6 pb-8"
-        style={{ height: "30vh", backgroundColor: "rgba(241,241,241,0.7)" }}
+        style={{ height: "32vh", backgroundColor: "rgba(241,241,241,0.7)" }}
       >
         <div
           className="flex flex-col h-full gap-2"
           style={{ opacity: visible ? 1 : 0, transition: "opacity 0.3s ease" }}
         >
           <div style={{ minHeight: "80px" }}>
-            <h2 className="font-display font-semibold text-primary text-3xl text-center leading-snug mb-1">
-              <span key={stage} style={{ animation: "fadeIn 0.3s ease" }}>
-                {currentStep.heading || "Diabetes og hjertet"}
-              </span>
-            </h2>
-            <p className="font-display font-light text-primary text-3xl leading-relaxed text-center">
-              <span
-                key={`body-${stage}`}
-                style={{ animation: "fadeIn 0.3s ease" }}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={stage}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.3 }}
               >
-                {currentStep.body || "[ Tekst fra museet ]"}
-              </span>
-            </p>
+                <h2 className="font-display font-semibold text-primary text-5xl text-center leading-snug mb-1">
+                  {currentStep.heading || "Diabetes og hjertet"}
+                </h2>
+                <p
+                  className="font-display font-light text-primary text-3xl leading-relaxed text-left"
+                  style={{ whiteSpace: "pre-line" }}
+                >
+                  {currentStep.body || ""}
+                </p>
+              </motion.div>
+            </AnimatePresence>
           </div>
-          <div className="w-full h-px bg-primary opacity-20" />
-          <div className="flex flex-col gap-2 flex-1 justify-center">
-            <GenderRow
-              label={t?.men || "Mænd"}
-              baseCount={baselineMen}
-              currentCount={menCount}
-              color={MAN_COLOR}
-              percent={menPercent}
-              showPercent={sugarLevel > 5}
-            />
-            <GenderRow
-              label={t?.women || "Kvinder"}
-              baseCount={baselineWomen}
-              currentCount={womenCount}
-              color={WOMAN_COLOR}
-              percent={womenPercent}
-              showPercent={sugarLevel > 5}
-            />
-          </div>
+
+          {/* Hint — stage 0 only */}
+          <AnimatePresence>
+            {stage === 0 && currentStep.hint && (
+              <motion.div
+                key="hint"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col items-center justify-center gap-2 mt-2"
+                style={{ pointerEvents: "none" }}
+              >
+                <motion.div
+                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <p className="font-display font-semibold text-primary text-3xl mt-40 text-center px-6">
+                    {currentStep.hint}
+                  </p>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Gender rows — stage 1+ */}
+          <AnimatePresence>
+            {stage >= 1 && (
+              <motion.div
+                key="gender-rows"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col gap-2 flex-1 justify-center"
+              >
+                <div className="w-full h-px bg-primary opacity-20 mb-2" />
+                <GenderRow
+                  label={t?.men || "Mænd"}
+                  gender="man"
+                  stage={stage}
+                  percent={PERCENTAGES.men}
+                />
+                <GenderRow
+                  label={t?.women || "Kvinder"}
+                  gender="woman"
+                  stage={stage}
+                  percent={PERCENTAGES.women}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
-      <style>{`
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-      `}</style>
+      {/* Fade to black */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 999,
+          background: "#000",
+          opacity: fading ? 1 : 0,
+          transition: "opacity 0.7s ease",
+          pointerEvents: "none",
+        }}
+      />
     </div>
   );
 }
