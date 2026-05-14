@@ -190,61 +190,74 @@ const translations = {
       },
       questions: [
         {
-          question: "[ Spørgsmål 1 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
+          question:
+            "Mænd dør tidligere af hjerte-kar-sygdomme end kvinder. Hvor mange år tidligere?",
+          options: ["3 år", "7 år", "15 år"],
+          correct: 1,
+          explanation:
+            "Mænd dør i gennemsnit 7 år tidligere af hjerte-kar-sygdomme, end kvinder gør. Dog ved vi mindre om de hjertesygdomme, som primært rammer kvinder.",
         },
         {
-          question: "[ Spørgsmål 2 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
+          question:
+            "Hvornår begynder kvinders risiko for at blive ramt af en hjertekarsygdom at stige meget hurtigt?",
+          options: [
+            "Når menstruationen begynder",
+            "Ved overgangsalderen - når østrogen-niveaut falder",
+            "Omkring 40-års alderen",
+          ],
+          correct: 1,
+          explanation:
+            "Det kvindelige kønshormon - østrogen - kan beskytte én overfor hjertesygdomme. Derfor bliver kvinder inden overgangsalderen sjældnere ramt af hjertesygdom. Efter overgangsalderen begynder kvinders risiko derfor at stige hurtigt.",
         },
         {
-          question: "[ Spørgsmål 3 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
+          question:
+            "Hvor mange procent af danskere dør af en hjerte-kar-sygdom?",
+          options: [" Ca. 5% ", " Ca. 50% ", " Ca. 20% "],
+          correct: 2,
+          explanation:
+            "Omkring 20% af danskerne dør i dag af hjerte-kar-sygdomme, og sygdommene rammer næsten lige mange mænd og kvinder. Hjerte-kar-sygdomme er derfor nogle af de dødeligste sygdomme – kun overgået af kræft.",
         },
         {
-          question: "[ Spørgsmål 4 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
+          question:
+            "Der er mange forskellige slags hjerte-kar-sygdomme, men hvilke er de mest almindelige?",
+          options: [
+            " Åreforkalkning og blodpropper ",
+            " Medfødte hjertefejl ",
+            " Hjertesygdomme under graviditet ",
+          ],
           correct: 0,
-          explanation: "[ Forklaring fra museet ]",
+          explanation:
+            "Åreforkalkning hænger sammen med livsstil og er én af de mest almindelige sygdomme i blodkarrene. Hvis ens blodårer er fyldt op med kalk, har man stor risiko for at få en blodprop i hjertet.",
         },
         {
-          question: "[ Spørgsmål 5 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
+          question: "Hvad er IKKE en risikofaktor for hjertesygdom?",
+          options: [
+            " Rygning ",
+            " Overvægt ",
+            " Diabetes under graviditet ",
+            " Dårlig fordøjelse ",
+            " Depression ",
+          ],
+          correct: 3,
+          explanation:
+            "Man har længe vidst, at rygning og overvægt kan gøre hjertet sygt. Men inden for de seneste år har forskere opdaget, at ting, som især rammer kvinder - for eksempel depression og diabetes under graviditet - også kan øge risikoen for hjerte-kar-sygdom.",
         },
         {
-          question: "[ Spørgsmål 6 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
+          question:
+            " Overvægt øger risikoen for hjertekarsygdom. Men hvor er det særligt farligt at være overvægtig henne? ",
+          options: [
+            " Omkring arme og hals ",
+            " Omkring maven ",
+            " På hofterne ",
+            " På brysterne ",
+          ],
+          correct: 1,
+          explanation:
+            "Det er særligt fedt omkring maven og de indre organer, der er farligt for hjertet. Mænds fedt sætter sig typisk på maven. Deres overvægt er derfor “mere farlig” end yngre kvinders, hvor fedt i højere grad sætter sig på lår, bryster og hofter. Efter overgangsalderen begynder kvinders fedt dog også at sætte sig omkring maven.",
         },
         {
-          question: "[ Spørgsmål 7 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
-        },
-        {
-          question: "[ Spørgsmål 8 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
-        },
-        {
-          question: "[ Spørgsmål 9 fra museet ]",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
-        },
-        {
-          question: "[ Spørgsmål 10 fra museet ]",
+          question:
+            "Dette spørgsmål har Steno ikke fået helt styr på endnu... ",
           options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
           correct: 0,
           explanation: "[ Forklaring fra museet ]",
@@ -442,106 +455,73 @@ const translations = {
       },
       questions: [
         {
-          question: "[ Question 1 from museum ]",
-          options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
-          ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
+          question:
+            "Men die earlier from cardiovascular disease than women. How many years earlier?",
+          options: ["3 years", "7 years", "15 years"],
+          correct: 1,
+          explanation:
+            "Men die on average 7 years earlier from cardiovascular disease than women. However, we know less about the heart diseases that primarily affect women.",
         },
         {
-          question: "[ Question 2 from museum ]",
+          question:
+            "When does women's risk of cardiovascular disease begin to rise very rapidly?",
           options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
+            "When menstruation begins",
+            "At menopause — when oestrogen levels drop",
+            "Around the age of 40",
           ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
+          correct: 1,
+          explanation:
+            "The female sex hormone oestrogen can protect against heart disease. This is why women before menopause are less frequently affected by heart disease. After menopause, women's risk therefore begins to rise rapidly.",
         },
         {
-          question: "[ Question 3 from museum ]",
-          options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
-          ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
+          question: "What percentage of Danes die from cardiovascular disease?",
+          options: ["Approx. 5%", "Approx. 50%", "Approx. 20%"],
+          correct: 2,
+          explanation:
+            "Around 20% of Danes today die from cardiovascular disease, and the diseases affect almost equal numbers of men and women. Cardiovascular diseases are therefore among the deadliest diseases — only surpassed by cancer.",
         },
         {
-          question: "[ Question 4 from museum ]",
+          question:
+            "There are many different types of cardiovascular disease, but which are the most common?",
           options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
+            "Atherosclerosis and blood clots",
+            "Congenital heart defects",
+            "Heart disease during pregnancy",
           ],
           correct: 0,
-          explanation: "[ Explanation from museum ]",
+          explanation:
+            "Atherosclerosis is linked to lifestyle and is one of the most common diseases of the blood vessels. If your blood vessels are filled with calcification, you have a high risk of having a heart attack.",
         },
         {
-          question: "[ Question 5 from museum ]",
+          question:
+            "Which of the following is NOT a risk factor for heart disease?",
           options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
+            "Smoking",
+            "Obesity",
+            "Diabetes during pregnancy",
+            "Poor digestion",
+            "Depression",
           ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
+          correct: 3,
+          explanation:
+            "It has long been known that smoking and obesity can damage the heart. But in recent years, researchers have discovered that things that particularly affect women — such as depression and diabetes during pregnancy — can also increase the risk of cardiovascular disease.",
         },
         {
-          question: "[ Question 6 from museum ]",
+          question:
+            "Obesity increases the risk of cardiovascular disease. But where is it particularly dangerous to carry excess weight?",
           options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
+            "Around the arms and neck",
+            "Around the abdomen",
+            "On the hips",
+            "On the chest",
           ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
+          correct: 1,
+          explanation:
+            "It is particularly fat around the abdomen and internal organs that is dangerous for the heart. Men's fat typically settles around the abdomen, making their excess weight more dangerous than that of younger women, where fat more commonly settles on the thighs, chest and hips. After menopause, women's fat also begins to settle around the abdomen.",
         },
         {
-          question: "[ Question 7 from museum ]",
-          options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
-          ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
-        },
-        {
-          question: "[ Question 8 from museum ]",
-          options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
-          ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
-        },
-        {
-          question: "[ Question 9 from museum ]",
-          options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
-          ],
-          correct: 0,
-          explanation: "[ Explanation from museum ]",
-        },
-        {
-          question: "[ Question 10 from museum ]",
+          question: "This question hasn't been finalised yet...",
           options: [
             "[ Answer A ]",
             "[ Answer B ]",
