@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import testvideo from "../assets/testlokalvideo.mp4"
+import testvideo from "../assets/testlokalvideo.mp4";
 
-// Swap this path out for the real video once received from the museum
 const VIDEO_SRC = testvideo;
-
 
 function VideoOverlay({ onClose, visible }) {
   const videoRef = useRef(null);
@@ -13,20 +11,24 @@ function VideoOverlay({ onClose, visible }) {
   const [dragging, setDragging] = useState(false);
   const progressRef = useRef(null);
 
+  // Video event listeners
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => setCurrentTime(video.currentTime);
     const handleLoaded = () => setDuration(video.duration);
+    const handleEnded = () => onClose();
 
     video.addEventListener("timeupdate", handleTimeUpdate);
     video.addEventListener("loadedmetadata", handleLoaded);
+    video.addEventListener("ended", handleEnded);
     video.play().catch(() => {});
 
     return () => {
       video.removeEventListener("timeupdate", handleTimeUpdate);
       video.removeEventListener("loadedmetadata", handleLoaded);
+      video.removeEventListener("ended", handleEnded);
     };
   }, []);
 
@@ -74,6 +76,22 @@ function VideoOverlay({ onClose, visible }) {
 
   const handlePointerUp = () => setDragging(false);
 
+  // Touch events with passive: false to allow preventDefault
+  useEffect(() => {
+    const bar = progressRef.current;
+    if (!bar) return;
+
+    bar.addEventListener("touchstart", handlePointerDown, { passive: false });
+    bar.addEventListener("touchmove", handlePointerMove, { passive: false });
+    bar.addEventListener("touchend", handlePointerUp);
+
+    return () => {
+      bar.removeEventListener("touchstart", handlePointerDown);
+      bar.removeEventListener("touchmove", handlePointerMove);
+      bar.removeEventListener("touchend", handlePointerUp);
+    };
+  }, [dragging]);
+
   const progress = duration ? currentTime / duration : 0;
 
   return (
@@ -116,7 +134,7 @@ function VideoOverlay({ onClose, visible }) {
           </svg>
         </button>
 
-        {/* Video wrapper with rounded corners */}
+        {/* Video wrapper */}
         <div className="flex-1 m-5 rounded-2xl overflow-hidden">
           <video
             ref={videoRef}
@@ -155,7 +173,7 @@ function VideoOverlay({ onClose, visible }) {
             )}
           </button>
 
-          {/* Progress bar */}
+          {/* Progress bar — touch events handled by useEffect, only mouse events here */}
           <div
             ref={progressRef}
             className="relative flex-1 h-2 bg-primary/20 rounded-full cursor-pointer"
@@ -163,9 +181,6 @@ function VideoOverlay({ onClose, visible }) {
             onMouseMove={handlePointerMove}
             onMouseUp={handlePointerUp}
             onMouseLeave={handlePointerUp}
-            onTouchStart={handlePointerDown}
-            onTouchMove={handlePointerMove}
-            onTouchEnd={handlePointerUp}
           >
             <div
               className="absolute left-0 top-0 h-full bg-primary rounded-full"
