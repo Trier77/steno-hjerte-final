@@ -79,7 +79,7 @@ export default function StartSide() {
           <h2
             key={language + "-body"}
             style={{ animation: "fadeIn 0.6s ease" }}
-            className="text-3xl text-center mt-5 opacity-50"
+            className="text-2xl font-semibold text-center mt-5 text-primary"
           >
             {t.startside.body}
           </h2>

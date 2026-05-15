@@ -455,20 +455,7 @@ export default function Blodsukker() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: PAGE_FADE_DURATION + 0.6 }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={stage}
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 8 }}
-              transition={{ duration: 0.25 }}
-              className="font-display font-semibold text-white text-xl"
-            >
-              {t?.stageLabels?.[stage] || ""}
-            </motion.p>
-          </AnimatePresence>
-        </motion.div>
+        ></motion.div>
       </div>
 
       {/* Infobox */}

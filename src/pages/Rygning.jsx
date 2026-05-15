@@ -194,7 +194,7 @@ export default function Rygning() {
               transition={{ duration: 0.3 }}
             >
               <motion.h2
-                className="font-display font-semibold text-6xl mb-4"
+                className="font-display font-semibold text-bg text-6xl mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.05 }}
@@ -203,7 +203,7 @@ export default function Rygning() {
               </motion.h2>
 
               <motion.p
-                className="font-display font-light text-2xl mb-3"
+                className="font-display text-bg font-light text-3xl mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.15 }}
@@ -212,7 +212,7 @@ export default function Rygning() {
               </motion.p>
 
               <motion.p
-                className="font-display font-light text-2xl mb-3"
+                className="font-display font-light text-bg text-3xl mb-3"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.25 }}
@@ -228,7 +228,7 @@ export default function Rygning() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.35 + i * 0.1 }}
                   >
-                    <p className="font-display font-semibold text-8xl">
+                    <p className="font-display text-bg font-semibold text-8xl">
                       {stat.value}
                     </p>
                     <p className="font-display font-semibold text-2xl opacity-90 mt-1">
