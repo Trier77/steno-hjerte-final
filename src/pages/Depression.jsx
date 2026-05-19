@@ -10,6 +10,12 @@ import BrainBackground from "../components/animatedbackgrounds/Brainbackground";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
+import depression1 from "../assets/icons/brain-depression1.svg";
+import depression2 from "../assets/icons/brain-depression2.svg";
+import depression3 from "../assets/icons/brain-depression3.svg";
+import depression4 from "../assets/icons/brain-depression4.svg";
+
+
 
 // Placering og rotation af de fire neuron-knapper på skærmen.
 // Koordinaterne er i procent så de skalerer med skærmstørrelsen.
@@ -40,11 +46,11 @@ export default function Depression() {
 
   // Illustrationer og størrelser til hvert neuron-punkt — indeks matcher NEURON_POSITIONS
   const NEURON_ILLUSTRATIONS = [
-    "/icons/brain-depression1.svg",
-    "/icons/brain-depression2.svg",
-    "/icons/brain-depression3.svg",
-    "/icons/brain-depression4.svg",
-  ];
+  depression1,
+  depression2,
+  depression3,
+  depression4,
+];
 
   const NEURON_ILLUSTRATION_SIZES = [
     { width: "42%", height: "250px" },
