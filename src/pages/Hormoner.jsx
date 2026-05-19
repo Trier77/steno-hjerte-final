@@ -128,7 +128,7 @@ export default function Hormoner() {
       {/* UI box slides up on entrance */}
       <motion.div
         className="relative z-10 w-full bg-ui-box/70 rounded-t-4xl px-8 pt-6 pb-4 flex flex-col"
-        style={{ height: "40vh" }}
+        style={{ height: "40vh", backdropFilter: "blur(12px)" }}
         initial={{ y: "100%" }}
         animate={{ y: 0 }}
         transition={{

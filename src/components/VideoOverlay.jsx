@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import testvideo from "../assets/testlokalvideo.mp4";
 
-const VIDEO_SRC = testvideo;
 
-function VideoOverlay({ onClose, visible }) {
+
+
+function VideoOverlay({ onClose, visible, src }) {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
@@ -138,7 +138,7 @@ function VideoOverlay({ onClose, visible }) {
         <div className="flex-1 m-5 rounded-2xl overflow-hidden">
           <video
             ref={videoRef}
-            src={VIDEO_SRC}
+            src={src}
             className="w-full h-full object-cover cursor-pointer"
             onClick={togglePlay}
             playsInline

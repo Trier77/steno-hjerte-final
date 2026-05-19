@@ -472,7 +472,6 @@ export default function Blodsukker() {
           height: "32vh",
           backgroundColor: "rgba(241,241,241,0.7)",
           backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
         }}
       >
         {/* visible-prop fra LanguageContext skjuler indhold under sprogskift */}
