@@ -6,7 +6,7 @@ import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
-import BloodBackground from "../components/animatedbackgrounds/BloodBackground";
+import BloodBackground from "../components/animatedbackgrounds/Bloodbackground";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
 
 // ─── Konstanter ───────────────────────────────────────────────────────────────
