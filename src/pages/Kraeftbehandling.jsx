@@ -109,7 +109,7 @@ const handleZoomTimeUpdate = () => {
 };
 
   // const handleLinkTap = () => setShowHint(true);
-  const handleTumorStart = () => setShowHint(false);
+  // const handleTumorStart = () => setShowHint(false);
 
   return (
     <div className={`relative w-full h-screen overflow-hidden page-fade-in ${fadeVisible ? "visible" : ""}`} >
@@ -184,7 +184,7 @@ const handleZoomTimeUpdate = () => {
 
           <TumorButton
             onComplete={handleTumorComplete}
-            onHoldStart={handleTumorStart}
+            // onHoldStart={handleTumorStart}
           />
         </div>
       )}
