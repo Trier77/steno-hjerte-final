@@ -135,8 +135,8 @@ const FIGURE_HEIGHT = 110; // px høj — fast så mænd og kvinder er samme hø
 // Blå og røde figurer ligger ovenpå hinanden og crossfader i stedet for at unmounte/remounte.
 // Det giver en blød overgang uden layout-hop.
 function PersonIcon({ gender, isRed, appearDelay, swapDelay }) {
-  const blueSrc = `/src/assets/icons/${gender}-blue.svg`;
-  const redSrc = `/src/assets/icons/${gender}-red.svg`;
+  const blueSrc = `${gender}-blue.svg`;
+  const redSrc = `${gender}-red.svg`;
 
   return (
     <motion.div
