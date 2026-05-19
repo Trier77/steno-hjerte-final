@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) =>{
+  const isGithubPages = process.env.BUILD_TARGET === 'raspberry';
 
   return{
     base: command === "serve" ? "/" : "/steno-hjerte2/",

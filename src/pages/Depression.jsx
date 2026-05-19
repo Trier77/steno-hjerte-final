@@ -40,10 +40,10 @@ export default function Depression() {
 
   // Illustrationer og størrelser til hvert neuron-punkt — indeks matcher NEURON_POSITIONS
   const NEURON_ILLUSTRATIONS = [
-    "/src/assets/icons/brain-depression1.svg",
-    "/src/assets/icons/brain-depression2.svg",
-    "/src/assets/icons/brain-depression3.svg",
-    "/src/assets/icons/brain-depression4.svg",
+    "/icons/brain-depression1.svg",
+    "/icons/brain-depression2.svg",
+    "/icons/brain-depression3.svg",
+    "/icons/brain-depression4.svg",
   ];
 
   const NEURON_ILLUSTRATION_SIZES = [
