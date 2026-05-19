@@ -5,7 +5,7 @@ import FlagButton from "../components/FlagButton";
 import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";
 import BloodVesselAnimation from "../components/BloodVesselAnimation";
-import OvariesBackground from "../components/animated backgrounds/Ovariesbackground";
+import OvariesBackground from "../components/animatedbackgrounds/Ovariesbackground";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";

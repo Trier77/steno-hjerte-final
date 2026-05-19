@@ -4,7 +4,7 @@ import FlagButton from "../components/FlagButton";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";
-import LungsBackground from "../components/animated backgrounds/Lungsbackground";
+import LungsBackground from "../components/animatedbackgrounds/Lungsbackground";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";

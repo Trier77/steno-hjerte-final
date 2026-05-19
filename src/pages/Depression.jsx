@@ -6,7 +6,7 @@ import BackButton from "../components/BackButton";
 import FlagButton from "../components/FlagButton";
 import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";
-import BrainBackground from "../components/animated backgrounds/Brainbackground";
+import BrainBackground from "../components/animatedbackgrounds/Brainbackground";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";

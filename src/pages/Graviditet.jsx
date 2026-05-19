@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import {motion} from "framer-motion";
 import BackButton from "../components/BackButton";
 import FlagButton from "../components/FlagButton";
-import WombBackground from "../components/animated backgrounds/Wombbackground";
+import WombBackground from "../components/animatedbackgrounds/Wombbackground";
 import Speedometer from "../components/Speedometer";
 import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";

@@ -7,7 +7,7 @@ import TumorButton from "../components/TumorButton";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
-import TumorBackground from "../components/animated backgrounds/Tumorbackground"
+import TumorBackground from "../components/animatedbackgrounds/Tumorbackground"
 import tumorani from "../assets/tumorani.webm"
 import rayOverlay from "../assets/rayOverlay.webm"  // din overlay video
 import notumorani from "../assets/notumorani.webm"            // din nye baggrund
