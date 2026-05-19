@@ -7,14 +7,30 @@ import TumorButton from "../components/TumorButton";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
+import TumorBackground from "../components/animated backgrounds/Tumorbackground"
 import tumorani from "../assets/tumorani.webm"
 import rayOverlay from "../assets/rayOverlay.webm"  // din overlay video
 import notumorani from "../assets/notumorani.webm"            // din nye baggrund
 import hjertezoom from "../assets/hjertezoom.webm"
+import { motion } from "framer-motion";
 
-function TekstModul({ step, currentStep, onLinkTap }) {
+function TekstModul({ step, currentStep }) {
   return (
-    <section className="absolute z-10 w-screen h-120 bg-[#f1f1f1]/70 bottom-0 rounded-t-4xl px-8 pt-8 pb-10">
+    <motion.section
+      className="absolute z-10 w-screen bottom-0 rounded-t-4xl px-8 pt-8 pb-10"
+      style={{
+        height: "30vh",
+        backgroundColor: "rgba(241,241,241,0.7)",
+        backdropFilter: "blur(12px)",
+      }}
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      transition={{
+        duration: 0.6,
+        delay: 0.5,
+        ease: [0.4, 0, 0.2, 1],
+      }}
+    >
       <div key={currentStep} style={{ animation: "fadeIn 0.6s ease" }}>
         <div className="mb-4">
           <h2 className="font-display font-semibold text-primary text-4xl">
@@ -24,16 +40,20 @@ function TekstModul({ step, currentStep, onLinkTap }) {
         <p className="font-display font-light text-primary text-3xl leading-relaxed whitespace-pre-line">
           {step.body}
         </p>
-        {step.link && (
-          <button
-            onClick={onLinkTap}
-            className="w-full text-center font-display font-semibold text-primary text-3xl leading-snug border-none bg-transparent cursor-pointer underline mt-8"
+        {step.hint && (
+          <motion.div
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="flex justify-center mt-40"
+            style={{ pointerEvents: "none" }}
           >
-            {step.link}
-          </button>
+            <p className="font-display font-semibold text-primary text-3xl text-center">
+              {step.hint}
+            </p>
+          </motion.div>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -42,7 +62,7 @@ function Kraeftbehandling() {
   const t = translations[language].kraeftbehandling;
   const [currentStep, setCurrentStep] = useState(0);
   const [showTumor, setShowTumor] = useState(true);
-  const [showHint, setShowHint] = useState(false);
+  // const [showHint, setShowHint] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [showTumorBg, setShowTumorBg] = useState(true);
   const [showZoom, setShowZoom] = useState(false);
@@ -64,13 +84,13 @@ const handleOverlayEnded = () => {
   setShowOverlay(false);
   setShowZoom(true); // Start hjertezoom i stedet for at skifte baggrund direkte
   setShowTumorBg(false);
-  setCurrentStep(1); // Tekst skifter når rayOverlay er færdig
+  
 };
 
 const handleZoomEnded = () => {
   setShowZoom(false);
   setShowNewBg(true);
-  
+  setCurrentStep(1); // Tekst skifter når hjerteZoom er færdig
 };
 
 const zoomRef = useRef(null);
@@ -88,13 +108,14 @@ const handleZoomTimeUpdate = () => {
   }
 };
 
-  const handleLinkTap = () => setShowHint(true);
+  // const handleLinkTap = () => setShowHint(true);
   const handleTumorStart = () => setShowHint(false);
 
   return (
     <div className={`relative w-full h-screen overflow-hidden page-fade-in ${fadeVisible ? "visible" : ""}`} >
       <FlagButton />
       <BackButton onClick={() => fadeNavigate("/")} />
+      <TumorBackground />
 
       {/* Baggrund 1: tumorani — fader ud når ny baggrund vises */}
       <video
@@ -148,7 +169,7 @@ const handleZoomTimeUpdate = () => {
             pointerEvents: currentStep === 0 ? "auto" : "none",
           }}
         >
-          <div
+          {/* <div
             className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white rounded-full px-4 py-2 whitespace-nowrap"
             style={{
               opacity: showHint ? 1 : 0,
@@ -159,7 +180,7 @@ const handleZoomTimeUpdate = () => {
             <span className="font-display font-semibold text-primary text-lg">
               Hold her
             </span>
-          </div>
+          </div> */}
 
           <TumorButton
             onComplete={handleTumorComplete}
@@ -179,7 +200,10 @@ const handleZoomTimeUpdate = () => {
         <TekstModul
           step={step}
           currentStep={currentStep}
-          onLinkTap={handleLinkTap}
+          // onLinkTap={handleLinkTap}
+          style={{
+             backdropFilter: "blur(12px)",
+          }}
         />
       </div>
       {/* Fade to black */}

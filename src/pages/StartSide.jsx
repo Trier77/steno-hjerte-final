@@ -4,6 +4,8 @@ import HotspotButton from "../components/HotspotButton";
 import { useNavigate } from "react-router";
 import { useState, useCallback } from "react";
 import VideoOverlay from "../components/VideoOverlay";
+import HjerteDa from "../assets/hjerteda.webm";
+import HjerteEn from "../assets/hjerteen.webm"
 import QuizOverlay from "../components/QuizOverlay";
 import FlagButton from "../components/FlagButton";
 import { useLanguage } from "../context/LanguageContext";
@@ -64,7 +66,7 @@ export default function StartSide() {
 
         <FlagButton />
         {showVideo && (
-          <VideoOverlay onClose={closeVideo} visible={videoVisible} />
+          <VideoOverlay onClose={closeVideo} visible={videoVisible} src={language === "da" ? HjerteDa : HjerteEn} />
         )}
         {showQuiz && <QuizOverlay onClose={closeQuiz} visible={quizVisible} />}
 

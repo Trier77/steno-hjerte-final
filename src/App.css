@@ -248,3 +248,34 @@ body {
   0%   { transform: scale(1); opacity: 0.6; }
   100% { transform: scale(2); opacity: 0; }
 }
+
+
+
+/* Tumor baggrundselementer */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.15); }
+}
+
+@keyframes vein {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 0.9; }
+}
+
+@keyframes drift {
+  0%   { transform: translate(0px, 0px)    scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.06); }
+  66%  { transform: translate(-20px, 25px) scale(0.96); }
+  100% { transform: translate(0px, 0px)    scale(1); }
+}
+
+/* Animation classes */
+.animate-pulse-slow {
+  animation: pulse-slow 5s ease-in-out infinite;
+}
+.animate-vein {
+  animation: vein 4s ease-in-out infinite;
+}
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}

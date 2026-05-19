@@ -207,7 +207,7 @@ export default function Depression() {
       <motion.section
         ref={boxRef}
         className="absolute w-screen bg-ui-box/70 bottom-0 rounded-t-4xl z-20 px-8 pt-6 pb-8"
-        style={{ height: "25vh" }}
+        style={{ height: "25vh", backdropFilter: "blur(12px)", }}
         initial={{ y: "100%" }}
         animate={{ y: 0 }}
         transition={{

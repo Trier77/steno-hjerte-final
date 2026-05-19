@@ -30,12 +30,12 @@ const translations = {
         {
           heading: "Brystkræft og hjertesygdomme",
           body: "Hvis man er blevet behandlet for brystkræft, har man større risiko for senere at udvikle en hjertesygdom. 99 % af patienter med brystkræft er kvinder.\n\n9 ud af 10 af brystkræftpatienter får stråling som en del af deres behandling.",
-          link: "Prøv at fjerne kræftknuden med stråling",
+          hint: "Prøv at fjerne kræftknuden med stråling",
         },
         {
           heading: "Stråling mod brystkræft kan skade hjertet",
           body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom.\n\nForskningen i sammenhængen mellem (behandling af) brystkræft og hjertesygdom er især vokset inden for de seneste 20–25 år.",
-          link: null,
+          hint: null,
         },
       ],
     },
@@ -138,8 +138,9 @@ const translations = {
       steps: [
         {
           heading: "Graviditet og kvinders hjerter",
-          body: "Hjerteforskning har historisk været fokuseret på mænd. Derfor er det først inden for de seneste 20-30 år, at forskere er begyndt at dykke ned i sammenhængen mellem kvinders graviditeter og hjerte-kar-sygodom senere i livet.\n\n9 ud",
-          link: "Prøv at trække i speedometeret",
+          body: "Hjerteforskning har historisk været fokuseret på mænd. Derfor er det først inden for de seneste 20-30 år, at forskere er begyndt at dykke ned i sammenhængen mellem kvinders graviditeter og hjerte-kar-sygodom senere i livet.",
+          hintStart: "Prøv at trække",
+          hintEnd: "i speedometeret",
         },
         {
           heading: "Diabetes under graviditet kan gøre hjertet sygt",
@@ -337,12 +338,12 @@ const translations = {
         {
           heading: "Breast cancer and heart disease",
           body: "If you have been treated for breast cancer, you have a greater risk of developing heart disease later in life. 99% of breast cancer patients are women.\n\n9 out of 10 breast cancer patients receive radiation as part of their treatment.",
-          link: "Try to remove the tumour with radiation",
+          hint: "Try to remove the tumour with radiation",
         },
         {
           heading: "Radiation for breast cancer can damage the heart",
           body: "You removed the tumour, but some of the radiation also reached the heart. This can cause scarring of the heart muscle and lead to disease.\n\nResearch into the connection between breast cancer (and its treatment) and heart disease has grown particularly over the last 20–25 years.",
-          link: null,
+          hint: null,
         },
       ],
     },
@@ -446,7 +447,8 @@ const translations = {
         {
           heading: "Pregnancy and women's hearts",
           body: "Heart research has historically focused on men. It is therefore only within the last 20–30 years that researchers have begun to explore the connection between women's pregnancies and cardiovascular disease later in life.",
-          link: "Try dragging the speedometer",
+          hintStart: "Try dragging",
+          hintEnd: "the speedometer",
         },
         {
           heading: "Diabetes during pregnancy can damage the heart",
