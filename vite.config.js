@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: command === "serve" ? "/" : "/steno-hjerte2/",
   plugins: [react(), legacy({
       targets: ['chrome >= 69'],   // BrightSign HD5 OS9 kører Chromium ~69-94
       renderLegacyChunks: true,
