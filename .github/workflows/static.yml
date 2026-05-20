@@ -43,7 +43,7 @@ jobs:
 
       # Build React app for production
       - name: Build
-        run: npm run build
+        run: npm run build:gh
 
       # Copy index.html to 404.html for SPA routing
       # This ensures React Router works on GitHub Pages
