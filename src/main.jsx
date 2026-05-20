@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, HashRouter } from "react-router";
+import { BrowserRouter, } from "react-router";
 import { LanguageProvider } from "./context/LanguageContext";
 import "./App.css";
 import App from "./App.jsx";
