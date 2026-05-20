@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:pi": "vite build --base=/",
-    "build gh": "vite build --base=/steno-hjerte2/",
+    "build:gh": "vite build --base=/steno-hjerte2/",
     "lint": "eslint .",
     "preview": "vite preview"
   },
