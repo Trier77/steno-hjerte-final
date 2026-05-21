@@ -1,6 +1,7 @@
 import playIcon from "../assets/icons/play-button.svg";
 import quizIcon from "../assets/icons/quiz-button.svg";
 
+//De to knapper til "Om Hjertet" og "Quiz er stylet her"
 const icons = {
   play: playIcon,
   quiz: quizIcon,

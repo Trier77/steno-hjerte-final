@@ -87,8 +87,8 @@ export default function StartSide() {
           </h2>
         </section>
 
-        <HotspotButton
-          className="depri-knap left-1/2 top-100"
+        <HotspotButton 
+          className="depri-knap left-1/2 top-100" //Justér placering af hotspots her 
           onClick={() => goTo("/depression")}
         />
         <HotspotButton

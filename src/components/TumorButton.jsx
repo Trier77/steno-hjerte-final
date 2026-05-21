@@ -36,7 +36,8 @@ function TumorButton({ onComplete, onHoldStart }) {
     setProgress(0);
   };
 
-  // Attach touchstart manually with passive: false so preventDefault works
+  // Touch-events tilføjes manuelt med passive: false så vi kan kalde preventDefault()
+  // og forhindre utilsigtet scrolling mens brugeren holder fingeren nede på knappen
   useEffect(() => {
     const el = buttonRef.current;
     if (!el) return;
@@ -56,12 +57,12 @@ function TumorButton({ onComplete, onHoldStart }) {
 
   return (
     <div className="relative flex items-center justify-center w-36 h-36">
-      {/* Pulsing ping - only when idle */}
+      {/* Pulserende ping vises kun når der ikke interageres med knappen */}
       {!holding && !done && (
         <span className="absolute inline-flex w-full h-full rounded-full bg-primary opacity-40 animate-ping" />
       )}
 
-      {/* Progress ring - only appears when holding */}
+      {/* Progressionsring vises kun når brugeren holder på knappen */}
       {holding && (
         <svg width={size} height={size} className="absolute rotate-[-90deg]">
           <circle
@@ -88,7 +89,7 @@ function TumorButton({ onComplete, onHoldStart }) {
         </svg>
       )}
 
-      {/* Inner circle */}
+      {/* Indre cirkel */}
       <button
         ref={buttonRef}
         onMouseDown={startHold}

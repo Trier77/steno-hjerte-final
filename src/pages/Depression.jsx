@@ -51,7 +51,7 @@ export default function Depression() {
   depression3,
   depression4,
 ];
-
+ //Størrelse af billeder
   const NEURON_ILLUSTRATION_SIZES = [
     { width: "42%", height: "250px" },
     { width: "42%", height: "200px" },

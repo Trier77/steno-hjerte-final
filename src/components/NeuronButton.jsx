@@ -4,16 +4,19 @@ function NeuronButton({ src, alt, selected, onClick, floatSeed = 0 }) {
   const divRef = useRef(null);
   const targetScaleRef = useRef(1);
 
-  // Keep target scale in sync with selected prop
+  // Opdaterer målskalaen når selected-prop ændres —
+  // 1.3 = forstørret når valgt, 1 = normal størrelse
   useEffect(() => {
     targetScaleRef.current = selected ? 1.3 : 1;
   }, [selected]);
 
-  // Single animation loop: float + smooth scale lerp, both on the same element
+   // Animationsloop der håndterer både flydende bevægelse og glidende skalering
+  // på samme element for at undgå layout-skift
   useEffect(() => {
     const el = divRef.current;
     if (!el) return;
 
+// Bevægelsesområde og hastighed varierer baseret på floatSeed
     const xRange = 8 + (floatSeed % 3) * 4;
     const yRange = 10 + (floatSeed % 4) * 4;
     const duration = 3000 + floatSeed * 400;
@@ -24,8 +27,11 @@ function NeuronButton({ src, alt, selected, onClick, floatSeed = 0 }) {
 
     const animate = (timestamp) => {
       if (!start) start = timestamp;
+      // floatSeed ganget ind i elapsed giver forskudt startposition
+      // så knapperne ikke svinger i takt
       const elapsed = timestamp - start + floatSeed * 1200;
 
+      // Bevægelserne er baseret på sinusbølger
       const x = Math.sin((elapsed / duration) * Math.PI * 2 + xOffset) * xRange;
       const y =
         Math.cos((elapsed / (duration * 1.3)) * Math.PI * 2 + floatSeed) *
@@ -43,6 +49,8 @@ function NeuronButton({ src, alt, selected, onClick, floatSeed = 0 }) {
   }, [floatSeed]);
 
   return (
+    // will-change-transform fortæller browseren at dette element animeres
+    // så den kan optimere renderingen på forhånd, og vi får et hak til at starte med
     <div ref={divRef} className="will-change-transform">
       <button
         onClick={onClick}
@@ -56,6 +64,7 @@ function NeuronButton({ src, alt, selected, onClick, floatSeed = 0 }) {
       >
         <img src={src} alt={alt} className="w-58 h-58 object-contain" />
 
+        {/* Ringe der breder sig udad fra ikke-valgte knapper */}
         {!selected && (
           <>
             <span className="absolute inset-0 rounded-full border border-[#e8a050]/50 animate-ripple" />

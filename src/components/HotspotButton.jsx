@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 
+//De blå interaktionsknapper er stylet her
 const HotspotButton = forwardRef(function HotspotButton(
   { onClick, className = "", style },
   ref,
