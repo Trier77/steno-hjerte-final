@@ -27,6 +27,7 @@ export default function Rygning() {
   const { fadeNavigate, fading } = useFadeNavigate();
   useIdleTimeout(3);
 
+  // Bestemmer om slideren er trukket helt til venstre eller højre
   const activeSide = sliderX <= 0 ? "left" : sliderX >= 1 ? "right" : null;
 
   const getClientX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
@@ -50,6 +51,7 @@ export default function Rygning() {
     setSliderX(newX);
   };
 
+  // Snapper slideren til venstre, midten eller højre afhængigt af position
   const handlePointerUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
@@ -95,7 +97,7 @@ export default function Rygning() {
       <BackButton onClick={() => fadeNavigate("/")} />
       <LungsBackground />
 
-      {/* Left animation — clipped til venstre side */}
+      {/* Venstre animation, klippes af baseret på sliderens position */}
       <video
         src={leftAni}
         autoPlay loop muted playsInline
@@ -107,7 +109,7 @@ export default function Rygning() {
         }}
       />
 
-      {/* Right animation — clipped til højre side */}
+      {/* Højre animation, klippes af baseret på sliderens position */}
       <video
         src={rightAni}
         autoPlay loop muted playsInline
@@ -119,7 +121,7 @@ export default function Rygning() {
         }}
       />
 
-      {/* Left overlay */}
+      {/* Venstre overlay */}
       <div
         className="absolute inset-0 bg-overlay-light opacity-30"
         style={{
@@ -128,7 +130,7 @@ export default function Rygning() {
         }}
       />
 
-      {/* Right overlay */}
+      {/* Højre overlay */}
       <div
         className="absolute inset-0 bg-overlay-dark opacity-30"
         style={{
@@ -137,7 +139,7 @@ export default function Rygning() {
         }}
       />
 
-      {/* Slider line + handle */}
+      {/* Lodret skillelinie med håndtag */}
       <div
         className="absolute top-0 bottom-0 z-30 flex flex-col items-center"
         style={{
@@ -146,10 +148,10 @@ export default function Rygning() {
           transition: snapTransition,
         }}
       >
-        {/* Single continuous line */}
+        {/* Skille linie design */}
         <div className="absolute top-0 bottom-0 w-2 bg-ui-box" />
 
-        {/* Handle centered on top of the line */}
+        {/* Håndtag */}
         <div className="absolute top-1/2 -translate-y-1/2">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -184,7 +186,7 @@ export default function Rygning() {
         </div>
       </div>
 
-      {/* Language fade wrapper */}
+      {/* Sprogskift fade-wrapper */}
       <div
         style={{ opacity: visible ? 1 : 0, transition: "opacity 0.3s ease" }}
       >
@@ -268,7 +270,7 @@ export default function Rygning() {
         </AnimatePresence>
       </div>
 
-      {/* Fade to black */}
+      {/* Fade til sort, når man forlader siden */}
       <div
         style={{
           position: "fixed",

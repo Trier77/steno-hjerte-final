@@ -11,13 +11,14 @@ function VideoOverlay({ onClose, visible, src }) {
   const [dragging, setDragging] = useState(false);
   const progressRef = useRef(null);
 
-  // Video event listeners
+  // Sætter video-event listeners op, starter afspilning automatisk, hvis den finder en
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => setCurrentTime(video.currentTime);
     const handleLoaded = () => setDuration(video.duration);
+    // Lukker overlayет automatisk når videoen er færdig
     const handleEnded = () => onClose();
 
     video.addEventListener("timeupdate", handleTimeUpdate);
@@ -32,6 +33,7 @@ function VideoOverlay({ onClose, visible, src }) {
     };
   }, []);
 
+  // Skifter mellem play og pause icon
   const togglePlay = () => {
     const video = videoRef.current;
     if (!video) return;
@@ -44,6 +46,7 @@ function VideoOverlay({ onClose, visible, src }) {
     }
   };
 
+  // Laver sekunder om til mm:ss, som viser hvor lang videoen er
   const formatTime = (t) => {
     if (isNaN(t)) return "0:00";
     const mins = Math.floor(t / 60);
@@ -53,6 +56,7 @@ function VideoOverlay({ onClose, visible, src }) {
     return `${mins}:${secs}`;
   };
 
+  // Beregner hvor/hvornår i videoen der trykkes/trækkes baseret på tryk-input
   const getProgressFromEvent = (e) => {
     const bar = progressRef.current;
     if (!bar) return;
@@ -76,7 +80,8 @@ function VideoOverlay({ onClose, visible, src }) {
 
   const handlePointerUp = () => setDragging(false);
 
-  // Touch events with passive: false to allow preventDefault
+   // Touch-events skal tilføjes med passive: false så vi kan kalde preventDefault()
+   // og forhindre at siden scroller mens brugeren trækker i progress-baren
   useEffect(() => {
     const bar = progressRef.current;
     if (!bar) return;
@@ -92,9 +97,11 @@ function VideoOverlay({ onClose, visible, src }) {
     };
   }, [dragging]);
 
+  // Beregner videoens progression som en værdi mellem 0 og 1
   const progress = duration ? currentTime / duration : 0;
 
   return (
+    // Mørk baggrund bag overlayет, når overlayet lukker forsvinder det
     <div
       className="fixed inset-0 z-50 flex items-center justify-center"
       style={{
@@ -103,6 +110,7 @@ function VideoOverlay({ onClose, visible, src }) {
       }}
       onClick={onClose}
     >
+      {/* Selve modulet — stopPropagation forhindrer at klik inde i boksen lukker den */}
       <div
         className="relative bg-ui-box rounded-3xl w-10/12 flex flex-col"
         style={{
@@ -113,7 +121,7 @@ function VideoOverlay({ onClose, visible, src }) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
+        {/* Lukkeknap i højre hjørne */}
         <button
           onClick={onClose}
           className="absolute top-0 right-0 z-10 w-20 h-20 flex items-center justify-center rounded-full bg-ui-box text-primary shadow"
@@ -134,7 +142,7 @@ function VideoOverlay({ onClose, visible, src }) {
           </svg>
         </button>
 
-        {/* Video wrapper */}
+        {/* Selve video-elementet */}
         <div className="flex-1 m-5 rounded-2xl overflow-hidden">
           <video
             ref={videoRef}
@@ -145,9 +153,9 @@ function VideoOverlay({ onClose, visible, src }) {
           />
         </div>
 
-        {/* Controls */}
+        {/* Videokontrol, start/stop, progressionsbar og resterende tid */}
         <div className="flex items-center gap-6 px-8 py-6">
-          {/* Play/Pause button */}
+          {/* Play/Pause knap */}
           <button
             onClick={togglePlay}
             className="shrink-0 w-16 h-16 flex items-center justify-center"
@@ -173,7 +181,7 @@ function VideoOverlay({ onClose, visible, src }) {
             )}
           </button>
 
-          {/* Progress bar — touch events handled by useEffect, only mouse events here */}
+          {/* Progressionsbar — touch-events håndteres af useEffect ovenfor, kun muse-events her */}
           <div
             ref={progressRef}
             className="relative flex-1 h-2 bg-primary/20 rounded-full cursor-pointer"
@@ -182,17 +190,19 @@ function VideoOverlay({ onClose, visible, src }) {
             onMouseUp={handlePointerUp}
             onMouseLeave={handlePointerUp}
           >
+            {/* Den fyldte del af progressionsbaren */}
             <div
               className="absolute left-0 top-0 h-full bg-primary rounded-full"
               style={{ width: `${progress * 100}%` }}
             />
+            {/* Håndtag til at trække i progressionsbaren */}
             <div
               className="absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-primary shadow"
               style={{ left: `calc(${progress * 100}% - 12px)` }}
             />
           </div>
 
-          {/* Time remaining */}
+          {/* Resterende tid */}
           <span className="font-display text-primary text-3xl shrink-0">
             -{formatTime(duration - currentTime)}
           </span>

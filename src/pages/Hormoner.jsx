@@ -11,6 +11,7 @@ import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
 import halvliv from "../assets/halvliv.webm"
 
+//Snap-punkter til "alder-slideren"
 const SNAP_POINTS = ["", "0-50", "50-60", "60-70", "70+", ""];
 const PAGE_FADE_DURATION = 0.4;
 
@@ -33,6 +34,7 @@ export default function Hormoner() {
 
   const getClientX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
 
+  // Snapper slideren til nærmeste punkt, så den ikke hænger mellem to punkter
   const snapToIndex = (index) => {
     const clampedIndex = Math.max(0, Math.min(SNAP_POINTS.length - 1, index));
     setIsSnapping(true);
@@ -103,6 +105,7 @@ export default function Hormoner() {
 
   const handlePointTap = (index) => snapToIndex(index);
   const dotPercent = sliderX * 100;
+  //isBookend, hvis slideren er i start eller slut, så bliver ping-animationen synlig
   const isBookend = activeIndex === 0 || activeIndex === SNAP_POINTS.length - 1;
   const showIllustration = !isBookend;
 
@@ -113,6 +116,8 @@ export default function Hormoner() {
       <FlagButton />
       <BackButton onClick={() => fadeNavigate("/")} />
       <OvariesBackground />
+
+      {/* Halvliv-animation afspilles bag UI-boksen */}
       <video
                 src={halvliv}
                 autoPlay
@@ -125,7 +130,7 @@ export default function Hormoner() {
 
       <div className="flex-1" />
 
-      {/* UI box slides up on entrance */}
+      {/* UI-boksen "slider" op fra bunden, når siden loades */}
       <motion.div
         className="relative z-10 w-full bg-ui-box/70 rounded-t-4xl px-8 pt-6 pb-4 flex flex-col"
         style={{ height: "40vh", backdropFilter: "blur(12px)" }}
@@ -141,7 +146,7 @@ export default function Hormoner() {
           className="flex flex-col h-full gap-10"
           style={{ opacity: visible ? 1 : 0, transition: "opacity 0.3s ease" }}
         >
-          {/* Text area */}
+          {/* Tekstområde */}
           <motion.div
             key={activeIndex}
             className="shrink-0 overflow-hidden"
@@ -168,7 +173,7 @@ export default function Hormoner() {
               {content.body || "[ Tekst fra museet ]"}
             </motion.p>
 
-            {/* Caption — fixed slot, only text changes, no layout shift */}
+            
             <div className="mt-4" style={{ height: "2rem" }}>
               <AnimatePresence mode="wait">
                 {content.caption && (
@@ -187,9 +192,9 @@ export default function Hormoner() {
             </div>
           </motion.div>
 
-          {/* Blood vessel animation OR hint */}
+          {/* Blodåre aimation eller hint */}
           <div className="shrink-0 relative" style={{ height: "160px" }}>
-            {/* Hint — only shows on bookend */}
+            {/* Hint vises kun når slideren er i start eller slut */}
             <motion.div
               className="absolute inset-0 flex flex-col items-center justify-center gap-2"
               animate={{ opacity: isBookend ? 1 : 0 }}
@@ -224,7 +229,7 @@ export default function Hormoner() {
               ></motion.div>
             </motion.div>
 
-            {/* Blood vessel animation — fades in when not bookend */}
+            {/* Blodåre animationen fader ind, når slideren ikke er i start eller slut */}
             <motion.div
               className="absolute inset-0"
               animate={{ opacity: showIllustration ? 1 : 0 }}
@@ -234,7 +239,7 @@ export default function Hormoner() {
             </motion.div>
           </div>
 
-          {/* Slider */}
+          {/* Start prik */}
           <div className="shrink-0">
             {/* Labels */}
             <div className="relative h-7 mb-7">
@@ -248,7 +253,7 @@ export default function Hormoner() {
                 ●
               </button>
 
-              {/* Age labels */}
+              {/* År labels */}
               {SNAP_POINTS.map((label, i) => {
                 if (!label) return null;
                 return (
@@ -267,7 +272,7 @@ export default function Hormoner() {
                 );
               })}
 
-              {/* End tick */}
+              {/* Slut prik */}
               <button
                 onClick={() => handlePointTap(SNAP_POINTS.length - 1)}
                 className={`absolute text-primary text-4xl transition-all duration-300 -translate-x-1/2 ${
@@ -281,13 +286,13 @@ export default function Hormoner() {
               </button>
             </div>
 
-            {/* Track */}
+            {/*Sporet til slider */}
             <div
               ref={sliderRef}
               className="relative w-full h-3 bg-primary/20 rounded-full cursor-pointer mb-2 overflow-visible"
               onMouseDown={handlePointerDown}
             >
-              {/* Fill */}
+              {/* Sporets fyld */}
               <div
                 className="absolute left-0 top-0 h-full bg-primary rounded-full"
                 style={{
@@ -298,7 +303,7 @@ export default function Hormoner() {
                 }}
               />
 
-              {/* Dot */}
+              {/* Håndtag */}
               <div
                 className="absolute top-1/2"
                 style={{
@@ -323,6 +328,7 @@ export default function Hormoner() {
                     ease: [0.34, 1.56, 0.64, 1],
                   }}
                 >
+                  {/* Ping-effekt på håndtaget, vises når ER i start- eller slut-position */}
                   {isBookend && (
                     <span className="absolute inset-0 rounded-full bg-primary opacity-40 animate-ping" />
                   )}
@@ -334,7 +340,7 @@ export default function Hormoner() {
               </div>
             </div>
 
-            {/* Drag hint */}
+            {/* Træk hint */}
             <motion.p
               className="mt-5 font-display font-semibold text-primary text-center text-4xl"
               initial={{ opacity: 0 }}
@@ -347,7 +353,7 @@ export default function Hormoner() {
         </div>
       </motion.div>
 
-      {/* Fade to black */}
+      {/* Fade til sort, når man forlader siden */}
       <div
         style={{
           position: "fixed",
