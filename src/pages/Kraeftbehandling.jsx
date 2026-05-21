@@ -9,8 +9,8 @@ import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
 import TumorBackground from "../components/animatedbackgrounds/Tumorbackground"
 import tumorani from "../assets/tumorani.webm"
-import rayOverlay from "../assets/rayOverlay.webm"  // din overlay video
-import notumorani from "../assets/notumorani.webm"            // din nye baggrund
+import rayOverlay from "../assets/rayOverlay.webm"  
+import notumorani from "../assets/notumorani.webm"            
 import hjertezoom from "../assets/hjertezoom.webm"
 import { motion } from "framer-motion";
 
@@ -73,16 +73,15 @@ function Kraeftbehandling() {
   useIdleTimeout(3);
 
   const handleTumorComplete = () => {
-    // Start overlay — tekst skifter IKKE endnu
+    // Starter videoen rayOverlay
     setShowOverlay(true);
     setTimeout(() => setShowTumor(false), 800);
   };
 
 
- // Opdater disse to handlers:
 const handleOverlayEnded = () => {
   setShowOverlay(false);
-  setShowZoom(true); // Start hjertezoom i stedet for at skifte baggrund direkte
+  setShowZoom(true); // Starter hjertezoom 
   setShowTumorBg(false);
   
 };
@@ -90,13 +89,13 @@ const handleOverlayEnded = () => {
 const handleZoomEnded = () => {
   setShowZoom(false);
   setShowNewBg(true);
-  setCurrentStep(1); // Tekst skifter når hjerteZoom er færdig
+  setCurrentStep(1); // Teksten skifter først når hjerteZoom er færdig
 };
 
 const zoomRef = useRef(null);
 const newBgRef = useRef(null);
 
-const PRELOAD_SECONDS = 6000; // Juster efter behov
+const PRELOAD_SECONDS = 6000; // Juster efter behov for at få mindst hak mellem videoskift
 
 const handleZoomTimeUpdate = () => {
   const video = zoomRef.current;
@@ -108,6 +107,7 @@ const handleZoomTimeUpdate = () => {
   }
 };
 
+  //Aktivér disse samt linie 172-183, 188 og 205 for at få "hint" synlig
   // const handleLinkTap = () => setShowHint(true);
   // const handleTumorStart = () => setShowHint(false);
 
@@ -147,7 +147,7 @@ const handleZoomTimeUpdate = () => {
         />
       )}
 
-      {/* Overlay video — spiller én gang henover alt */}
+      {/* Strålevideon — spiller én gang henover alt */}
       {showOverlay && (
         <video
           src={rayOverlay}
@@ -158,7 +158,7 @@ const handleZoomTimeUpdate = () => {
         />
       )}
 
-      {/* Tumor button + hint */}
+      {/* Tumor knap + hint */}
       {showTumor && (
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -169,7 +169,8 @@ const handleZoomTimeUpdate = () => {
             pointerEvents: currentStep === 0 ? "auto" : "none",
           }}
         >
-          {/* <div
+            {/*Aktivér disse samt linie 110-112 188 og 205 for at få "hint" synlig
+          <div
             className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white rounded-full px-4 py-2 whitespace-nowrap"
             style={{
               opacity: showHint ? 1 : 0,
@@ -189,7 +190,7 @@ const handleZoomTimeUpdate = () => {
         </div>
       )}
 
-      {/* Tekst — skifter kun efter overlay er færdig */}
+      {/* Tekstkontainer */}
       <div
         style={{
           zIndex: 30,
@@ -197,6 +198,7 @@ const handleZoomTimeUpdate = () => {
           transition: "opacity 0.3s ease",
         }}
       >
+        {/* Tekstkomponent, som er defineret i linie 17-58, kan evt. styles her  */}
         <TekstModul
           step={step}
           currentStep={currentStep}
@@ -206,7 +208,7 @@ const handleZoomTimeUpdate = () => {
           }}
         />
       </div>
-      {/* Fade to black */}
+      {/* Fade til sort, når man forlader siden */}
       <div
         style={{
           position: "fixed",

@@ -15,16 +15,19 @@ function Graviditet() {
   const t = translations[language]?.graviditet;
   const fadeVisible = useFadeIn();
   const { fadeNavigate, fading } = useFadeNavigate();
+
+   // currentStep følger hvilket af de 4 segmenter der er aktivt i speedometeret (0-3)
   const [currentStep, setCurrentStep] = useState(0);
   useIdleTimeout(3);
 
+  // Opdaterer currentStep når speedometeret skifter segment
   const handleSegmentChange = useCallback((segmentId) => {
     if (segmentId !== null) setCurrentStep(segmentId);
   }, []);
 
   const step = t.steps[currentStep];
 
-  // Midlertidig placeholder — udskift med rigtige billeder senere
+  // Midlertidig placeholder,  udskift til rigtige billeder senere
 const PLACEHOLDERS = [
   "https://placehold.co/800x200/c8cdd6/white?text=Graviditet-billede",
   "https://placehold.co/800x200/c8cdd6/white?text=Graviditetsdiabetes-billede",
@@ -40,7 +43,8 @@ const PLACEHOLDERS = [
 
       <div className="flex-1" />
 
-      {/* Illustration over infoboxen */}
+     {/* Illustration der skifter baseret på aktivt segment */}
+      
       <motion.div
         key={currentStep}
         className="absolute z-20 flex justify-center"
@@ -49,6 +53,7 @@ const PLACEHOLDERS = [
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
+        {/* Tjekker om der er illustration til step'et ellers tager den placeholderbilledet */}
         <img
           src={step.illustration ?? PLACEHOLDERS[currentStep]}
           alt=""
@@ -57,17 +62,8 @@ const PLACEHOLDERS = [
         />
       </motion.div>
 
-      {/* Speedometer */}
-      {/* <div
-        className="absolute left-0 right-0 z-20 flex justify-center"
-        style={{ bottom: "34.5vh" }}
-      >
-        <div style={{ width: "100%", maxWidth: "500px" }}>
-          <Speedometer onSegmentChange={handleSegmentChange} labels={t.labels} />
-        </div>
-      </div> */}
-
-      {/* UI Infobox */}
+      
+      {/* UI Infobox, der slider op fra bunden når siden loader */}
       <motion.div
         className="relative z-10 w-full bg-ui-box/70 rounded-t-4xl px-8 pt-8 pb-8 flex flex-col"
         style={{ height: "35vh",backdropFilter: "blur(12px)",}}
@@ -79,6 +75,7 @@ const PLACEHOLDERS = [
           ease: [0.4, 0, 0.2, 1],
         }}
       >
+        {/*Tekst, der udskiftes afhængigt af step*/}
         <div
           key={currentStep}
           style={{
@@ -93,6 +90,7 @@ const PLACEHOLDERS = [
           <p className="font-display font-light text-primary text-2xl leading-relaxed mb-6">
             {step.body}
           </p>
+          {/* Pulserende hint-tekst */}
           <motion.div
             animate={{ opacity: [0.4, 1, 0.4] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
@@ -107,6 +105,7 @@ const PLACEHOLDERS = [
             </p>
           </motion.div>
         </div>
+        {/* Speedometer er sat til at sidde i bunden og er kun 80% er sin oprindelige størrelse */}
         <div
           className="absolute -bottom-6 left-0 right-0"
           style={{ transformOrigin: "bottom center", transform: "scale(0.80)" }}
@@ -117,7 +116,7 @@ const PLACEHOLDERS = [
           />
         </div>
       </motion.div>
-      {/* Sort overlay der fader ind ved tilbage-navigation */}
+      {/* Fader til sort, når man forlader siden */}
       <div
         style={{
           position: "fixed",

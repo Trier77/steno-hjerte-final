@@ -5,10 +5,10 @@ import {animate} from "framer-motion";
 // --- Geometri-konstanter ---
 const CX = 300; // Centrum X
 const CY = 295; // Centrum Y (bunden af halvkreds)
-const SEG_OUTER_R = 255; // Ydre kant af røde segmenter
-const SEG_INNER_R = 190; // Indre kant af røde segmenter
-const TRACK_OUTER_R = 190; // Ydre kant af grå track
-const TRACK_INNER_R = 140; // Indre kant af grå track
+const SEG_OUTER_R = 255; // Ydre kant af emne segmenter
+const SEG_INNER_R = 190; // Indre kant af emne segmenter
+const TRACK_OUTER_R = 190; // Ydre kant af slider segmenter
+const TRACK_INNER_R = 140; // Indre kant af slider segmenter
 const DOT_R = 165; // Radius hvor den blå cirkel kører
 
 // --- Hjælpefunktioner ---
@@ -36,7 +36,7 @@ const arcPath = (cx, cy, outerR, innerR, startDeg, endDeg) => {
   ].join(" ");
 };
 
-// Sti som teksten følger langs midten af segmentet
+// Sti/bue som teksten følger langs midten af segmentet
 const LABEL_R = (SEG_OUTER_R + SEG_INNER_R) / 2;
 const labelArcD = (startDeg, endDeg) => {
   const margin = 3;
@@ -87,7 +87,7 @@ function Speedometer({onSegmentChange, labels =[]}) {
     // Klemmer til halvkredsens gyldige interval
     const clamped = Math.max(6, Math.min(174, a));
 
-    //Sørger for at vi ikke kan komme v<->h uden forbi 0 og 180 grader
+    //Sørger for at vi ikke kan komme v<->h uden for 0 og 180 grader
     setAngle(prev => Math.abs(clamped - prev) > 90 ? prev : clamped);
   
   }, []);
@@ -146,7 +146,7 @@ function Speedometer({onSegmentChange, labels =[]}) {
             <rect width="600" height="310" fill="black" />
             {/* Hvid = synlig — definerer segmentets form */}
             <path d={arcPath(CX, CY, SEG_OUTER_R, SEG_INNER_R, seg.startDeg, seg.endDeg)} fill="white" />
-            {/* Sort cirkel krymper fra ydre til indre → afslører farven udefra og ind */}
+            {/* Sort cirkel krymper (fade) fra ydre til indre → afslører farven udefra og ind */}
             <circle
               key={activeSegment === seg.id ? "on" : "off"}
               cx={CX} cy={CY} fill="black"
@@ -181,9 +181,7 @@ function Speedometer({onSegmentChange, labels =[]}) {
             seg.endDeg,
           )}
           fill="#c1cddb"
-          // stroke="white"
-          // strokeWidth={2}
-           filter="url(#round-corners)"
+          filter="url(#round-corners)"
 
            //Kan slettes, hvis vi kun vil have at man kan trykke på emne felterne
            style={{ transition: "fill 0.35s ease", cursor: "pointer" }}
@@ -205,9 +203,7 @@ function Speedometer({onSegmentChange, labels =[]}) {
             seg.endDeg,
           )}
           fill={activeSegment === seg.id ? "var(--color-secondary)" : "#c1cddb"}
-          // stroke="white"
-          // strokeWidth={2}
-           filter="url(#round-corners)"
+          filter="url(#round-corners)"
           style={{ transition: "fill 0.35s ease", cursor: "pointer" }}
           onClick={() => handleSegmentClick(seg.midDeg)}
           

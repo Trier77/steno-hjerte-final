@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 
+//Tilbage knappen på alle undersider, er stylet her
 function BackButton({ onClick }) {
   const navigate = useNavigate();
 
