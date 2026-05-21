@@ -5,6 +5,7 @@ import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import translations from "../translations";
 
+//En fejl-404 "Site not found"-side. Der har en knap, der linker tilbage til StartSide.jsx
 const COLORS = {
   sys: "#e5e9ed",
   ok: "#4cff91",
