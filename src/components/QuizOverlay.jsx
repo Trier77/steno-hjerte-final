@@ -438,13 +438,19 @@ function ResultsScreen({ score, total, stats, t, onPlayAgain }) {
 
       {/* Score tæller op fra 0 via useCountUp */}
       <p
-        className="font-display font-semibold text-primary leading-none fade-slide-up"
+        className="font-display font-semibold text-primary mt-10 leading-none fade-slide-up"
         style={{ fontSize: "9rem", animationDelay: "100ms", opacity: 0 }}
       >
         {animatedScore}
         <span className="opacity-30" style={{ fontSize: "4.5rem" }}>
           /{total}
         </span>
+      </p>
+      <p
+        className="font-display font-light text-primary text-5xl text-center mt-2 fade-slide-up"
+        style={{ animationDelay: "150ms" }}
+      >
+        {t.resultsCorrect}
       </p>
 
       <div className="flex-1" />
@@ -473,18 +479,13 @@ function ResultsScreen({ score, total, stats, t, onPlayAgain }) {
         </p>
 
         {/* Lille note om hvor mange forsøg statistikken er baseret på */}
-        <p
-          className="font-display font-light text-primary opacity-35 text-center mt-4"
-          style={{ fontSize: "1.1rem" }}
-        >
+        <p className="font-display font-light text-primary opacity-60 text-center mt-4 text-2xl">
           {t.resultsBasedOn}{" "}
-          <span
-            className="font-semibold"
-            style={{ fontSize: "1.6rem", opacity: 1 }}
-          >
-            {stats.totalAttempts}
-          </span>{" "}
+          <span className="font-semibold text-3xl">{stats.totalAttempts}</span>{" "}
           {t.resultsAttempts}
+        </p>
+        <p className="font-display font-semibold text-primary text-3xl text-center mt-30 leading-relaxed">
+          {t.completionMessage}
         </p>
       </div>
 

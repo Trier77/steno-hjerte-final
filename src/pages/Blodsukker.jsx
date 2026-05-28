@@ -83,20 +83,20 @@ function SugarCube({ traits, entranceDelay }) {
         >
           <polygon
             points="18,2 34,10 18,18 2,10"
-            fill="#f9e4a0"
-            stroke="#c9a84c"
+            fill="#FFFFFF"
+            stroke="#d0d0d0"
             strokeWidth="1"
           />
           <polygon
             points="2,10 18,18 18,34 2,26"
-            fill="#e8c96e"
-            stroke="#c9a84c"
+            fill="#E8E8E8"
+            stroke="#d0d0d0"
             strokeWidth="1"
           />
           <polygon
             points="34,10 18,18 18,34 34,26"
-            fill="#d4a843"
-            stroke="#c9a84c"
+            fill="#D4D4D4"
+            stroke="#d0d0d0"
             strokeWidth="1"
           />
           <circle cx="20" cy="7" r="1.5" fill="white" opacity="0.6" />
