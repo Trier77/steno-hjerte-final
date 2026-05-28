@@ -37,7 +37,7 @@ const arcPath = (cx, cy, outerR, innerR, startDeg, endDeg) => {
 };
 
 // Sti/bue som teksten følger langs midten af segmentet
-const LABEL_R = (SEG_OUTER_R + SEG_INNER_R) / 2;
+const LABEL_R = (SEG_OUTER_R + SEG_INNER_R) / 2-5;
 const labelArcD = (startDeg, endDeg, r = LABEL_R) => {
   const margin = 3;
   const s = polarToCart(CX, CY, r, startDeg - margin);
