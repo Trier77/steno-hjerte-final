@@ -431,7 +431,7 @@ const translations = {
     graviditet: {
       labels: [
         "Pregnancy",
-        "Gestational diabetes",
+        "Gestational\n\ndiabetes",
         "Pre-eclampsia",
         "Preterm birth",
       ],
