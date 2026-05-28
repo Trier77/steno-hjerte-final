@@ -6,7 +6,7 @@ const translations = {
         label: "Rygning Historisk",
         heading: "Rygning Historisk",
         intro:
-          'Læger har vidst siden midten af 1900-tallet, at rygning øger risikoen for hjerte-kar-sygdom. Mænd har historisk set røget mere end kvinder. Derfor blev blodpropper i hjertet opfattet som en mandesygdom eller "direktørsygdom", fordi det i høj grad var mænd med store cigarer og store maver, der blev ramt.',
+          "Læger har vidst siden midten af 1900-tallet, at rygning øger risikoen for hjerte-kar-sygdom. Mænd har historisk set røget mere end kvinder. Derfor blev blodpropper i hjertet opfattet som en mandesygdom eller “direktørsygdom”, fordi det i høj grad var mænd med store cigarer og store maver, der blev ramt.",
         body: "",
         stats: [
           { value: "75%", description: "af mænd røg i 1950" },
@@ -29,12 +29,12 @@ const translations = {
       steps: [
         {
           heading: "Brystkræft og hjertesygdomme",
-          body: "Hvis man er blevet behandlet for brystkræft, har man større risiko for senere at udvikle en hjertesygdom. 99 % af patienter med brystkræft er kvinder.\n\n9 ud af 10 af brystkræftpatienter får stråling som en del af deres behandling.",
+          body: "Hvis man er blevet behandlet for brystkræft, har man større risiko for senere at udvikle en hjertesygdom. 99 % af patienter med brystkræft er kvinder. 9 ud af 10 af brystkræftpatienter får stråling som en del af deres behandling.",
           hint: "Prøv at fjerne kræftknuden med stråling",
         },
         {
           heading: "Stråling mod brystkræft kan skade hjertet",
-          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom.\n\nForskningen i sammenhængen mellem (behandling af) brystkræft og hjertesygdom er især vokset inden for de seneste 20–25 år.",
+          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem brystkræft og hjertesygdom er især vokset inden for de seneste 20–25 år.",
           hint: null,
         },
       ],
@@ -62,7 +62,7 @@ const translations = {
         },
         {
           heading: "Hjertesygdomme bliver værre af depression",
-          body: "Hvis man i forvejen har en hjerte-kar-sygdom, og bliver ramt af depression, vil sygdommen blive værre hurtigere. Nogle studier viser, at depression kan fordoble risikoen for hjertesygdom.",
+          body: "Hvis man i forvejen har en hjerte-kar-sygdom, og bliver ramt af depression, vil sygdommen blive værre hurtigere.",
         },
       ],
     },
@@ -75,21 +75,21 @@ const translations = {
       steps: [
         {
           heading: "Diabetes og hjertet",
-          body: "Diabetes er en sygdom, som gør, at man har for meget sukker i blodet. Sygdommen påvirker mænd og kvinders hjerter på forskellige måder. Omkring de 50-60 år bliver flere mænd end kvinder ramt af hjerte-kar-sygdomme.",
+          body: "Diabetes er en sygdom, som gør, at man har for meget sukker i blodet. Sygdommen påvirker mænd og kvinders hjerter på forskellige måder.",
           hint: "Brug slideren og se hvad der sker med risikoen for hjerte-kar-sygdomme, hvis man får diabetes",
         },
         {
-          heading: "Risikoen stiger",
-          body: "Både flere kvinder og flere mænd bliver ramt af hjerte-kar-sygdom, hvis de får diabetes. Hvis 10 mænd omkring 50-60 år uden diabetes bliver ramt af en hjerte-kar-sygdom, vil omkring 7 kvinder uden diabetes blive ramt.",
+          heading: "Risikoen for hjerte-kar-sygdom uden diabetes",
+          body: "Hvis 10 mænd omkring 50-60 år uden diabetes bliver ramt af en hjerte-kar-sygdom, vil omkring 7 kvinder uden diabetes blive ramt.",
         },
         {
-          heading: "Diabetes gør hjertet sygt",
+          heading: "Kvinders hjerter tager større skade af diabetes",
           body: 'Begge køns risiko for at få en hjerte-kar-sygdom stiger meget, hvis de bliver ramt af diabetes. Kvinders risiko stiger mere end mænds. Forskere er ikke sikre på, hvad der gør diabetes "farligere" for kvinder.',
         },
       ],
     },
     hormoner: {
-      dragHint: "← Alder →",
+      dragHint: "← Alder (år) →",
       vesselHintStart: "Træk og undersøg, hvad der sker med kvinders blodkar,",
       vesselHintStartBold: "når de bliver ældre",
       vesselHintEnd: "Du har nu set, hvad alderen gør ved blodkarrene!",
@@ -114,17 +114,17 @@ const translations = {
         {
           heading: "Kvinders blodtryk bliver højere end mænds",
           body: "Omkring 60-65-årsalderen bliver kvinders blodtryk gennemsnitligt højere end mænds. Forhøjet blodtryk øger risikoen for hjerte-kar-sygdomme.",
-          caption: "● Blodtrykket bliver hurtigere",
+          caption: "● Blodtrykket bliver højere",
         },
         {
           heading: "Kvinder og mænds blodkar er lige syge",
-          body: "Omtrent 20 år efter, at en kvinde er gået i overgangsalderen, er deres risiko for hjerte-kar-sygdom den samme som mænds.",
+          body: "Omtrent 20 år efter, at kvinder går i overgangsalderen, er deres risiko for hjerte-kar-sygdom den samme som mænds.",
           caption:
             "● Endnu stærkere åreforkalkning, stive kar og højt blodtryk",
         },
         {
-          heading: "Den oversete sammenhæng:",
-          body: "Mænd dør syv år tidligere end kvinder af hjerte-kar-sygdom, fordi østrogen beskytter kvinders hjerter.\n\nNyere forskning viser dog, at sygdomme i kvinders hormoner som for eksempel endometriose og PCOS kan øge risikoen for hjerte-kar-sygdom med op til 30 %. Der mangler stadig forskning på området.",
+          heading: "Den oversete sammenhæng",
+          body: "Mænd dør syv år tidligere end kvinder af hjerte-kar-sygdom, fordi østrogen beskytter kvinders hjerter. Nyere forskning viser dog, at sygdomme i kvinders hormoner som for eksempel endometriose og PCOS kan øge risikoen for hjerte-kar-sygdom med op til 30 %. Der mangler stadig forskning på området.",
         },
       ],
     },
@@ -201,7 +201,7 @@ const translations = {
     quiz: {
       title: "Quiz",
       intro:
-        "Test din viden om hjertet og hjertesygdomme. Du vil blive stillet 10 spørgsmål, og efter hvert svar får du en forklaring. God fornøjelse!",
+        "Test din viden om hjertet og hjertesygdomme. Du vil blive stillet 7 spørgsmål, og efter hvert svar får du en forklaring. God fornøjelse!",
       startBtn: "Start",
       nextBtn: "Næste spørgsmål",
       resultsTitle: "Resultat",
@@ -397,7 +397,7 @@ const translations = {
       ],
     },
     hormoner: {
-      dragHint: "← Age →",
+      dragHint: "← Age (years) →",
       vesselHintStart: "Drag and explore what happens to women's blood vessels",
       vesselHintStartBold: "as they get older",
       vesselHintEnd: "You have now seen what age does to the blood vessels!",
@@ -514,7 +514,7 @@ const translations = {
     quiz: {
       title: "Quiz",
       intro:
-        "Test your knowledge about the heart and heart disease. You will be asked 10 questions, and after each answer you will receive an explanation. Good luck!",
+        "Test your knowledge about the heart and heart disease. You will be asked 7 questions, and after each answer you will receive an explanation. Good luck!",
       startBtn: "Start",
       nextBtn: "Next question",
       resultsTitle: "Results",
