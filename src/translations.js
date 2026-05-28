@@ -131,9 +131,9 @@ const translations = {
     graviditet: {
       labels: [
         "Graviditet",
-        "Graviditetsdiabetes",
-        "Svangerskabsforgiftning",
-        "For tidlig fødsel",
+        "Graviditets-\n\ndiabetes",
+        "Svangerskabs-\n\nforgiftning",
+        "For tidlig\n\nfødsel",
       ],
       steps: [
         {

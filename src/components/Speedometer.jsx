@@ -38,10 +38,10 @@ const arcPath = (cx, cy, outerR, innerR, startDeg, endDeg) => {
 
 // Sti/bue som teksten følger langs midten af segmentet
 const LABEL_R = (SEG_OUTER_R + SEG_INNER_R) / 2;
-const labelArcD = (startDeg, endDeg) => {
+const labelArcD = (startDeg, endDeg, r = LABEL_R) => {
   const margin = 3;
-  const s = polarToCart(CX, CY, LABEL_R, startDeg - margin);
-  const e = polarToCart(CX, CY, LABEL_R, endDeg + margin);
+  const s = polarToCart(CX, CY, r, startDeg - margin);
+  const e = polarToCart(CX, CY, r, endDeg + margin);
   const fmt = (n) => n.toFixed(2);
   return `M ${fmt(s.x)} ${fmt(s.y)} A ${LABEL_R} ${LABEL_R} 0 0 1 ${fmt(e.x)} ${fmt(e.y)}`;
 };
@@ -57,9 +57,9 @@ function Speedometer({onSegmentChange, labels =[]}) {
 
   const SEGMENTS = [
     { id: 0, startDeg: 180, endDeg: 135, midDeg:157, label: labels[0] ?? "Graviditet" },
-    { id: 1, startDeg: 135, endDeg: 90, midDeg:112, label: labels[1] ?? "Graviditetsdiabetes" },
-    { id: 2, startDeg: 90,  endDeg: 45, midDeg:67, label: labels[2] ?? "Svangerskabsforgiftning" },
-    { id: 3, startDeg: 45,  endDeg: 0, midDeg:22, label: labels[3] ?? "For tidlig fødsel" },
+    { id: 1, startDeg: 135, endDeg: 90, midDeg:112, label: labels[1] ?? "Graviditets-\ndiabetes" },
+    { id: 2, startDeg: 90,  endDeg: 45, midDeg:67, label: labels[2] ?? "Svangerskabs-\nforgiftning" },
+    { id: 3, startDeg: 45,  endDeg: 0, midDeg:22, label: labels[3] ?? "For tidlig\nfødsel" },
   ];
   
   // Finder hvilket segment den blå cirkel er i (eller null)
@@ -134,13 +134,18 @@ function Speedometer({onSegmentChange, labels =[]}) {
     >
       {/* Sti-definitioner til tekst langs kurven */}
       <defs>
-        {SEGMENTS.map((seg) => (
-          <path
-            key={`lp-${seg.id}`}
-            id={`lp-${seg.id}`}
-            d={labelArcD(seg.startDeg, seg.endDeg)}
-          />
-        ))}
+        {SEGMENTS.map((seg) =>
+          seg.label.split("\n").map((_, lineIndex, arr) => {
+            const offset = (lineIndex - (arr.length - 1) / 2) * -13;
+            return (
+              <path
+                key={`lp-${seg.id}-${lineIndex}`}
+                id={`lp-${seg.id}-${lineIndex}`}
+                d={labelArcD(seg.startDeg, seg.endDeg, LABEL_R + offset)}
+              />
+            );
+          })
+        )}
         {SEGMENTS.map((seg) => (
           <mask key={`mask-${seg.id}`} id={`sweep-${seg.id}`}>
             <rect width="600" height="310" fill="black" />
@@ -253,24 +258,26 @@ function Speedometer({onSegmentChange, labels =[]}) {
       
 
       {/* Labels langs kurven */}
-      {SEGMENTS.map((seg) => (
-        <text
-          key={`t-${seg.id}`}
-          fontSize="11"
-          fontWeight="600"
-          fontFamily="sans-serif"
-          fill={activeSegment === seg.id ? "var(--color-primary)" : "#f5ede8"}
-          style={{ transition: "fill 0.35s ease", pointerEvents: "none" }}
-        >
-          <textPath
-            href={`#lp-${seg.id}`}
-            startOffset="50%"
-            textAnchor="middle"
+      {SEGMENTS.map((seg) =>
+        seg.label.split("\n").map((line, lineIndex, arr) => (
+          <text
+            key={`t-${seg.id}-${lineIndex}`}
+            fontSize="17"
+            fontWeight="600"
+            fontFamily="sans-serif"
+            fill={activeSegment === seg.id ? "var(--color-primary)" : "#f5ede8"}
+            style={{ transition: "fill 0.35s ease", pointerEvents: "none" }}
           >
-            {seg.label}
-          </textPath>
-        </text>
-      ))}
+            <textPath
+              href={`#lp-${seg.id}-${lineIndex}`}
+              startOffset="50%"
+              textAnchor="middle"
+            >
+              {line}
+            </textPath>
+          </text>
+        ))
+      )}
 
       
       {/* Ping-effekt */}
