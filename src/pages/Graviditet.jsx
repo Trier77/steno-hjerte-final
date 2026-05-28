@@ -95,7 +95,7 @@ const PLACEHOLDERS = [
           <motion.div
             animate={{ opacity: [0.4, 1, 0.4] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col justify-center mt-70"
+            className="absolute bottom-6 left-0 right-0"
             style={{ pointerEvents: "none" }}
           >
             <p className="font-display font-semibold text-primary text-3xl text-center">
