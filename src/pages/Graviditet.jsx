@@ -82,19 +82,20 @@ const PLACEHOLDERS = [
             opacity: visible ? 1 : 0,
             transition: "opacity 0.3s ease",
             animation: "fadeIn 0.6s ease",
+            
             }}
         >
           <h2 className="font-display font-semibold text-primary text-4xl mb-3 leading-snug">
             {step.heading}
           </h2>
-          <p className="font-display font-light text-primary text-2xl leading-relaxed mb-6">
+          <p className="font-display font-light text-primary text-3xl leading-relaxed mb-6">
             {step.body}
           </p>
           {/* Pulserende hint-tekst */}
           <motion.div
             animate={{ opacity: [0.4, 1, 0.4] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col justify-center mt-88"
+            className="flex flex-col justify-center mt-70"
             style={{ pointerEvents: "none" }}
           >
             <p className="font-display font-semibold text-primary text-3xl text-center">
