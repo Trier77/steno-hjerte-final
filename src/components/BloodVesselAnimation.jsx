@@ -297,7 +297,7 @@ function drawFrame(
   const t = frameRef.current * 0.016;
   ctx.clearRect(0, 0, W, H);
 
-  ctx.fillStyle = "#7B1525";
+  ctx.fillStyle = WALL_COLOR;
   ctx.globalAlpha = 1;
   ctx.fillRect(0, 0, W, H);
   ctx.globalAlpha = 1;
