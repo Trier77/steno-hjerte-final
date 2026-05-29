@@ -184,7 +184,9 @@ function QuizOverlay({ onClose, visible }) {
 
   const handleAnswer = (index) => {
     if (selectedAnswer !== null) return;
-    const correct = index === question.correct;
+    const correct = question.isMultiple
+      ? question.correct.includes(index)
+      : index === question.correct;
     setSelectedAnswer(index);
     setWasCorrect(correct);
     if (correct) setScore((s) => s + 1);
@@ -224,15 +226,17 @@ function QuizOverlay({ onClose, visible }) {
 
   // Returnerer Tailwind-klasser til svarmuligheder baseret på om der er svaret og om svaret er korrekt
   const getOptionStyle = (index) => {
-    if (selectedAnswer === null) return "bg-secondary text-primary";
-    if (showCorrect && index === question.correct)
-      return "bg-primary text-white";
+    const isCorrect = question.isMultiple
+      ? question.correct.includes(index)
+      : index === question.correct;
+
+    if (showCorrect && isCorrect) return "bg-primary text-white";
     if (index === selectedAnswer) {
-      return index === question.correct
+      return isCorrect
         ? "bg-green-400/50 text-primary"
         : "bg-red-400/50 text-primary";
     }
-    return "bg-secondary text-primary opacity-40";
+    return "bg-secondary text-primary ";
   };
 
   return (
@@ -479,12 +483,12 @@ function ResultsScreen({ score, total, stats, t, onPlayAgain }) {
         </p>
 
         {/* Lille note om hvor mange forsøg statistikken er baseret på */}
-        <p className="font-display font-light text-primary opacity-60 text-center mt-4 text-2xl">
+        <p className="font-display font-normal text-primary text-center mt-4 text-2xl">
           {t.resultsBasedOn}{" "}
           <span className="font-semibold text-3xl">{stats.totalAttempts}</span>{" "}
           {t.resultsAttempts}
         </p>
-        <p className="font-display font-semibold text-primary text-3xl text-center mt-30 leading-relaxed">
+        <p className="font-display font-semibold text-primary text-4xl text-center mt-40 leading-relaxed">
           {t.completionMessage}
         </p>
       </div>
@@ -494,7 +498,7 @@ function ResultsScreen({ score, total, stats, t, onPlayAgain }) {
       {/* Knappen fader ind sidst så brugeren får tid til at se resultatet først */}
       <button
         onClick={onPlayAgain}
-        className="bg-secondary text-primary font-display font-semibold text-4xl rounded-full px-16 py-5"
+        className="bg-secondary text-primary font-display font-semibold text-5xl rounded-full px-15 py-7 mb-10"
         style={{
           opacity: showButton ? 1 : 0,
           transform: showButton ? "translateY(0)" : "translateY(12px)",
