@@ -229,19 +229,19 @@ const translations = {
           options: ["3 år", "7 år", "15 år"],
           correct: 1,
           explanation:
-            "Mænd dør i gennemsnit 7 år tidligere af hjerte-kar-sygdomme, end kvinder gør. Dog ved vi mindre om de hjertesygdomme, som primært rammer kvinder.",
+            "Mænd dør i gennemsnit syv år tidligere af hjerte-kar-sygdomme end kvinder. Alligevel ved vi stadig mindre om de hjerte-kar-sygdomme, der næsten udelukkende rammer kvinder.",
         },
         {
           question:
             "Hvornår begynder kvinders risiko for at blive ramt af en hjertekarsygdom at stige meget hurtigt?",
           options: [
-            "Når menstruationen begynder",
-            "Ved overgangsalderen - når østrogen-niveaut falder",
+            "Når menstruationen begynder i teenageårene",
+            "Ved overgangsalderen omkring 50 år",
             "Omkring 40-års alderen",
           ],
           correct: 1,
           explanation:
-            "Det kvindelige kønshormon - østrogen - kan beskytte én overfor hjertesygdomme. Derfor bliver kvinder inden overgangsalderen sjældnere ramt af hjertesygdom. Efter overgangsalderen begynder kvinders risiko derfor at stige hurtigt.",
+            "Det kvindelige kønshormon østrogen kan beskytte kvinder imod hjerte-kar-sygdomme. Efter overgangsalderen begynder kvinders risiko at stige meget hurtigt, fordi mængden af østrogen falder.",
         },
         {
           question:
@@ -249,7 +249,7 @@ const translations = {
           options: [" Ca. 5% ", " Ca. 50% ", " Ca. 20% "],
           correct: 2,
           explanation:
-            "Omkring 20% af danskerne dør i dag af hjerte-kar-sygdomme, og sygdommene rammer næsten lige mange mænd og kvinder. Hjerte-kar-sygdomme er derfor nogle af de dødeligste sygdomme – kun overgået af kræft.",
+            "Omkring 20 % af danskerne dør i dag af hjerte-kar-sygdomme. Hjerte-kar-sygdomme er derfor nogle af de dødeligste sygdomme – kun overgået af kræft.",
         },
         {
           question:
@@ -261,7 +261,7 @@ const translations = {
           ],
           correct: 0,
           explanation:
-            "Åreforkalkning hænger sammen med livsstil og er én af de mest almindelige sygdomme i blodkarrene. Hvis ens blodårer er fyldt op med kalk, har man stor risiko for at få en blodprop i hjertet.",
+            "Åreforkalkning er én af de mest almindelige sygdomme i blodkarrene. Hvis ens blodårer er fyldt op med kalk, har man stor risiko for at få en blodprop i hjertet.",
         },
         {
           question:
@@ -276,11 +276,11 @@ const translations = {
           correct: [0, 1, 2, 4],
           isMultiple: true,
           explanation:
-            "Man har længe vidst, at rygning og overvægt kan gøre hjertet sygt. Men inden for de seneste år har forskere opdaget, at ting, som især rammer kvinder - for eksempel depression og diabetes under graviditet - også kan øge risikoen for hjerte-kar-sygdom.",
+            "Man har længe vidst, at rygning og overvægt kan gøre hjertet sygt. Men inden for de seneste år har forskere opdaget, at faktorer, som især rammer kvinder - for eksempel diabetes under graviditet og depression - også kan øge risikoen for hjerte-kar-sygdom.",
         },
         {
           question:
-            " Overvægt øger risikoen for hjertekarsygdom. Men hvor er det særligt farligt at være overvægtig henne? ",
+            " Overvægt øger risikoen for hjerte-kar-sygdom. Men hvor er det særligt farligt at være overvægtig henne? ",
           options: [
             " Omkring arme og hals ",
             " Omkring maven ",
@@ -289,20 +289,20 @@ const translations = {
           ],
           correct: 1,
           explanation:
-            'Det er særligt fedt omkring maven og de indre organer, der er farligt for hjertet. Mænds fedt sætter sig typisk på maven. Deres overvægt er derfor "mere farlig" end yngre kvinders, hvor fedt i højere grad sætter sig på lår, bryster og hofter. Efter overgangsalderen begynder kvinders fedt dog også at sætte sig omkring maven.',
+            "Fedt omkring maven og de indre organer er særligt skadeligt for hjertet. Mænds fedt sætter sig typisk omkring maven, mens kvinders fedt også sætter sig på lår, hofter og bryster. Derfor er mænds overvægt “farligere” end kvinders.",
         },
         {
           question:
             "Kvinders hjerter er 'oversete' i forskningen, men på hvilken måde?",
           options: [
-            "Forskere har historisk set troet, at mænds og kvinders hjerter havde brug for den samme behandling.",
-            "Der er mindre viden om, hvordan fx rygning, depression og diabetes påvirker kvinders hjerter anderledes end mænds.",
-            "Der er mindre viden om de hjerte-kar-sygdomme, der oftere rammer kvinder.",
+            "Forskere har historisk set troet, at mænd og kvinders syge hjerter skulle have samme behandling.",
+            "Der er mindre viden om, hvordan f.eks. rygning, depression og diabetes påvirker kvinders hjerter anderledes end mænds.",
+            "Der er mindre viden om de hjerte-kar-sygdomme, som oftere rammer kvinder.",
           ],
           correct: [0, 1, 2],
           isMultiple: true,
           explanation:
-            "Kvinders hjerter er oversete på flere måder. Vi ved mindre om, hvad der forårsager sygdom i kvinders hjerter, og hvorfor det sker. Vi ved også mindre om de sygdomme, der primært rammer kvinder. Dyk ned i organerne eller se videoen for at lære mere om kvinders oversete hjerter.",
+            "Kvinders hjerter er oversete på flere måder. Vi ved mindre om, hvad der gør særligt kvinders hjerter syge, og hvorfor det sker. Vi ved også mindre om de sygdomme, der især rammer kvinder. Dyk ned i organerne, eller se videoen for at få mere viden om kvinders oversete hjerter.",
         },
       ],
     },
