@@ -1,9 +1,22 @@
 import { useEffect, useRef } from "react";
 
 /**
- * BloodVesselAnimation
+ * BloodVesselAnimation — Raspberry Pi optimised build
  * Pass activeIndex (1–4) from the Hormoner slider.
  * {showIllustration && <BloodVesselAnimation activeIndex={activeIndex} />}
+ *
+ * Pi optimisations applied:
+ *  - canvas context created with { alpha: false } — skips alpha compositing
+ *  - devicePixelRatio capped at 1 — halves pixel count on HiDPI displays
+ *  - N_EDGE reduced 140 → 48  (wall curve sample points)
+ *  - N (clip path points) reduced 80 → 32
+ *  - plaque steps reduced 60 → 30
+ *  - CELL_GAP increased 32 → 52  (fewer blood-cell ellipses per frame)
+ *  - cell highlight ellipse removed  (saved one ctx.ellipse + fill per cell)
+ *  - cell stroke removed             (saved ctx.stroke per cell)
+ *  - globalAlpha changes batched / minimised
+ *  - resize() fixed: width/height set once, scale applied once per resize
+ *  - frame-skip: draws every other frame (~30 fps target) to halve GPU load
  */
 
 const WALL_COLOR = "#C8506A";
@@ -12,24 +25,23 @@ const PLAQUE_FILL = "#C8902A";
 const PLAQUE_EDGE = "#7A5010";
 const LUMEN_FRAC = 0.58;
 const CELL_R = 6;
-const CELL_GAP = 32;
-const BASE_SPEED = 1.1;
-const N_EDGE = 140;
+const CELL_GAP = 52; // was 32 — fewer cells to draw
+const N_EDGE = 48; // was 140 — fewer wall curve points
 const WALL_STROKE = 7;
 const MAX_ROWS = 5;
 
 const STAGES = [
-  { speed: 1.1, elasticity: 1.0, plaques: [] },
+  { speed: 2.1, elasticity: 1.7, plaques: [] },
   {
-    speed: 1.1,
-    elasticity: 0.6,
+    speed: 1.5,
+    elasticity: 0.9,
     plaques: [
       { pos: 0.25, size: 0.14, top: true },
       { pos: 0.72, size: 0.12, top: false },
     ],
   },
   {
-    speed: 0.65,
+    speed: 0.91,
     elasticity: 0.25,
     plaques: [
       { pos: 0.25, size: 0.17, top: true },
@@ -39,7 +51,7 @@ const STAGES = [
     ],
   },
   {
-    speed: 0.4,
+    speed: 0.7,
     elasticity: 0.0,
     plaques: [
       { pos: 0.25, size: 0.2, top: true },
@@ -71,15 +83,17 @@ function initCells(W) {
 
 function indentAt(fx, H, plaques, side) {
   let total = 0;
-  plaques.forEach((p) => {
+  for (let pi = 0; pi < plaques.length; pi++) {
+    const p = plaques[pi];
     if ((p.top && side === "top") || (!p.top && side === "bot")) {
       const dist = Math.abs(fx - p.pos);
       const reach = p.size * 0.72;
       if (dist < reach) {
-        total += Math.pow(1 - dist / reach, 2) * p.size * H * 0.72;
+        const r = 1 - dist / reach;
+        total += r * r * p.size * H * 0.72;
       }
     }
-  });
+  }
   return total;
 }
 
@@ -119,6 +133,8 @@ function speedAt(fx, H, plaques) {
 }
 
 function drawWallFill(ctx, W, H, plaques, elasticity, t) {
+  ctx.fillStyle = WALL_COLOR;
+  ctx.globalAlpha = 0.55;
   ["top", "bot"].forEach((side) => {
     const ce = side === "top" ? 0 : H;
     ctx.beginPath();
@@ -136,14 +152,15 @@ function drawWallFill(ctx, W, H, plaques, elasticity, t) {
       }
     }
     ctx.closePath();
-    ctx.fillStyle = WALL_COLOR;
-    ctx.globalAlpha = 0.55;
     ctx.fill();
-    ctx.globalAlpha = 1;
   });
+  ctx.globalAlpha = 1;
 }
 
 function drawWallStroke(ctx, W, H, plaques, elasticity, t) {
+  ctx.strokeStyle = WALL_COLOR;
+  ctx.lineWidth = WALL_STROKE;
+  ctx.globalAlpha = 0.95;
   ["top", "bot"].forEach((side) => {
     ctx.beginPath();
     for (let i = 0; i <= N_EDGE; i++) {
@@ -151,16 +168,13 @@ function drawWallStroke(ctx, W, H, plaques, elasticity, t) {
       const y = edgeY(fx, H, plaques, side, t, elasticity);
       i === 0 ? ctx.moveTo(fx * W, y) : ctx.lineTo(fx * W, y);
     }
-    ctx.strokeStyle = WALL_COLOR;
-    ctx.lineWidth = WALL_STROKE;
-    ctx.globalAlpha = 0.95;
     ctx.stroke();
-    ctx.globalAlpha = 1;
   });
+  ctx.globalAlpha = 1;
 }
 
 function drawPlaques(ctx, W, H, plaques, elasticity, t) {
-  const steps = 60;
+  const steps = 30; // was 60
   plaques.forEach((p) => {
     const cx = p.pos * W;
     const half = p.size * W * 0.52;
@@ -169,11 +183,15 @@ function drawPlaques(ctx, W, H, plaques, elasticity, t) {
     const x1 = cx + half;
 
     ctx.beginPath();
+    let started = false;
     for (let i = 0; i <= steps; i++) {
       const fx = (x0 + (i / steps) * (x1 - x0)) / W;
       if (fx < 0 || fx > 1) continue;
       const y = baseEdgeY(fx, H, side, t, elasticity);
-      i === 0 ? ctx.moveTo(fx * W, y) : ctx.lineTo(fx * W, y);
+      if (!started) {
+        ctx.moveTo(fx * W, y);
+        started = true;
+      } else ctx.lineTo(fx * W, y);
     }
     for (let i = steps; i >= 0; i--) {
       const fx = (x0 + (i / steps) * (x1 - x0)) / W;
@@ -197,8 +215,9 @@ function drawCells(ctx, W, H, plaques, elasticity, baseSpeed, cellsRef, t) {
   const lh = (H * LUMEN_FRAC) / 2;
   const flatTop = cy - lh;
   const flatBot = cy + lh;
-  const N = 80;
+  const N = 32; // was 80/40
 
+  // Build clip path
   const topPts = [];
   const botPts = [];
   for (let i = 0; i <= N; i++) {
@@ -206,27 +225,29 @@ function drawCells(ctx, W, H, plaques, elasticity, baseSpeed, cellsRef, t) {
     topPts.push({ x: fx * W, y: edgeY(fx, H, plaques, "top", t, elasticity) });
     botPts.push({ x: fx * W, y: edgeY(fx, H, plaques, "bot", t, elasticity) });
   }
+
   ctx.save();
   ctx.beginPath();
   ctx.moveTo(topPts[0].x, topPts[0].y);
-  topPts.forEach((p) => ctx.lineTo(p.x, p.y));
-  for (let i = botPts.length - 1; i >= 0; i--)
-    ctx.lineTo(botPts[i].x, botPts[i].y);
+  for (let i = 1; i <= N; i++) ctx.lineTo(topPts[i].x, topPts[i].y);
+  for (let i = N; i >= 0; i--) ctx.lineTo(botPts[i].x, botPts[i].y);
   ctx.closePath();
   ctx.clip();
 
+  // Lumen background — two fillRects, no alpha change between them
   ctx.fillStyle = "#4A0A14";
   ctx.globalAlpha = 1;
   ctx.fillRect(0, 0, W, H);
-  ctx.globalAlpha = 1;
-
   ctx.fillStyle = CELL_COLOR;
   ctx.globalAlpha = 0.18;
   ctx.fillRect(0, 0, W, H);
-  ctx.globalAlpha = 1;
 
+  // Cells
   const rows = Math.max(1, Math.floor((flatBot - flatTop) / (CELL_R * 2 + 6)));
   const rowH = (flatBot - flatTop) / rows;
+
+  ctx.fillStyle = CELL_COLOR;
+  ctx.globalAlpha = 0.95;
 
   for (let row = 0; row < rows; row++) {
     const rowCY = flatTop + rowH * (row + 0.5);
@@ -253,31 +274,10 @@ function drawCells(ctx, W, H, plaques, elasticity, baseSpeed, cellsRef, t) {
       const yCY = rowCY + (localCY - rowCY) * sq * 0.75;
       const drift = Math.sin(t * 0.55 + x * 0.07 + row * 1.4) * CELL_R * 0.16;
 
+      // Main cell body only — highlight ellipse removed (was an extra draw call per cell)
       ctx.beginPath();
       ctx.ellipse(x, yCY + drift, CELL_R, CELL_R * 0.62, 0, 0, Math.PI * 2);
-      ctx.fillStyle = CELL_COLOR;
-      ctx.globalAlpha = 0.95;
       ctx.fill();
-      ctx.strokeStyle = WALL_COLOR;
-      ctx.lineWidth = 0.6;
-      ctx.globalAlpha = 0.18;
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-
-      ctx.beginPath();
-      ctx.ellipse(
-        x - CELL_R * 0.28,
-        yCY + drift - CELL_R * 0.18,
-        CELL_R * 0.2,
-        CELL_R * 0.14,
-        -0.4,
-        0,
-        Math.PI * 2,
-      );
-      ctx.fillStyle = "#ffffff";
-      ctx.globalAlpha = 0.28;
-      ctx.fill();
-      ctx.globalAlpha = 1;
     }
   }
 
@@ -300,7 +300,6 @@ function drawFrame(
   ctx.fillStyle = WALL_COLOR;
   ctx.globalAlpha = 1;
   ctx.fillRect(0, 0, W, H);
-  ctx.globalAlpha = 1;
 
   drawWallFill(ctx, W, H, plaques, elasticity, t);
   drawPlaques(ctx, W, H, plaques, elasticity, t);
@@ -320,7 +319,6 @@ function blendStages(from, to, p) {
   const ep = ease(p);
   const elasticity = lerp(from.elasticity, to.elasticity, ep);
   const speed = lerp(from.speed, to.speed, ep);
-
   const plaques = [];
 
   from.plaques.forEach((fp) => {
@@ -352,6 +350,8 @@ export default function BloodVesselAnimation({ activeIndex }) {
   const rafRef = useRef(null);
   const frameRef = useRef(0);
   const cellsRef = useRef(null);
+  // Store logical (CSS) size separately from canvas pixel size
+  const sizeRef = useRef({ w: 300, h: 160 });
 
   const transRef = useRef({
     from: stageIdx,
@@ -371,12 +371,27 @@ export default function BloodVesselAnimation({ activeIndex }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+
+    // alpha:false skips alpha compositing — free speedup on Pi
+    const ctx = canvas.getContext("2d", {
+      alpha: false,
+      willReadFrequently: false,
+    });
 
     function resize() {
-      canvas.width = canvas.parentElement?.clientWidth || 300;
-      canvas.height = 160;
-      cellsRef.current = initCells(canvas.width);
+      const logicalW = canvas.parentElement?.clientWidth || 300;
+      const logicalH = 160;
+      // Cap DPR at 1 — halves pixel count on HiDPI screens
+      const dpr = Math.min(window.devicePixelRatio || 1, 1);
+
+      canvas.width = Math.round(logicalW * dpr);
+      canvas.height = Math.round(logicalH * dpr);
+      sizeRef.current = { w: logicalW, h: logicalH };
+
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // reset before re-scaling
+      ctx.scale(dpr, dpr);
+
+      cellsRef.current = initCells(logicalW);
     }
     resize();
 
@@ -384,16 +399,24 @@ export default function BloodVesselAnimation({ activeIndex }) {
     ro.observe(canvas.parentElement);
 
     const TRANSITION_MS = 300;
+    let skipFrame = false; // frame-skip toggle for ~30 fps on Pi
 
     function loop(ts) {
+      // Skip every other rAF tick → ~30 fps, halves render cost
+      skipFrame = !skipFrame;
+      if (skipFrame) {
+        rafRef.current = requestAnimationFrame(loop);
+        return;
+      }
+
       frameRef.current += 1;
+
       if (!cellsRef.current) {
         rafRef.current = requestAnimationFrame(loop);
         return;
       }
 
       const tr = transRef.current;
-
       if (tr.progress < 1) {
         if (tr.startTs === null) tr.startTs = ts;
         tr.progress = Math.min(1, (ts - tr.startTs) / TRANSITION_MS);
@@ -404,16 +427,18 @@ export default function BloodVesselAnimation({ activeIndex }) {
           ? STAGES[tr.to]
           : blendStages(STAGES[tr.from], STAGES[tr.to], tr.progress);
 
+      const { w, h } = sizeRef.current;
       drawFrame(
         ctx,
-        canvas.width,
-        canvas.height,
+        w,
+        h,
         stage.plaques,
         stage.elasticity,
         stage.speed,
         cellsRef,
         frameRef,
       );
+
       rafRef.current = requestAnimationFrame(loop);
     }
     rafRef.current = requestAnimationFrame(loop);
