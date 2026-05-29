@@ -217,8 +217,8 @@ const translations = {
       resultsHeading: "Resultat",
       resultsBetterThan: "Du klarede dig bedre end",
       resultsOfVisitors: "af alle andre besøgende",
-      resultsBasedOn: "Baseret på",
-      resultsAttempts: "forsøg i alt",
+      resultsBasedOn: "(Baseret på",
+      resultsAttempts: "forsøg i alt)",
       completionMessage:
         "Tillykke! Du har gennemført quizzen. Se videoen eller udforsk kroppen for at lære mere om køn og hjerte-kar-sygdomme.",
       resultsCorrect: "rigtige svar",
@@ -264,7 +264,8 @@ const translations = {
             "Åreforkalkning hænger sammen med livsstil og er én af de mest almindelige sygdomme i blodkarrene. Hvis ens blodårer er fyldt op med kalk, har man stor risiko for at få en blodprop i hjertet.",
         },
         {
-          question: "Hvad er IKKE en risikofaktor for hjertesygdom?",
+          question:
+            "Hvilken af disse risikofaktor kan lede til en hjertesygdom?",
           options: [
             " Rygning ",
             " Overvægt ",
@@ -272,7 +273,8 @@ const translations = {
             " Dårlig fordøjelse ",
             " Depression ",
           ],
-          correct: 3,
+          correct: [0, 1, 2, 4],
+          isMultiple: true,
           explanation:
             "Man har længe vidst, at rygning og overvægt kan gøre hjertet sygt. Men inden for de seneste år har forskere opdaget, at ting, som især rammer kvinder - for eksempel depression og diabetes under graviditet - også kan øge risikoen for hjerte-kar-sygdom.",
         },
@@ -291,10 +293,16 @@ const translations = {
         },
         {
           question:
-            "Dette spørgsmål har Steno ikke fået helt styr på endnu... ",
-          options: ["[ Svar A ]", "[ Svar B ]", "[ Svar C ]", "[ Svar D ]"],
-          correct: 0,
-          explanation: "[ Forklaring fra museet ]",
+            "Kvinders hjerter er 'oversete' i forskningen, men på hvilken måde?",
+          options: [
+            "Forskere har historisk set troet, at mænds og kvinders hjerter havde brug for den samme behandling.",
+            "Der er mindre viden om, hvordan fx rygning, depression og diabetes påvirker kvinders hjerter anderledes end mænds.",
+            "Der er mindre viden om de hjerte-kar-sygdomme, der oftere rammer kvinder.",
+          ],
+          correct: [0, 1, 2],
+          isMultiple: true,
+          explanation:
+            "Kvinders hjerter er oversete på flere måder. Vi ved mindre om, hvad der forårsager sygdom i kvinders hjerter, og hvorfor det sker. Vi ved også mindre om de sygdomme, der primært rammer kvinder. Dyk ned i organerne eller se videoen for at lære mere om kvinders oversete hjerter.",
         },
       ],
     },
@@ -519,11 +527,11 @@ const translations = {
       quitBody: "If you leave the quiz now, you will lose all your progress.",
       quitConfirm: "Leave quiz",
       quitCancel: "Continue quiz",
-      resultsHeading: "Result",
+      resultsHeading: "Results",
       resultsBetterThan: "You did better than",
       resultsOfVisitors: "of all other visitors",
-      resultsBasedOn: "Based on",
-      resultsAttempts: "attempts in total",
+      resultsBasedOn: "(Based on",
+      resultsAttempts: "attempts in total)",
       completionMessage:
         "Congratulations! You have completed the quiz. Watch the video or explore the body to learn more about gender and cardiovascular disease.",
       resultsCorrect: "correct answers",
@@ -534,76 +542,80 @@ const translations = {
           options: ["3 years", "7 years", "15 years"],
           correct: 1,
           explanation:
-            "Men die on average 7 years earlier from cardiovascular disease than women. However, we know less about the heart diseases that primarily affect women.",
+            "On average, men die 7 years earlier from cardiovascular disease than women. Surprisingly, we know less about the cardiovascular diseases that almost only affect women.",
         },
         {
           question:
-            "When does women's risk of cardiovascular disease begin to rise very rapidly?",
+            "When does a woman’s risk of cardiovascular disease begin to rise rapidly?",
           options: [
-            "When menstruation begins",
-            "At menopause — when oestrogen levels drop",
-            "Around the age of 40",
+            "When menstruation begins in the teenage years",
+            "During menopause, around 50 years of age",
+            "Around 40 years of age",
           ],
           correct: 1,
           explanation:
-            "The female sex hormone oestrogen can protect against heart disease. This is why women before menopause are less frequently affected by heart disease. After menopause, women's risk therefore begins to rise rapidly.",
-        },
-        {
-          question: "What percentage of Danes die from cardiovascular disease?",
-          options: ["Approx. 5%", "Approx. 50%", "Approx. 20%"],
-          correct: 2,
-          explanation:
-            "Around 20% of Danes today die from cardiovascular disease, and the diseases affect almost equal numbers of men and women. Cardiovascular diseases are therefore among the deadliest diseases — only surpassed by cancer.",
+            "The female sex hormone, estrogen, can protect women against cardiovascular disease. After menopause, women’s risk therefore begins to rise rapidly as their levels of estrogen decrease.",
         },
         {
           question:
-            "There are many different types of cardiovascular disease, but which are the most common?",
+            "What percentage of Danes will die of cardiovascular disease?",
+          options: ["About 5%", "About 50%", "About 20%"],
+          correct: 2,
+          explanation:
+            "About 20% of Danes die of cardiovascular disease today. Cardiovascular diseases are therefore among the deadliest diseases, only surpassed by cancer.",
+        },
+        {
+          question:
+            "There are many types of cardiovascular diseases, but which are the most common?",
           options: [
-            "Atherosclerosis and blood clots",
+            "Blood clots",
             "Congenital heart defects",
             "Heart disease during pregnancy",
           ],
           correct: 0,
           explanation:
-            "Atherosclerosis is linked to lifestyle and is one of the most common diseases of the blood vessels. If your blood vessels are filled with calcification, you have a high risk of having a heart attack.",
+            "Blood clots are one of the most common diseases in blood vessels. If your blood vessels become clogged with plaque, you have a greater chance of blood clots in the heart.",
         },
         {
           question:
-            "Which of the following is NOT a risk factor for heart disease?",
+            "Which of these risk factors can lead to cardiovascular disease?",
           options: [
             "Smoking",
             "Obesity",
             "Diabetes during pregnancy",
-            "Poor digestion",
+            "Bad digestion",
             "Depression",
           ],
-          correct: 3,
+          correct: [0, 1, 2, 4],
+          isMultiple: true,
           explanation:
-            "It has long been known that smoking and obesity can damage the heart. But in recent years, researchers have discovered that things that particularly affect women — such as depression and diabetes during pregnancy — can also increase the risk of cardiovascular disease.",
+            "It has long been known that smoking and obesity can damage the heart. However, in recent years, researchers have discovered that factors which especially affect women, like gestational diabetes and depression, can also increase the risk of cardiovascular disease.",
         },
         {
           question:
-            "Obesity increases the risk of cardiovascular disease. But where is it particularly dangerous to carry excess weight?",
+            "Obesity increases the risk of cardiovascular disease. Where on the body is it especially dangerous to be obese?",
           options: [
+            "Around the stomach area",
             "Around the arms and neck",
-            "Around the abdomen",
             "On the hips",
-            "On the chest",
-          ],
-          correct: 1,
-          explanation:
-            "It is particularly fat around the abdomen and internal organs that is dangerous for the heart. Men's fat typically settles around the abdomen, making their excess weight more dangerous than that of younger women, where fat more commonly settles on the thighs, chest and hips. After menopause, women's fat also begins to settle around the abdomen.",
-        },
-        {
-          question: "This question hasn't been finalised yet...",
-          options: [
-            "[ Answer A ]",
-            "[ Answer B ]",
-            "[ Answer C ]",
-            "[ Answer D ]",
+            "On the breasts",
           ],
           correct: 0,
-          explanation: "[ Explanation from museum ]",
+          explanation:
+            "Fat around the stomach area and the internal organs is especially harmful to the heart. Men’s fat typically sits around the stomach while women’s fat also sits onthe hips, thighs, and breasts. Men’s obesity is therefore, on average, more dangerous than women’s obesity.",
+        },
+        {
+          question:
+            "Women’s hearts are “overlooked” in research, but in what way?",
+          options: [
+            "Researchers have historically believed that men and women’s hearts needed the same treatment.",
+            "There is less knowledge on how e.g. smoking, depression, and diabetes affect women’s hearts differently than men’s hearts.",
+            "There is less knowledge on the cardiovascular diseases that more often affect women.",
+          ],
+          correct: [0, 1, 2],
+          isMultiple: true,
+          explanation:
+            "Women’s hearts are overlooked in several ways. We know less about what causes disease in women’s hearts, and why it happens. We also know less about the diseases that primarily affect women. Dive into the organs or watch the video to learn more about women’s overlooked hearts.",
         },
       ],
     },

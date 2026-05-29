@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 
-export function useIdleTimeout(minutes = 2) {
+export function useIdleTimeout(minutes = 9) {
   const navigate = useNavigate();
   const timer = useRef(null);
 
