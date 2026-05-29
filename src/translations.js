@@ -35,7 +35,7 @@ const translations = {
         {
           heading: "Stråling mod brystkræft kan skade hjertet",
           body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem brystkræft og hjertesygdom er især vokset inden for de seneste 20–25 år.",
-          hint: null,
+          hint: "Du har nu fjernet kræftknuden og set hvad stråling kan gøre ved hjertet!",
         },
       ],
     },
@@ -337,13 +337,13 @@ const translations = {
       steps: [
         {
           heading: "Breast cancer and heart disease",
-          body: "If you have been treated for breast cancer, you have a greater risk of developing heart disease later in life. 99% of breast cancer patients are women.\n\n9 out of 10 breast cancer patients receive radiation as part of their treatment.",
+          body: "If you have been treated for breast cancer, you have a greater risk of developing heart disease later in life. 99% of breast cancer patients are women. 9 out of 10 breast cancer patients receive radiation as part of their treatment.",
           hint: "Try to remove the tumour with radiation",
         },
         {
           heading: "Radiation for breast cancer can damage the heart",
-          body: "You removed the tumour, but some of the radiation also reached the heart. This can cause scarring of the heart muscle and lead to disease.\n\nResearch into the connection between breast cancer (and its treatment) and heart disease has grown particularly over the last 20–25 years.",
-          hint: null,
+          body: "You removed the tumour, but some of the radiation also reached the heart. This can cause scarring of the heart muscle and lead to disease. Research into the connection between breast cancer (and its treatment) and heart disease has grown particularly over the last 20–25 years.",
+          hint: "You have now removed the tumour and seen what radiation can do to the heart!",
         },
       ],
     },
