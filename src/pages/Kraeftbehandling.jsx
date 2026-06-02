@@ -7,11 +7,11 @@ import TumorButton from "../components/TumorButton";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
-import TumorBackground from "../components/animatedbackgrounds/Tumorbackground"
-import tumorani from "../assets/tumorani.webm"
-import rayOverlay from "../assets/rayOverlay.webm"  
-import notumorani from "../assets/notumorani.webm"            
-import hjertezoom from "../assets/hjertezoom.webm"
+import TumorBackground from "../components/animatedbackgrounds/Tumorbackground";
+import tumorani from "../assets/tumorani.webm";
+import rayOverlay from "../assets/rayOverlay.webm";
+import notumorani from "../assets/notumorani.webm";
+import hjertezoom from "../assets/hjertezoom.webm";
 import { motion } from "framer-motion";
 
 function TekstModul({ step, currentStep }) {
@@ -44,7 +44,7 @@ function TekstModul({ step, currentStep }) {
           <motion.div
             animate={{ opacity: [0.4, 1, 0.4] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="flex justify-center mt-40"
+            className="flex justify-center mt-25"
             style={{ pointerEvents: "none" }}
           >
             <p className="font-display font-semibold text-primary text-3xl text-center">
@@ -78,41 +78,41 @@ function Kraeftbehandling() {
     setTimeout(() => setShowTumor(false), 800);
   };
 
+  const handleOverlayEnded = () => {
+    setShowOverlay(false);
+    setShowZoom(true); // Starter hjertezoom
+    setShowTumorBg(false);
+  };
 
-const handleOverlayEnded = () => {
-  setShowOverlay(false);
-  setShowZoom(true); // Starter hjertezoom 
-  setShowTumorBg(false);
-  
-};
+  const handleZoomEnded = () => {
+    setShowZoom(false);
+    setShowNewBg(true);
+    setCurrentStep(1); // Teksten skifter først når hjerteZoom er færdig
+  };
 
-const handleZoomEnded = () => {
-  setShowZoom(false);
-  setShowNewBg(true);
-  setCurrentStep(1); // Teksten skifter først når hjerteZoom er færdig
-};
+  const zoomRef = useRef(null);
+  const newBgRef = useRef(null);
 
-const zoomRef = useRef(null);
-const newBgRef = useRef(null);
+  const PRELOAD_SECONDS = 6000; // Juster efter behov for at få mindst hak mellem videoskift
 
-const PRELOAD_SECONDS = 6000; // Juster efter behov for at få mindst hak mellem videoskift
-
-const handleZoomTimeUpdate = () => {
-  const video = zoomRef.current;
-  if (!video || !newBgRef.current) return;
-  const timeLeft = video.duration - video.currentTime;
-  // Start notumorani i baggrunden X sekunder før hjertezoom slutter
-  if (timeLeft <= PRELOAD_SECONDS && newBgRef.current.paused) {
-    newBgRef.current.play().catch(() => {});
-  }
-};
+  const handleZoomTimeUpdate = () => {
+    const video = zoomRef.current;
+    if (!video || !newBgRef.current) return;
+    const timeLeft = video.duration - video.currentTime;
+    // Start notumorani i baggrunden X sekunder før hjertezoom slutter
+    if (timeLeft <= PRELOAD_SECONDS && newBgRef.current.paused) {
+      newBgRef.current.play().catch(() => {});
+    }
+  };
 
   //Aktivér disse samt linie 172-183, 188 og 205 for at få "hint" synlig
   // const handleLinkTap = () => setShowHint(true);
   // const handleTumorStart = () => setShowHint(false);
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden page-fade-in ${fadeVisible ? "visible" : ""}`} >
+    <div
+      className={`relative w-full h-screen overflow-hidden page-fade-in ${fadeVisible ? "visible" : ""}`}
+    >
       <FlagButton />
       <BackButton onClick={() => fadeNavigate("/")} />
       <TumorBackground />
@@ -120,7 +120,10 @@ const handleZoomTimeUpdate = () => {
       {/* Baggrund 1: tumorani — fader ud når ny baggrund vises */}
       <video
         src={tumorani}
-        autoPlay loop muted playsInline
+        autoPlay
+        loop
+        muted
+        playsInline
         className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
         style={{ zIndex: 0, opacity: showTumorBg ? 1 : 0 }}
       />
@@ -129,7 +132,9 @@ const handleZoomTimeUpdate = () => {
       <video
         ref={newBgRef}
         src={notumorani}
-        loop muted playsInline
+        loop
+        muted
+        playsInline
         className="absolute inset-0 w-full h-full object-cover"
         style={{ zIndex: 1, opacity: showNewBg ? 1 : 0 }}
       />
@@ -139,7 +144,9 @@ const handleZoomTimeUpdate = () => {
         <video
           ref={zoomRef}
           src={hjertezoom}
-          autoPlay muted playsInline
+          autoPlay
+          muted
+          playsInline
           onTimeUpdate={handleZoomTimeUpdate}
           onEnded={handleZoomEnded}
           className="absolute inset-0 w-full h-full object-cover"
@@ -151,7 +158,9 @@ const handleZoomTimeUpdate = () => {
       {showOverlay && (
         <video
           src={rayOverlay}
-          autoPlay muted playsInline
+          autoPlay
+          muted
+          playsInline
           onEnded={handleOverlayEnded}
           className="absolute inset-0 w-full h-full object-cover"
           style={{ zIndex: 20 }}
@@ -169,7 +178,7 @@ const handleZoomTimeUpdate = () => {
             pointerEvents: currentStep === 0 ? "auto" : "none",
           }}
         >
-            {/*Aktivér disse samt linie 110-112 188 og 205 for at få "hint" synlig
+          {/*Aktivér disse samt linie 110-112 188 og 205 for at få "hint" synlig
           <div
             className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white rounded-full px-4 py-2 whitespace-nowrap"
             style={{
@@ -204,7 +213,7 @@ const handleZoomTimeUpdate = () => {
           currentStep={currentStep}
           // onLinkTap={handleLinkTap}
           style={{
-             backdropFilter: "blur(12px)",
+            backdropFilter: "blur(12px)",
           }}
         />
       </div>
@@ -220,9 +229,7 @@ const handleZoomTimeUpdate = () => {
           pointerEvents: "none",
         }}
       />
-    
     </div>
-    
   );
 }
 
