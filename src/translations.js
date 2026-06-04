@@ -17,10 +17,10 @@ const translations = {
         label: "Rygning i dag og kvinders hjerter",
         heading: "Rygning i dag og kvinders hjerter",
         intro:
-          'I dag ryger lige mange kvinder og mænd, men forskning har vist, at rygning er "farligere" for kvinders hjerter. Hvis en kvinde ryger stiger hendes risiko for en hjertekarsygdom med 25 % mere, end en mands gør. Forskere er ikke klar over, hvad årsagen er.',
+          'I dag ryger lige mange kvinder og mænd, men forskning har vist, at rygning er "farligere" for kvinders hjerter. Forskere er ikke klar over, hvad årsagen er. Hvis en kvinde ryger stiger hendes risiko for en hjertekarsygdom med 25 % mere, end en mands gør. ',
         body: "",
         stats: [
-          { value: "25%", description: "Større risiko for kvinder end mænd" },
+          { value: "25%", description: "Rygning øger kvinders risiko for hjerte-kar-sygdom 25% mere end mænds" },
         ],
       },
       dragLabel: "Rygning og hjerte-kar-sygdomme - før og nu",
