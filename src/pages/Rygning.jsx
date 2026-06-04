@@ -8,8 +8,8 @@ import LungsBackground from "../components/animatedbackgrounds/Lungsbackground";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
-import leftAni from "../assets/smok.webm"
-import rightAni from "../assets/nosmok.webm"
+import rightAni from "../assets/smok.webm"
+import leftAni from "../assets/nosmok.webm"
 
 const PAGE_FADE_DURATION = 0.4;
 

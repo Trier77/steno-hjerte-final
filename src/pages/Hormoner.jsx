@@ -9,7 +9,7 @@ import OvariesBackground from "../components/animatedbackgrounds/Ovariesbackgrou
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
-import halvliv from "../assets/halvliv.webm"
+import halvliv5 from "../assets/halvliv.mp4"
 
 //Snap-punkter til "alder-slideren"
 const SNAP_POINTS = ["", "0-50", "50-60", "60-70", "70+", ""];
@@ -119,7 +119,7 @@ export default function Hormoner() {
 
       {/* Halvliv-animation afspilles bag UI-boksen */}
       <video
-                src={halvliv}
+                src={halvliv5}
                 autoPlay
                 loop
                 muted
