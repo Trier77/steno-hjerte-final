@@ -19,12 +19,12 @@ const PAGE_FADE_DURATION = 0.4;
 // Vi bruger deterministisk matematik (i * primtal) i stedet for Math.random() så de ikke hopper rundt.
 const CUBE_TRAITS = Array.from({ length: 20 }, (_, i) => ({
   id: i,
-  y: 5 + ((i * 37 + 11) % 85), // vertikal placering 5–90%
-  duration: 6 + ((i * 13) % 10), // 6–16s om at krydse skærmen
-  delay: -((i * 3.7) % 16), // negativ delay gør at de starter midt i animationen
-  size: 24 + ((i * 7) % 20), // 24–44px
-  opacity: 0.5 + ((i * 11) % 40) / 100, // 0.5–0.9
-  wobble: ((i * 17) % 12) - 6, // lille vertikal drift ±6px
+  y: 5 + ((i * 37 + 11) % 85),
+  duration: 6 + ((i * 13) % 10),
+  delay: -((i * 3.7) % 16),
+  size: 24 + ((i * 7) % 20),
+  opacity: 0.5 + ((i * 11) % 40) / 100,
+  wobble: ((i * 17) % 12) - 6,
 }));
 
 // Antal terninger der vises per stage — flere terninger = mere sukker i blodet
@@ -66,7 +66,6 @@ function SugarCube({ traits, entranceDelay }) {
         pointerEvents: "none",
       }}
     >
-      {/* Det indre div håndterer den løbende drift på tværs af skærmen */}
       <div
         style={{
           "--wobble": `${wobble}px`,
@@ -113,7 +112,6 @@ function SugarCubes({ stage }) {
       className="absolute inset-0"
       style={{ pointerEvents: "none", zIndex: 5, overflow: "hidden" }}
     >
-      {/* AnimatePresence sørger for at terninger fader ud når stagen skifter */}
       <AnimatePresence>
         {CUBE_TRAITS.slice(0, count).map((traits, i) => (
           <SugarCube key={traits.id} traits={traits} entranceDelay={i * 0.05} />
@@ -124,20 +122,11 @@ function SugarCubes({ stage }) {
 }
 
 // ─── Personfigur ──────────────────────────────────────────────────────────────
-const GENDER_CONFIG = {
-  man: { total: 10, redCount: 4, multiplier: "140%" },
-  woman: { total: 10, redCount: 5, multiplier: "185%" },
-};
 
-const FIGURE_SIZE = 64; // px bred
-const FIGURE_HEIGHT = 110; // px høj — fast så mænd og kvinder er samme højde
+const FIGURE_SIZE = 32; // px bred
+const FIGURE_HEIGHT = 55; // px høj
 
-// Blå og røde figurer ligger ovenpå hinanden og crossfader i stedet for at unmounte/remounte.
-// Det giver en blød overgang uden layout-hop.
-function PersonIcon({ gender, isRed, appearDelay, swapDelay }) {
-  const blueSrc = `${gender}-blue.svg`;
-  const redSrc = `${gender}-red.svg`;
-
+function PersonIcon({ gender, appearDelay }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.4, y: 10 }}
@@ -148,78 +137,47 @@ function PersonIcon({ gender, isRed, appearDelay, swapDelay }) {
         ease: [0.34, 1.56, 0.64, 1],
       }}
       style={{
-        position: "relative",
         width: FIGURE_SIZE,
         height: FIGURE_HEIGHT,
         flexShrink: 0,
       }}
     >
-      {/* Blå fader ud når figuren skal blive rød */}
-      <motion.img
-        src={blueSrc}
+      <img
+        src={`${gender}-blue.svg`}
         alt=""
-        animate={{ opacity: isRed ? 0 : 1 }}
-        transition={{ duration: 0.35, delay: isRed ? swapDelay : 0 }}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-        }}
-      />
-      {/* Rød fader ind oven på den blå */}
-      <motion.img
-        src={redSrc}
-        alt=""
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isRed ? 1 : 0 }}
-        transition={{ duration: 0.35, delay: isRed ? swapDelay : 0 }}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-        }}
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
       />
     </motion.div>
   );
 }
 
-function GenderRow({ gender, stage }) {
-  const { total, redCount, multiplier } = GENDER_CONFIG[gender];
+function GenderRow({ gender, stage, label, multiplier }) {
+  const counts = {
+    man: [0, 10, 24],
+    woman: [0, 7, 20],
+  };
+  const count = counts[gender][stage] ?? 0;
 
   return (
-    <div className="relative flex flex-row items-center justify-center w-full">
-      <div className="flex flex-row items-end justify-center gap-1 w-full">
-        {Array.from({ length: total }, (_, i) => {
-          const isRed = stage === 2 && i >= total - redCount;
-          const redIndex = i - (total - redCount);
-          return (
-            <PersonIcon
-              key={`${gender}-${i}`}
-              gender={gender}
-              isRed={isRed}
-              // Kun stagger-delay ved stage 1, ved stage 2 er figurerne allerede synlige
-              appearDelay={stage === 1 ? i * 0.06 : 0}
-              swapDelay={isRed ? redIndex * 0.1 : 0}
-            />
-          );
-        })}
+    <div className="flex flex-row items-center w-full gap-3">
+      {/* Figurer starter fra venstre */}
+      <div className="flex flex-row flex-wrap items-end justify-start gap-1 flex-1">
+        {Array.from({ length: count }, (_, i) => (
+          <PersonIcon
+            key={`${gender}-${i}`}
+            gender={gender}
+            appearDelay={stage === 1 ? i * 0.04 : i * 0.02}
+          />
+        ))}
       </div>
 
-      {/* Badge/tallene får absolute så den ikke påvirker centreringen af figurerne */}
-      <div
-        style={{
-          position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-        }}
-      >
+      {/* Label + multiplier i fast kolonne til højre */}
+      <div className="flex flex-col items-center justify-center shrink-0 w-24">
+        <p className="font-display font-semibold text-primary text-2xl">
+          {label}
+        </p>
         <AnimatePresence>
-          {stage === 2 && (
+          {stage === 2 && multiplier && (
             <motion.div
               key="multiplier"
               initial={{ opacity: 0, scale: 0.5, x: 12 }}
@@ -227,7 +185,7 @@ function GenderRow({ gender, stage }) {
               exit={{ opacity: 0, scale: 0.5, x: 12 }}
               transition={{
                 duration: 0.45,
-                delay: redCount * 0.1 + 0.4,
+                delay: 0.4,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
               className="flex flex-row items-center gap-1"
@@ -267,9 +225,6 @@ export default function Blodsukker() {
   const startSliderRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ w: 500, h: 900 });
 
-  // Refs bruges i event listeners for at undgå stale closures
-  // React state kan ikke læses korrekt inde i addEventListener-callbacks,
-  // så vi holder en synkroniseret ref-kopi af de værdier vi har brug for der.
   const isDraggingRef = useRef(false);
   const sliderYRef = useRef(0);
   const stageRef = useRef(0);
@@ -284,7 +239,6 @@ export default function Blodsukker() {
     stageRef.current = stage;
   }, [stage]);
 
-  // Tracker container-størrelsen så BloodBackground kan skalere korrekt
   useEffect(() => {
     const update = () => {
       if (containerRef.current) {
@@ -305,7 +259,6 @@ export default function Blodsukker() {
     const clamped = Math.max(0, Math.min(2, index));
     setIsSnapping(true);
     setSliderY(SNAP_POSITIONS[clamped] / 100);
-    // Lille forsinkelse så slider-animationen når at starte inden indholdet skifter
     if (clamped !== stageRef.current) {
       setTimeout(() => {
         setStage(clamped);
@@ -327,7 +280,6 @@ export default function Blodsukker() {
     const onMove = (e) => {
       if (!isDraggingRef.current) return;
       e.preventDefault();
-      // Vi bruger slider-elementets højde som reference for hvor langt man skal trække
       const height = sliderRef.current?.offsetHeight || 300;
       const delta = startYRef.current - getClientY(e);
       const newY = Math.max(
@@ -342,7 +294,6 @@ export default function Blodsukker() {
       if (!isDraggingRef.current) return;
       isDraggingRef.current = false;
       setIsDragging(false);
-      // Snap til nærmeste stage når brugeren slipper
       const nearest = Math.round(sliderYRef.current * 2);
       snapToIndex(nearest);
     };
@@ -379,7 +330,6 @@ export default function Blodsukker() {
 
       <BloodBackground w={containerSize.w} h={containerSize.h} />
 
-      {/* Sukkerknalderne er over baggrunden, under UI */}
       <SugarCubes stage={stage} />
 
       {/* Øverste område med den vertikale slider */}
@@ -417,7 +367,7 @@ export default function Blodsukker() {
               }}
             />
 
-            {/* Håndtaget/selve den dot der er */}
+            {/* Håndtaget */}
             <div
               className="absolute left-1/2"
               style={{
@@ -474,13 +424,11 @@ export default function Blodsukker() {
           backdropFilter: "blur(12px)",
         }}
       >
-        {/* visible-prop fra LanguageContext skjuler indhold under sprogskift */}
         <div
           className="flex flex-col h-full gap-2"
           style={{ opacity: visible ? 1 : 0, transition: "opacity 0.3s ease" }}
         >
           <div style={{ minHeight: "80px" }}>
-            {/* mode="wait" sikrer at gammelt indhold er væk inden nyt fader ind */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={stage}
@@ -511,7 +459,7 @@ export default function Blodsukker() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="flex flex-col items-center justify-center gap-2 mt-2 flex-1"
+                className="flex flex-col items-center justify-center gap-2 mb-30 flex-1"
                 style={{ pointerEvents: "none" }}
               >
                 <motion.div
@@ -537,8 +485,18 @@ export default function Blodsukker() {
                 transition={{ duration: 0.35 }}
                 className="flex flex-col gap-2 flex-1 justify-center"
               >
-                <GenderRow gender="man" stage={stage} />
-                <GenderRow gender="woman" stage={stage} />
+                <GenderRow
+                  gender="man"
+                  stage={stage}
+                  label={t.men}
+                  multiplier="140%"
+                />
+                <GenderRow
+                  gender="woman"
+                  stage={stage}
+                  label={t.women}
+                  multiplier="185%"
+                />
               </motion.div>
             )}
           </AnimatePresence>
