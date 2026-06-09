@@ -8,10 +8,10 @@ import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
 import TumorBackground from "../components/animatedbackgrounds/Tumorbackground";
-import tumorani from "../assets/tumorani.webm";
+import tumorani from "../assets/tumoranimb.mp4";
 import rayOverlay from "../assets/rayOverlay.webm";
-import notumorani from "../assets/notumorani.webm";
-import hjertezoom from "../assets/hjertezoom.webm";
+import notumorani from "../assets/notumoranimb.mp4";
+import hjertezoom from "../assets/hjertezoommb.mp4";
 import { motion } from "framer-motion";
 
 function TekstModul({ step, currentStep }) {
