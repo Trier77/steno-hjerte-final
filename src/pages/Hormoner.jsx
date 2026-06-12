@@ -9,7 +9,7 @@ import OvariesBackground from "../components/animatedbackgrounds/Ovariesbackgrou
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
-import halvlivmb2 from "../assets/halvlivmb2.mp4"
+import halvlivmb2 from "../assets/halvlivmb2.mp4";
 
 //Snap-punkter til "alder-slideren"
 const SNAP_POINTS = ["", "0-50", "50-60", "60-70", "70+", ""];
@@ -119,14 +119,14 @@ export default function Hormoner() {
 
       {/* Halvliv-animation afspilles bag UI-boksen */}
       <video
-                src={halvlivmb2}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute top-0 left-0 w-full h-full"
-                style={{ zIndex: 0 }}
-              />
+        src={halvlivmb2}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full"
+        style={{ zIndex: 0 }}
+      />
 
       <div className="flex-1" />
 
@@ -143,14 +143,14 @@ export default function Hormoner() {
         }}
       >
         <div
-          className="flex flex-col h-full gap-10"
+          className="flex flex-col h-full"
           style={{ opacity: visible ? 1 : 0, transition: "opacity 0.3s ease" }}
         >
           {/* Tekstområde */}
           <motion.div
             key={activeIndex}
             className="shrink-0 overflow-hidden"
-            style={{ height: "310px" }}
+            style={{ height: "335px" }}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -172,26 +172,24 @@ export default function Hormoner() {
             >
               {content.body || "[ Tekst fra museet ]"}
             </motion.p>
-
-            
-            <div className="mt-4" style={{ height: "2rem" }}>
-              <AnimatePresence mode="wait">
-                {content.caption && (
-                  <motion.p
-                    key={content.caption}
-                    className="font-display font-semibold text-primary text-2xl"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3, delay: 0.5 }}
-                  >
-                    {content.caption}
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </div>
           </motion.div>
 
+          <div style={{ height: "2rem" }}>
+            <AnimatePresence mode="wait">
+              {content.caption && (
+                <motion.p
+                  key={content.caption}
+                  className="font-display font-semibold text-primary text-2xl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {content.caption}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </div>
           {/* Blodåre aimation eller hint */}
           <div className="shrink-0 relative" style={{ height: "160px" }}>
             {/* Hint vises kun når slideren er i start eller slut */}
@@ -240,7 +238,7 @@ export default function Hormoner() {
           </div>
 
           {/* Start prik */}
-          <div className="shrink-0">
+          <div className="shrink-0 mt-2">
             {/* Labels */}
             <div className="relative h-7 mb-7">
               <button
@@ -289,7 +287,7 @@ export default function Hormoner() {
             {/*Sporet til slider */}
             <div
               ref={sliderRef}
-              className="relative w-full h-3 bg-primary/20 rounded-full cursor-pointer mb-2 overflow-visible"
+              className="relative w-full h-5 bg-primary/20 rounded-full cursor-pointer mb-2 overflow-visible"
               onMouseDown={handlePointerDown}
             >
               {/* Sporets fyld */}
@@ -316,8 +314,8 @@ export default function Hormoner() {
               >
                 <motion.div
                   style={{
-                    width: isDragging ? "52px" : "36px",
-                    height: isDragging ? "52px" : "36px",
+                    width: isDragging ? "65px" : "50px",
+                    height: isDragging ? "65px" : "50px",
                     position: "relative",
                   }}
                   initial={{ opacity: 0, scale: 0.5 }}

@@ -23,7 +23,7 @@ const translations = {
           {
             value: "25 %",
             description:
-              "Rygning øger kvinders risiko for hjerte-kar-sygdom 25 % mere end mænds",
+              "Rygning øger kvinders risiko for hjerte-kar-sygdom 25 % mere end mænds.",
           },
         ],
       },
@@ -39,7 +39,7 @@ const translations = {
         {
           heading: "Stråling mod brystkræft kan skade hjertet",
           body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem (behandling af) brystkræft og hjertesygdom er især vokset indenfor de seneste 20-25 år.",
-          hint: "Du har nu fjernet kræftknuden og set hvad stråling kan gøre ved hjertet!",
+          hint: "Du fik fjernet kræftknuden, men du kom også til at ramme hjertet!",
         },
       ],
     },
@@ -49,6 +49,7 @@ const translations = {
     },
     hjerteknap: {
       heading: "Om hjertet",
+      quiz: "Quiz om hjertet",
     },
     depression: {
       neurons: [
@@ -80,10 +81,10 @@ const translations = {
         {
           heading: "Diabetes og hjertet",
           body: "Diabetes er en sygdom, som gør, at man har for meget sukker i blodet. Sygdommen påvirker mænd og kvinders hjerter på forskellige måder.",
-          hint: "Brug slideren og se hvad der sker med risikoen for hjerte-kar-sygdomme, hvis man får diabetes",
+          hint: "Brug slideren og se, hvad der sker med risikoen for hjerte-kar-sygdomme, hvis man får diabetes",
         },
         {
-          heading: "Risikoen for hjerte-kar-sygdom uden diabetes",
+          heading: "Risikoen for hjerte-kar-sygdom\nuden diabetes",
           body: "Hvis 10 mænd omkring 50-60 år uden diabetes bliver ramt af en hjerte-kar-sygdom, vil omkring 7 kvinder uden diabetes blive ramt.",
         },
         {
@@ -95,7 +96,7 @@ const translations = {
     hormoner: {
       dragHint: "← Alder (år) →",
       vesselHintStart: "Træk og undersøg, hvad der sker med kvinders blodkar",
-      vesselHintStartBold: "når de bliver ældre",
+      vesselHintStartBold: "når de bliver ældre.",
       vesselHintEnd: "Du har nu set, hvad alderen gør ved blodkarrene!",
       sliderStart: "Før",
       sliderEnd: "Efter",
@@ -107,28 +108,27 @@ const translations = {
         {
           heading: "Kvinder har meget østrogen i blodet",
           body: "Kønshormonet østrogen beskytter hjertet mod forkalkning, stive blodkar og højt blodtryk frem til overgangsalderen.",
-          caption: "● Blodårerne er glatte og flowet er godt",
+          caption: "● Blodårerne er glatte og flyder uden modstand.",
         },
         {
           heading: "Mængden af østrogen falder drastisk",
           body: "De fleste kvinder går i overgangsalderen, når de er mellem 45 og 55 år. Herefter falder mængden af østrogen, og risikoen for hjerte-kar-sygdomme begynder at stige kraftigt. Blodkarrene bliver stivere, og blodtrykket stiger.",
           caption:
-            "● Væggene bliver tykkere, og der opstår forkalkninger på indersiden",
+            "● Blodkarrene bliver stivere, og der opstår forkalkninger på indersiden.",
         },
         {
           heading: "Kvinders blodtryk bliver højere end mænds",
           body: "Omkring 60-65-årsalderen bliver kvinders blodtryk gennemsnitligt højere end mænds. Forhøjet blodtryk øger risikoen for hjerte-kar-sygdomme.",
-          caption: "● Blodtrykket bliver højere",
+          caption: "● Blodtrykket bliver højere.",
         },
         {
           heading: "Kvinder og mænds blodkar er lige syge",
-          body: "Omtrent 20-25 år efter, at kvinder går i overgangsalderen, er deres risiko for hjerte-kar-sygdom den samme som mænds.",
-          caption:
-            "● Endnu stærkere åreforkalkning, stive kar og højt blodtryk",
+          body: "Omtrent 20-25 år efter, at kvinder går i overgangsalderen, er deres risiko for hjerte-kar-sygdomme den samme som mænds.",
+          caption: "● Forkalkning af blodkarrene fortsætter.",
         },
         {
           heading: "Den oversete sammenhæng: hormoner og hjertet",
-          body: "Mænd dør syv år tidligere end kvinder af hjerte-kar-sygdom, fordi østrogen beskytter kvinders hjerter. Nyere forskning viser dog, at sygdomme relateret til kvinders hormoner, som for eksempel endometriose og PCOS, kan øge risikoen for hjerte-kar-sygdom med op til 30 %. Der mangler stadig forskning på området.",
+          body: "Mænd dør syv år tidligere end kvinder af hjerte-kar-sygdom, bl.a. fordi østrogen beskytter kvinders hjerter. Nyere forskning viser dog, at sygdomme relateret til kvinders hormoner, som for eksempel endometriose og PCOS, kan øge risikoen for hjerte-kar-sygdom med op til 30 %. Der mangler stadig forskning på området.",
         },
       ],
     },
@@ -143,8 +143,8 @@ const translations = {
         {
           heading: "Graviditet og kvinders hjerter",
           body: "Ny forskning peger på, at forskellige sygdomme under graviditet kan føre til, at kvinder senere i livet bliver ramt af hjerte-kar-sygdom. Træk i speedometeret og få mere viden!",
-          hintStart: "Prøv at trække",
-          hintEnd: "i speedometeret",
+          hintStart: "Træk i speedometeret",
+          hintEnd: "og få mere viden!",
         },
         {
           heading: "Diabetes under graviditet kan gøre hjertet sygt",
@@ -347,7 +347,7 @@ const translations = {
         {
           heading: "Radiation can damage the heart.",
           body: "You removed the tumor, but some of the radiation also hit the heart. This can cause scarring on the heart muscle, which can lead to cardiovascular disease. Research on the connection between breast cancer treatment and heart disease has increased over the past 20-25 years.",
-          hint: "You have now removed the tumour and seen what radiation can do to the heart!",
+          hint: "You removed the tumor - but the heart was also negatively affected!",
         },
       ],
     },
@@ -356,7 +356,8 @@ const translations = {
       body: "Press on the body and dive into overlooked connections between gender and cardiovascular diseases.",
     },
     hjerteknap: {
-      heading: "The heart",
+      heading: "on heart disease",
+      quiz: "heart quiz",
     },
     depression: {
       neurons: [
@@ -391,7 +392,7 @@ const translations = {
           hint: "Use the slider to learn more about how diabetes affects the risk of a cardiovascular disease",
         },
         {
-          heading: "The risk for cardiovascular disease without diabetes.",
+          heading: "The risk for cardiovascular disease\nwithout diabetes.",
           body: "If 10 men without diabetes between the ages of 50 to 60 develop a cardiovascular disease, about 7 women without diabetes will be affected.",
         },
         {
@@ -402,10 +403,9 @@ const translations = {
     },
     hormoner: {
       dragHint: "← Age (years) →",
-      vesselHintStart:
-        "Drag and explore what happens to women's blood vessels as they age",
-      vesselHintStartBold: "as they get older",
-      vesselHintEnd: "You have now seen what age does to the blood vessels!",
+      vesselHintStart: "Drag and explore what happens to women's blood vessels",
+      vesselHintStartBold: "as they get older.",
+      vesselHintEnd: "You have now seen how againg affects the blood vessels!",
       sliderStart: "Before",
       sliderEnd: "After",
       stages: [
@@ -416,24 +416,23 @@ const translations = {
         {
           heading: "Women have high levels of estrogen in their blood",
           body: "The sex hormone estrogen protects the heart against arterial calcification, stiff blood vessels and high blood pressure until menopause.",
-          caption: "● Blood vessels are smooth and blood flow is good",
+          caption: "● Blood vessels are smooth and healthy.",
         },
         {
           heading: "Estrogen levels drop drastically",
           body: "Most women enter menopause between the ages of 45 and 55. Following menopause, estrogen levels fall, and the risk of developing a cardiovascular disease begins to rise significantly.",
           caption:
-            "● The walls become thicker and calcifications develop on the inside",
+            "● Blood vessels begin to stiffen and calcifications start to develop.",
         },
         {
           heading: "Women's blood pressure becomes higher than men's",
           body: "Around the ages of 60 to 65, women's average blood pressure becomes higher than men's. High blood pressure increases the risk of cardiovascular disease.",
-          caption: "● Blood pressure rises",
+          caption: "● Blood pressure rises.",
         },
         {
           heading: "Women's and men's blood vessels are equally affected",
           body: "About 20-25 years after a woman enters menopause, her risk of developing a cardiovascular disease is the same as men's.",
-          caption:
-            "● Even stronger calcification, stiff vessels and high blood pressure",
+          caption: "● Calcification and stiffening of blood vessels continues.",
         },
         {
           heading: "The overlooked connection",

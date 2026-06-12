@@ -437,7 +437,7 @@ export default function Blodsukker() {
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.3 }}
               >
-                <h2 className="font-display font-semibold text-primary text-5xl text-center leading-snug mb-1">
+                <h2 className="font-display font-semibold text-primary text-5xl text-center leading-snug mb-1 whitespace-pre-line">
                   {currentStep.heading || "Diabetes og hjertet"}
                 </h2>
                 <p

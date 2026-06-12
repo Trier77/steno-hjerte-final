@@ -127,7 +127,7 @@ export default function StartSide() {
           label={t.hjerteknap.heading}
           onClick={openVideo}
         />
-        <NavButton icon="quiz" label="Quiz" onClick={openQuiz} />
+        <NavButton icon="quiz" label={t.hjerteknap.quiz} onClick={openQuiz} />
       </section>
 
       {/* Fade to black overlay */}
