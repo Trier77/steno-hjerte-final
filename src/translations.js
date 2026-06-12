@@ -9,18 +9,22 @@ const translations = {
           "Læger har vidst siden midten af 1900-tallet, at rygning øger risikoen for hjerte-kar-sygdom. Mænd har historisk set røget mere end kvinder. Derfor blev blodpropper i hjertet opfattet som en mandesygdom eller “direktørsygdom”, fordi det i høj grad var mænd med store cigarer og store maver, der blev ramt.",
         body: "",
         stats: [
-          { value: "75%", description: "af mænd røg i 1950" },
-          { value: "40%", description: "af kvinder røg i 1950" },
+          { value: "75 %", description: "af mænd røg i 1950" },
+          { value: "40 %", description: "af kvinder røg i 1950" },
         ],
       },
       right: {
         label: "Rygning i dag og kvinders hjerter",
         heading: "Rygning i dag og kvinders hjerter",
         intro:
-          'I dag ryger lige mange kvinder og mænd, men forskning har vist, at rygning er "farligere" for kvinders hjerter. Forskere er ikke klar over, hvad årsagen er. Hvis en kvinde ryger stiger hendes risiko for en hjertekarsygdom med 25 % mere, end en mands gør. ',
+          "I dag ryger lige mange kvinder og mænd, men forskning har vist, at rygning gør kvinders hjerter mere syge. Forskere er ikke klar over, hvad årsagen er.",
         body: "",
         stats: [
-          { value: "25%", description: "Rygning øger kvinders risiko for hjerte-kar-sygdom 25% mere end mænds" },
+          {
+            value: "25 %",
+            description:
+              "Rygning øger kvinders risiko for hjerte-kar-sygdom 25 % mere end mænds",
+          },
         ],
       },
       dragLabel: "Rygning og hjerte-kar-sygdomme - før og nu",
@@ -29,19 +33,19 @@ const translations = {
       steps: [
         {
           heading: "Brystkræft og hjertesygdomme",
-          body: "Hvis man er blevet behandlet for brystkræft, har man større risiko for senere at udvikle en hjertesygdom. 99 % af patienter med brystkræft er kvinder. 9 ud af 10 af brystkræftpatienter får stråling som en del af deres behandling.",
+          body: "Hvis man er blevet behandlet for brystkræft, har man større risiko for senere hen at udvikle en hjertesygdom. 99 % af patienter med brystkræft er kvinder. 9 ud af 10 brystkræftpatienter får stråling som en del af deres behandling.",
           hint: "Prøv at fjerne kræftknuden med stråling",
         },
         {
           heading: "Stråling mod brystkræft kan skade hjertet",
-          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem brystkræft og hjertesygdom er især vokset inden for de seneste 20–25 år.",
+          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem (behandling af) brystkræft og hjertesygdom er især vokset indenfor de seneste 20-25 år.",
           hint: "Du har nu fjernet kræftknuden og set hvad stråling kan gøre ved hjertet!",
         },
       ],
     },
     startside: {
-      heading: "Det Oversete Hjerte",
-      body: "Tryk på kroppen og undersøg sammenhænge mellem køn og hjertekarsygdomme.",
+      heading: "Det oversete hjerte",
+      body: "Tryk på kroppen, og undersøg oversete sammenhænge mellem køn og hjerte-kar-sygdomme.",
     },
     hjerteknap: {
       heading: "Om hjertet",
@@ -50,11 +54,11 @@ const translations = {
       neurons: [
         {
           heading: "Depression og hjertet",
-          body: "Depression og andre psykiske forhold kan påvirke hjertet negativt. Forskere er først begyndt at undersøge sammenhængen mellem hjernen og hjerte-kar-sygdomme inden for de seneste 20-30 år.",
+          body: "Depression og andre psykiske forhold kan påvirke hjertet negativt. Forskere er først begyndt at undersøge sammenhængen mellem hjernen og hjerte-kar-sygdomme indenfor de seneste 20-30 år.",
         },
         {
           heading: "Depression rammer flest kvinder",
-          body: "Dobbelt så mange kvinder som mænd bliver ramt af depression i løbet af livet. Derfor er depression særligt en overset risiko for hjerte-kar-sygdom hos kvinder.",
+          body: "Dobbelt så mange kvinder som mænd bliver ramt af depression i løbet af livet. Derfor er depression særligt en overset risikofaktor for hjerte-kar-sygdom hos kvinder.",
         },
         {
           heading: "Depression kan gøre hjertet sygt",
@@ -84,13 +88,13 @@ const translations = {
         },
         {
           heading: "Kvinders hjerter tager større skade af diabetes",
-          body: 'Begge køns risiko for at få en hjerte-kar-sygdom stiger meget, hvis de bliver ramt af diabetes. Kvinders risiko stiger mere end mænds. Forskere er ikke sikre på, hvad der gør diabetes "farligere" for kvinder.',
+          body: "Diabetes påvirker både mænd og kvinders hjerter negativt. Mænds risiko for hjerte-kar-sygdomme stiger med 140 %, hvis de får diabetes. Kvinders risiko stiger med 185 %. Forskere er ikke sikre på, hvorfor diabetes gør kvinders hjerter mere syge.",
         },
       ],
     },
     hormoner: {
       dragHint: "← Alder (år) →",
-      vesselHintStart: "Træk og undersøg, hvad der sker med kvinders blodkar,",
+      vesselHintStart: "Træk og undersøg, hvad der sker med kvinders blodkar",
       vesselHintStartBold: "når de bliver ældre",
       vesselHintEnd: "Du har nu set, hvad alderen gør ved blodkarrene!",
       sliderStart: "Før",
@@ -118,13 +122,13 @@ const translations = {
         },
         {
           heading: "Kvinder og mænds blodkar er lige syge",
-          body: "Omtrent 20 år efter, at kvinder går i overgangsalderen, er deres risiko for hjerte-kar-sygdom den samme som mænds.",
+          body: "Omtrent 20-25 år efter, at kvinder går i overgangsalderen, er deres risiko for hjerte-kar-sygdom den samme som mænds.",
           caption:
             "● Endnu stærkere åreforkalkning, stive kar og højt blodtryk",
         },
         {
-          heading: "Den oversete sammenhæng",
-          body: "Mænd dør syv år tidligere end kvinder af hjerte-kar-sygdom, fordi østrogen beskytter kvinders hjerter. Nyere forskning viser dog, at sygdomme i kvinders hormoner som for eksempel endometriose og PCOS kan øge risikoen for hjerte-kar-sygdom med op til 30 %. Der mangler stadig forskning på området.",
+          heading: "Den oversete sammenhæng: hormoner og hjertet",
+          body: "Mænd dør syv år tidligere end kvinder af hjerte-kar-sygdom, fordi østrogen beskytter kvinders hjerter. Nyere forskning viser dog, at sygdomme relateret til kvinders hormoner, som for eksempel endometriose og PCOS, kan øge risikoen for hjerte-kar-sygdom med op til 30 %. Der mangler stadig forskning på området.",
         },
       ],
     },
@@ -138,21 +142,21 @@ const translations = {
       steps: [
         {
           heading: "Graviditet og kvinders hjerter",
-          body: "Hjerteforskning har historisk været fokuseret på mænd. Derfor er det først inden for de seneste 20-30 år, at forskere er begyndt at dykke ned i sammenhængen mellem kvinders graviditeter og hjerte-kar-sygodom senere i livet.",
+          body: "Ny forskning peger på, at forskellige sygdomme under graviditet kan føre til, at kvinder senere i livet bliver ramt af hjerte-kar-sygdom. Træk i speedometeret og få mere viden!",
           hintStart: "Prøv at trække",
           hintEnd: "i speedometeret",
         },
         {
           heading: "Diabetes under graviditet kan gøre hjertet sygt",
-          body: "Omkring 3-4% af alle gravide udvikler diabetes under en graviditet. Sygdommen forsvinder som regel kort tid efter fødslen. Nyere forskning på, at graviditetsdiabetes kan være et vigtigt tegn på hjerte-kar-sygdom senere i livet.",
+          body: "Omkring 3-4% af alle gravide udvikler diabetes under en graviditet. Sygdommen forsvinder som regel kort tid efter fødslen. Forskning tyder på, at graviditetsdiabetes kan øge risikoen for hjerte-kar-sygdom senere hen i livet.",
         },
         {
           heading: "Svangerskabsforgiftning og hjertet",
-          body: "Svangerskabsforgiftning er en sygdom, man kan få som gravid. Symptomerne er blandt andet hovedpine og forhøjet blodtryk. Nyere forskning viser, at kvinder, der har haft svangerskabsforgiftning, har større risiko for atfå en hjerte-kar-sygdom senere i livet.",
+          body: "Svangerskabsforgiftning er en sygdom, man kan få som gravid. Symptomerne er blandt andet hovedpine og forhøjet blodtryk. Nyere forskning viser, at kvinder, der har haft svangerskabsforgiftning, har større risiko for at få en hjerte-kar-sygdom senere i livet.",
         },
         {
           heading: "For tidlig fødsel og hjerte-kar-sygdom",
-          body: "Ny forskning har vist, at kvinder der føder 3 uger før termin, har cirka 40% øget risiko for senere at udvikle en hjerte-kar-sygdom. Risikoen bliver større jo tidligere fødslen sker.",
+          body: "Ny forskning har vist, at kvinder, der føder mere end tre uger før termin, har cirka 40 % øget risiko for senere at udvikle en hjerte-kar-sygdom. Risikoen bliver større, jo tidligere fødslen sker.",
         },
       ],
     },
@@ -208,7 +212,7 @@ const translations = {
       resultsText:
         "Fedt, godt klaret! Du gjorde det bedre end {percentile} af alle vores besøgende!",
       playAgainBtn: "Prøv igen",
-      correctLabel: "Rigtigt!",
+      correctLabel: "Korrekt!",
       wrongLabel: "Forkert!",
       quitTitle: "Er du sikker?",
       quitBody: "Hvis du forlader quizzen nu, mister du al din fremgang.",
@@ -311,10 +315,10 @@ const translations = {
   en: {
     rygning: {
       left: {
-        label: "Smoking — Historic",
-        heading: "Smoking — Historic",
+        label: "Smoking historically",
+        heading: "Smoking historically",
         intro:
-          'Doctors have known since the mid-20th century that smoking increases the risk of cardiovascular disease. Men have historically smoked more than women. As a result, heart attacks were seen as a male disease — or a "boardroom disease" — because it was largely men with big cigars and big stomachs who were affected.',
+          "Men have historically smoked more than women. Because of this, blood clots in the heart were considered a male disease, or a “businessman's disease”, as it was predominantly men with cigars and large waistlines who were affected.",
         body: "",
         stats: [
           { value: "75%", description: "of men smoked in 1950" },
@@ -325,31 +329,31 @@ const translations = {
         label: "Smoking today and women's hearts",
         heading: "Smoking today and women's hearts",
         intro:
-          "Today, women and men smoke in equal numbers — but research has shown that smoking is more dangerous for women's hearts. If a woman smokes, her risk of cardiovascular disease rises 25% more than a man's does. Researchers are not yet sure what causes this difference.",
+          "Today men and women smoke at equal rates, but research has shown that smoking has a more harmful effect on women's hearts. Researchers do not yet know why. If a woman smokes, her risk of developing cardiovascular disease increases with 25% more than a man’s.",
         body: "",
         stats: [
           { value: "25%", description: "Higher risk for women than men" },
         ],
       },
-      dragLabel: "Smoking and cardiovascular disease — then and now",
+      dragLabel: "Smoking and cardiovascular disease — Past and present",
     },
     kraeftbehandling: {
       steps: [
         {
-          heading: "Breast cancer and heart disease",
-          body: "If you have been treated for breast cancer, you have a greater risk of developing heart disease later in life. 99% of breast cancer patients are women. 9 out of 10 breast cancer patients receive radiation as part of their treatment.",
+          heading: "Breast cancer and cardiovascular disease",
+          body: "People who have received treatment for breast cancer have a higher risk of developing a cardiovascular disease later in life. 99% of patients with breast cancer are women. 9 out of 10 breast cancer patients receive radiation as part of their treatment.",
           hint: "Try to remove the tumour with radiation",
         },
         {
-          heading: "Radiation for breast cancer can damage the heart",
-          body: "You removed the tumour, but some of the radiation also reached the heart. This can cause scarring of the heart muscle and lead to disease. Research into the connection between breast cancer (and its treatment) and heart disease has grown particularly over the last 20–25 years.",
+          heading: "Radiation can damage the heart.",
+          body: "You removed the tumor, but some of the radiation also hit the heart. This can cause scarring on the heart muscle, which can lead to cardiovascular disease. Research on the connection between breast cancer treatment and heart disease has increased over the past 20-25 years.",
           hint: "You have now removed the tumour and seen what radiation can do to the heart!",
         },
       ],
     },
     startside: {
       heading: "The Overlooked Heart",
-      body: "Press on the body and explore connections between the body, gender and cardiovascular disease",
+      body: "Press on the body and dive into overlooked connections between gender and cardiovascular diseases.",
     },
     hjerteknap: {
       heading: "The heart",
@@ -358,19 +362,19 @@ const translations = {
       neurons: [
         {
           heading: "Depression and the heart",
-          body: "Depression and other mental health conditions can have a negative impact on the heart. Researchers have only begun to investigate the connection between the brain and cardiovascular disease within the last 20–30 years.",
+          body: "Depression and other psychological conditions can affect the heart negatively. Researchers have only begun researching the connection between the brain and cardiovascular diseases within the last 20-30 years.",
         },
         {
-          heading: "Depression affects more women",
-          body: "Twice as many women as men are affected by depression during their lifetime. This makes depression a particularly overlooked risk factor for cardiovascular disease in women.",
+          heading: "Depression mostly affects women",
+          body: "Twice as many women as men will experience a depression during their life. Depression is therefore a particularly overlooked risk factor for cardiovascular disease in women.",
         },
         {
           heading: "Depression can make the heart sick",
-          body: "Newer research shows that if you are affected by depression, you have a greater risk of developing cardiovascular disease later in life.",
+          body: "New research shows that individuals who experience depression have a higher risk of developing cardiovascular disease later in life.",
         },
         {
-          heading: "Heart disease gets worse with depression",
-          body: "If you already have cardiovascular disease and then develop depression, the illness will worsen more rapidly. Some studies show that depression can double the risk of heart disease.",
+          heading: "Cardiovascular diseases are worsened by depression",
+          body: "Those who already have cardiovascular disease and develop depression will experience a faster progression of the disease.",
         },
       ],
     },
@@ -383,22 +387,23 @@ const translations = {
       steps: [
         {
           heading: "Diabetes and the heart",
-          body: "Diabetes is a disease that causes too much sugar in the blood. The disease affects men's and women's hearts in different ways. Around the age of 50–60, more men than women are affected by cardiovascular disease.",
-          hint: "Use the slider to see what happens to the risk of cardiovascular disease if you develop diabetes",
+          body: "Diabetes is a disease that causes elevated blood sugar levels. The disease affects men's and women's hearts differently.",
+          hint: "Use the slider to learn more about how diabetes affects the risk of a cardiovascular disease",
         },
         {
-          heading: "The risk increases",
-          body: "Both more women and more men are affected by cardiovascular disease if they develop diabetes. For every 10 men around age 50–60 without diabetes who develop cardiovascular disease, around 7 women without diabetes will be affected.",
+          heading: "The risk for cardiovascular disease without diabetes.",
+          body: "If 10 men without diabetes between the ages of 50 to 60 develop a cardiovascular disease, about 7 women without diabetes will be affected.",
         },
         {
-          heading: "Diabetes makes the heart sick",
-          body: "The risk of cardiovascular disease rises sharply for both sexes if they develop diabetes — but women's risk rises more than men's. Researchers are not yet sure what makes diabetes more \"dangerous\" for women.",
+          heading: "Women's hearts are more damaged by diabetes",
+          body: "Diabetes has a negative impact on the hearts of both men and women. Men's risk of cardiovascular disease increases by 140% if they develop diabetes. Women's risk increases by 185%. Researchers are not sure why diabetes has a more harmful effect on women's hearts.",
         },
       ],
     },
     hormoner: {
       dragHint: "← Age (years) →",
-      vesselHintStart: "Drag and explore what happens to women's blood vessels",
+      vesselHintStart:
+        "Drag and explore what happens to women's blood vessels as they age",
       vesselHintStartBold: "as they get older",
       vesselHintEnd: "You have now seen what age does to the blood vessels!",
       sliderStart: "Before",
@@ -406,33 +411,33 @@ const translations = {
       stages: [
         {
           heading: "Hormones and women's hearts",
-          body: "The sex hormone oestrogen is produced in the ovaries. Oestrogen protects women's bodies against cardiovascular disease up until menopause. How women's hormones affect the heart has only recently begun to receive more attention in research.",
+          body: "The sex hormone estrogen is produced in the ovaries. Estrogen protects the female body against cardiovascular diseases until menopause. How women’s hormones affect the heart has only recently begun to receive more attention in research.",
         },
         {
-          heading: "Women have high levels of oestrogen in the blood",
-          body: "The sex hormone oestrogen protects the heart against calcification, stiff blood vessels and high blood pressure up until menopause.",
+          heading: "Women have high levels of estrogen in their blood",
+          body: "The sex hormone estrogen protects the heart against arterial calcification, stiff blood vessels and high blood pressure until menopause.",
           caption: "● Blood vessels are smooth and blood flow is good",
         },
         {
-          heading: "Oestrogen levels drop drastically",
-          body: "Most women go through menopause between the ages of 45 and 55. After this, oestrogen levels fall and the risk of cardiovascular disease begins to rise sharply. Blood vessels become stiffer and blood pressure rises.",
+          heading: "Estrogen levels drop drastically",
+          body: "Most women enter menopause between the ages of 45 and 55. Following menopause, estrogen levels fall, and the risk of developing a cardiovascular disease begins to rise significantly.",
           caption:
             "● The walls become thicker and calcifications develop on the inside",
         },
         {
           heading: "Women's blood pressure becomes higher than men's",
-          body: "Around the age of 60–65, women's blood pressure becomes on average higher than men's. High blood pressure increases the risk of cardiovascular disease.",
+          body: "Around the ages of 60 to 65, women's average blood pressure becomes higher than men's. High blood pressure increases the risk of cardiovascular disease.",
           caption: "● Blood pressure rises",
         },
         {
-          heading: "Women's and men's blood vessels are equally unhealthy",
-          body: "Approximately 20 years after a woman has gone through menopause, her risk of cardiovascular disease is the same as a man's.",
+          heading: "Women's and men's blood vessels are equally affected",
+          body: "About 20-25 years after a woman enters menopause, her risk of developing a cardiovascular disease is the same as men's.",
           caption:
             "● Even stronger calcification, stiff vessels and high blood pressure",
         },
         {
-          heading: "The overlooked connection:",
-          body: "Men die seven years earlier than women from cardiovascular disease, because oestrogen protects women's hearts.\n\nNewer research shows, however, that hormonal conditions such as endometriosis and PCOS can increase women's risk of cardiovascular disease by up to 30%. More research is still needed in this area.",
+          heading: "The overlooked connection",
+          body: "Men die 7 years earlier than women from cardiovascular disease because estrogen protects women's hearts. However, new research shows that hormonal related conditions, such as endometriosis and PCOS, can increase the risk of developing cardiovascular disease by up to 30%. More research in this area is still needed.",
         },
       ],
     },
@@ -441,26 +446,26 @@ const translations = {
         "Pregnancy",
         "Gestational\n\ndiabetes",
         "Pre-eclampsia",
-        "Preterm birth",
+        "Premature birth",
       ],
       steps: [
         {
           heading: "Pregnancy and women's hearts",
-          body: "Heart research has historically focused on men. It is therefore only within the last 20–30 years that researchers have begun to explore the connection between women's pregnancies and cardiovascular disease later in life.",
+          body: "New research suggests that certain health conditions during pregnancy may increase a woman's risk of developing cardiovascular disease later in life. Explore the gauge to learn more!",
           hintStart: "Try dragging",
-          hintEnd: "the speedometer",
+          hintEnd: "the gauge",
         },
         {
-          heading: "Diabetes during pregnancy can damage the heart",
-          body: "Around 3–4% of all pregnant women develop diabetes during pregnancy. The condition usually disappears shortly after birth. Newer research suggests that gestational diabetes may be an important early indicator of cardiovascular disease later in life.",
+          heading: "Gestational diabetes can damage the heart.",
+          body: "About 3-4% of all pregnant women develop diabetes during pregnancy. The condition usually disappears shortly after giving birth. New research indicates that gestational diabetes can be an important indicator of increased risk of cardiovascular disease later in life.",
         },
         {
           heading: "Pre-eclampsia and the heart",
-          body: "Pre-eclampsia is a condition that can develop during pregnancy. Symptoms include headaches and high blood pressure. Newer research shows that women who have had pre-eclampsia have a greater risk of developing cardiovascular disease later in life.",
+          body: "Preeclampsia is a condition you can develop while pregnant. Some of the symptoms include headaches and high blood pressure. New research shows that women who have had preeclampsia have a higher risk of developing a cardiovascular disease later in life.",
         },
         {
-          heading: "Preterm birth and cardiovascular disease",
-          body: "New research has shown that women who give birth 3 weeks before their due date have approximately a 40% higher risk of developing cardiovascular disease later in life. The earlier the birth, the greater the risk.",
+          heading: "Premature birth and cardiovascular disease",
+          body: "New research has shown that women who give birth more than 3 weeks before their due date have about a 40% higher risk of developing a cardiovascular disease later in life. The earlier the birth occurs, the greater the risk.",
         },
       ],
     },
@@ -522,7 +527,7 @@ const translations = {
         "Well done! You did better than {percentile} of all our visitors!",
       playAgainBtn: "Try again",
       correctLabel: "Correct!",
-      wrongLabel: "Wrong!",
+      wrongLabel: "Incorrect!",
       quitTitle: "Are you sure?",
       quitBody: "If you leave the quiz now, you will lose all your progress.",
       quitConfirm: "Leave quiz",

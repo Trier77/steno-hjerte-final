@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { useState, useCallback } from "react";
 import VideoOverlay from "../components/VideoOverlay";
 import HjerteDa from "../assets/hjerteda.webm";
-import HjerteEn from "../assets/hjerteen.webm"
+import HjerteEn from "../assets/hjerteen.webm";
 import QuizOverlay from "../components/QuizOverlay";
 import FlagButton from "../components/FlagButton";
 import { useLanguage } from "../context/LanguageContext";
@@ -66,7 +66,11 @@ export default function StartSide() {
 
         <FlagButton />
         {showVideo && (
-          <VideoOverlay onClose={closeVideo} visible={videoVisible} src={language === "da" ? HjerteDa : HjerteEn} />
+          <VideoOverlay
+            onClose={closeVideo}
+            visible={videoVisible}
+            src={language === "da" ? HjerteDa : HjerteEn}
+          />
         )}
         {showQuiz && <QuizOverlay onClose={closeQuiz} visible={quizVisible} />}
 
@@ -87,8 +91,8 @@ export default function StartSide() {
           </h2>
         </section>
 
-        <HotspotButton 
-          className="depri-knap left-1/2 top-100" //Justér placering af hotspots her 
+        <HotspotButton
+          className="depri-knap left-1/2 top-100" //Justér placering af hotspots her
           onClick={() => goTo("/depression")}
         />
         <HotspotButton
