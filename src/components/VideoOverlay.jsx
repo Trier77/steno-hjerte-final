@@ -112,7 +112,7 @@ function VideoOverlay({ onClose, visible, src }) {
     >
       {/* Selve modulet — stopPropagation forhindrer at klik inde i boksen lukker den */}
       <div
-        className="relative bg-ui-box rounded-3xl w-10/12 flex flex-col"
+        className="relative bg-ui-box rounded-3xl w-11/12 flex flex-col"
         style={{
           height: "70vh",
           opacity: visible ? 1 : 0,
@@ -154,7 +154,7 @@ function VideoOverlay({ onClose, visible, src }) {
         </div>
 
         {/* Videokontrol, start/stop, progressionsbar og resterende tid */}
-        <div className="flex items-center gap-6 px-8 py-6">
+        <div className="flex items-center gap-6 px-8 pt-6 pb-10">
           {/* Play/Pause knap */}
           <button
             onClick={togglePlay}
@@ -165,7 +165,7 @@ function VideoOverlay({ onClose, visible, src }) {
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-14 h-14 text-primary"
                 fill="currentColor"
-                viewBox="0 0 24 24"
+                viewBox="6 3 12 18"
               >
                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
               </svg>
@@ -174,7 +174,7 @@ function VideoOverlay({ onClose, visible, src }) {
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-14 h-14 text-primary"
                 fill="currentColor"
-                viewBox="0 0 24 24"
+                viewBox="6 3 12 18"
               >
                 <path d="M8 5v14l11-7z" />
               </svg>
@@ -184,7 +184,7 @@ function VideoOverlay({ onClose, visible, src }) {
           {/* Progressionsbar — touch-events håndteres af useEffect ovenfor, kun muse-events her */}
           <div
             ref={progressRef}
-            className="relative flex-1 h-2 bg-primary/20 rounded-full cursor-pointer"
+            className="relative flex-1 h-5 bg-primary/20 rounded-full cursor-pointer"
             onMouseDown={handlePointerDown}
             onMouseMove={handlePointerMove}
             onMouseUp={handlePointerUp}
@@ -197,13 +197,13 @@ function VideoOverlay({ onClose, visible, src }) {
             />
             {/* Håndtag til at trække i progressionsbaren */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-primary shadow"
+              className="absolute top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-primary shadow"
               style={{ left: `calc(${progress * 100}% - 12px)` }}
             />
           </div>
 
           {/* Resterende tid */}
-          <span className="font-display text-primary text-3xl shrink-0">
+          <span className="font-display text-primary text-4xl shrink-0">
             -{formatTime(duration - currentTime)}
           </span>
         </div>
