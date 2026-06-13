@@ -205,7 +205,7 @@ const translations = {
     quiz: {
       title: "Quiz",
       intro:
-        "Test din viden om hjertet og hjertesygdomme. Du vil blive stillet 7 spørgsmål, og efter hvert svar får du en forklaring. God fornøjelse!",
+        "Test din viden om hjertet og hjerte-kar-sygdomme. Du vil blive stillet syv spørgsmål, og efter hvert svar får du en forklaring. God fornøjelse!",
       startBtn: "Start",
       nextBtn: "Næste spørgsmål",
       resultsTitle: "Resultat",
@@ -224,20 +224,20 @@ const translations = {
       resultsBasedOn: "(Baseret på",
       resultsAttempts: "forsøg i alt)",
       completionMessage:
-        "Tillykke! Du har gennemført quizzen. Se videoen eller udforsk kroppen for at lære mere om køn og hjerte-kar-sygdomme.",
+        "Tillykke! Du har gennemført quizzen. Se videoen om hjertet eller udforsk kroppen for at lære mere om sammenhænge mellem køn og hjerte-kar-sygdomme.",
       resultsCorrect: "rigtige svar",
       questions: [
         {
           question:
-            "Mænd dør tidligere af hjerte-kar-sygdomme end kvinder. Hvor mange år tidligere?",
+            "Mænd dør tidligere af hjerte-kar-sygdomme end kvinder gør. Hvor mange år tidligere?",
           options: ["3 år", "7 år", "15 år"],
           correct: 1,
           explanation:
-            "Mænd dør i gennemsnit syv år tidligere af hjerte-kar-sygdomme end kvinder. Alligevel ved vi stadig mindre om de hjerte-kar-sygdomme, der næsten udelukkende rammer kvinder.",
+            "Mænd dør i gennemsnit syv år tidligere af hjerte-kar-sygdomme end kvinder gør. Alligevel ved vi stadig mindre om de hjerte-kar-sygdomme, der næsten udelukkende rammer kvinder.",
         },
         {
           question:
-            "Hvornår begynder kvinders risiko for at blive ramt af en hjertekarsygdom at stige meget hurtigt?",
+            "Hvornår begynder kvinders risiko for at blive ramt af en hjerte-kar-sygdom at stige meget hurtigt?",
           options: [
             "Når menstruationen begynder i teenageårene",
             "Ved overgangsalderen omkring 50 år",
@@ -249,11 +249,11 @@ const translations = {
         },
         {
           question:
-            "Hvor mange procent af danskere dør af en hjerte-kar-sygdom?",
-          options: [" Ca. 5% ", " Ca. 50% ", " Ca. 20% "],
+            "Hvor mange procent af danskerne dør af en hjerte-kar-sygdom?",
+          options: [" Ca. 5 % ", " Ca. 50 % ", " Ca. 20 % "],
           correct: 2,
           explanation:
-            "Omkring 20 % af danskerne dør i dag af hjerte-kar-sygdomme. Hjerte-kar-sygdomme er derfor nogle af de dødeligste sygdomme – kun overgået af kræft.",
+            "Omkring 20 % af danskerne dør i dag af hjerte-kar-sygdomme. Hjerte-kar-sygdomme er derfor nogle af de dødeligste sygdomme",
         },
         {
           question:
@@ -269,7 +269,7 @@ const translations = {
         },
         {
           question:
-            "Hvilken af disse risikofaktor kan lede til en hjertesygdom?",
+            "Hvilken af disse faktorer kan øge risikoen for hjerte-kar-sygdom?",
           options: [
             " Rygning ",
             " Overvægt ",
@@ -293,20 +293,20 @@ const translations = {
           ],
           correct: 1,
           explanation:
-            "Fedt omkring maven og de indre organer er særligt skadeligt for hjertet. Mænds fedt sætter sig typisk omkring maven, mens kvinders fedt også sætter sig på lår, hofter og bryster. Derfor er mænds overvægt “farligere” end kvinders.",
+            "Fedt omkring maven og de indre organer er særligt skadeligt for hjertet. Mænds fedt sætter sig typisk omkring maven, mens kvinders fedt også sætter sig på lår, hofter og bryster. Derfor er mænds overvægt farligere for hjertet end kvinders overvægt.",
         },
         {
           question:
             "Kvinders hjerter er 'oversete' i forskningen, men på hvilken måde?",
           options: [
             "Forskere har historisk set troet, at mænd og kvinders syge hjerter skulle have samme behandling.",
-            "Der er mindre viden om, hvordan f.eks. rygning, depression og diabetes påvirker kvinders hjerter anderledes end mænds.",
+            "Man ved mindre om, hvordan f.eks. rygning påvirker kvinders hjerter anderledes end mænds",
             "Der er mindre viden om de hjerte-kar-sygdomme, som oftere rammer kvinder.",
           ],
           correct: [0, 1, 2],
           isMultiple: true,
           explanation:
-            "Kvinders hjerter er oversete på flere måder. Vi ved mindre om, hvad der gør særligt kvinders hjerter syge, og hvorfor det sker. Vi ved også mindre om de sygdomme, der især rammer kvinder. Dyk ned i organerne, eller se videoen for at få mere viden om kvinders oversete hjerter.",
+            "Kvinders hjerter er oversete på flere måder. Vi ved mindre om, hvad der gør kvinders hjerter syge, og hvorfor det sker. Vi ved også mindre om de sygdomme, der især rammer kvinder. Dyk ned i organerne, eller se videoen for at få mere viden om kvinders oversete hjerter.",
         },
       ],
     },
@@ -436,7 +436,7 @@ const translations = {
         },
         {
           heading: "The overlooked connection",
-          body: "Men die 7 years earlier than women from cardiovascular disease because estrogen protects women's hearts. However, new research shows that hormonal related conditions, such as endometriosis and PCOS, can increase the risk of developing cardiovascular disease by up to 30%. More research in this area is still needed.",
+          body: "Men die seven years earlier than women from cardiovascular disease because estrogen protects women's hearts. However, new research shows that hormonal related conditions, such as endometriosis and PCOS, can increase the risk of developing cardiovascular disease by up to 30%. More research in this area is still needed.",
         },
       ],
     },
@@ -518,7 +518,7 @@ const translations = {
     quiz: {
       title: "Quiz",
       intro:
-        "Test your knowledge about the heart and heart disease. You will be asked 7 questions, and after each answer you will receive an explanation. Good luck!",
+        "Test your knowledge of the heart and cardiovascular disease. You will be asked seven questions, and you will receive an explanation after each answer. Have fun!",
       startBtn: "Start",
       nextBtn: "Next question",
       resultsTitle: "Results",
@@ -537,7 +537,7 @@ const translations = {
       resultsBasedOn: "(Based on",
       resultsAttempts: "attempts in total)",
       completionMessage:
-        "Congratulations! You have completed the quiz. Watch the video or explore the body to learn more about gender and cardiovascular disease.",
+        "Congratulations! You have completed the quiz. Watch the video or explore the different body parts to find out more about gender differences in cardiovascular disease",
       resultsCorrect: "correct answers",
       questions: [
         {
@@ -606,14 +606,14 @@ const translations = {
           ],
           correct: 0,
           explanation:
-            "Fat around the stomach area and the internal organs is especially harmful to the heart. Men’s fat typically sits around the stomach while women’s fat also sits onthe hips, thighs, and breasts. Men’s obesity is therefore, on average, more dangerous than women’s obesity.",
+            "Fat around the stomach area and the internal organs is especially harmful to the heart. Men’s fat typically sits around the stomach while women’s fat also sits on the hips, thighs, and breasts. Men’s obesity is therefore, on average, more dangerous than women’s obesity.",
         },
         {
           question:
             "Women’s hearts are “overlooked” in research, but in what way?",
           options: [
             "Researchers have historically believed that men and women’s hearts needed the same treatment.",
-            "There is less knowledge on how e.g. smoking, depression, and diabetes affect women’s hearts differently than men’s hearts.",
+            "There is less knowledge on how e.g. smoking, affect women’s hearts differently than men’s hearts.",
             "There is less knowledge on the cardiovascular diseases that more often affect women.",
           ],
           correct: [0, 1, 2],
