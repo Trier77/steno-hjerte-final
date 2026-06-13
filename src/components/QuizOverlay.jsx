@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";
+import hjerte from "../assets/hjerte25n.mp4";
 
 // Nøgler til localStorage så vi kan huske scores og forsøg på tværs af sessioner
 const STORAGE_KEY = "hjerteskærm_quiz_scores";
@@ -258,6 +259,16 @@ function QuizOverlay({ onClose, visible }) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
+        <video
+                src={hjerte}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute opacity-75 blur-md"
+                
+              />
+
         {/* Luk-knap */}
         <button
           onClick={handleCloseAttempt}
