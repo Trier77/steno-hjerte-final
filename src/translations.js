@@ -38,18 +38,18 @@ const translations = {
         },
         {
           heading: "Stråling mod brystkræft kan skade hjertet",
-          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem (behandling af) brystkræft og hjertesygdom er især vokset indenfor de seneste 20-25 år.",
+          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem behandling af brystkræft og hjertesygdom er især vokset indenfor de seneste 20-25 år.",
           hint: "Du fik fjernet kræftknuden, men du kom også til at ramme hjertet!",
         },
       ],
     },
     startside: {
       heading: "Det oversete hjerte",
-      body: "Tryk på kroppen, og undersøg oversete sammenhænge mellem køn og hjerte-kar-sygdomme.",
+      body: "Tryk på kroppen, og undersøg sammenhænge mellem køn og hjerte-kar-sygdomme.",
     },
     hjerteknap: {
       heading: "Om hjertet",
-      quiz: "Quiz om hjertet",
+      quiz: "Quiz",
     },
     depression: {
       neurons: [
@@ -85,7 +85,7 @@ const translations = {
         },
         {
           heading: "Risikoen for hjerte-kar-sygdom\nuden diabetes",
-          body: "Hvis 10 mænd omkring 50-60 år uden diabetes bliver ramt af en hjerte-kar-sygdom, vil omkring 7 kvinder uden diabetes blive ramt.",
+          body: "Flere mænd bliver ramt af hjerte-kar-sygdom tidligt i livet. Hvis 10 mænd omkring 50-60 år uden diabetes bliver ramt af en hjerte-kar-sygdom, vil omkring 7 kvinder uden diabetes blive ramt.",
         },
         {
           heading: "Kvinders hjerter tager større skade af diabetes",
@@ -205,7 +205,7 @@ const translations = {
     quiz: {
       title: "Quiz",
       intro:
-        "Test din viden om hjertet og hjertesygdomme. Du vil blive stillet 7 spørgsmål, og efter hvert svar får du en forklaring. God fornøjelse!",
+        "Test din viden om hjertet og hjerte-kar-sygdomme. Du vil blive stillet syv spørgsmål, og efter hvert svar får du en forklaring. God fornøjelse!",
       startBtn: "Start",
       nextBtn: "Næste spørgsmål",
       resultsTitle: "Resultat",
@@ -224,20 +224,20 @@ const translations = {
       resultsBasedOn: "(Baseret på",
       resultsAttempts: "forsøg i alt)",
       completionMessage:
-        "Tillykke! Du har gennemført quizzen. Se videoen eller udforsk kroppen for at lære mere om køn og hjerte-kar-sygdomme.",
+        "Tillykke! Du har gennemført quizzen. Se videoen om hjertet eller udforsk kroppen for at lære mere om sammenhænge mellem køn og hjerte-kar-sygdomme.",
       resultsCorrect: "rigtige svar",
       questions: [
         {
           question:
-            "Mænd dør tidligere af hjerte-kar-sygdomme end kvinder. Hvor mange år tidligere?",
+            "Mænd dør tidligere af hjerte-kar-sygdomme end kvinder gør. Hvor mange år tidligere?",
           options: ["3 år", "7 år", "15 år"],
           correct: 1,
           explanation:
-            "Mænd dør i gennemsnit syv år tidligere af hjerte-kar-sygdomme end kvinder. Alligevel ved vi stadig mindre om de hjerte-kar-sygdomme, der næsten udelukkende rammer kvinder.",
+            "Mænd dør i gennemsnit syv år tidligere af hjerte-kar-sygdomme end kvinder gør. Alligevel ved vi stadig mindre om de hjerte-kar-sygdomme, der næsten udelukkende rammer kvinder.",
         },
         {
           question:
-            "Hvornår begynder kvinders risiko for at blive ramt af en hjertekarsygdom at stige meget hurtigt?",
+            "Hvornår begynder kvinders risiko for at blive ramt af en hjerte-kar-sygdom at stige meget hurtigt?",
           options: [
             "Når menstruationen begynder i teenageårene",
             "Ved overgangsalderen omkring 50 år",
@@ -249,11 +249,11 @@ const translations = {
         },
         {
           question:
-            "Hvor mange procent af danskere dør af en hjerte-kar-sygdom?",
-          options: [" Ca. 5% ", " Ca. 50% ", " Ca. 20% "],
+            "Hvor mange procent af danskerne dør af en hjerte-kar-sygdom?",
+          options: [" Ca. 5 % ", " Ca. 50 % ", " Ca. 20 % "],
           correct: 2,
           explanation:
-            "Omkring 20 % af danskerne dør i dag af hjerte-kar-sygdomme. Hjerte-kar-sygdomme er derfor nogle af de dødeligste sygdomme – kun overgået af kræft.",
+            "Omkring 20 % af danskerne dør i dag af hjerte-kar-sygdomme. Hjerte-kar-sygdomme er derfor nogle af de dødeligste sygdomme",
         },
         {
           question:
@@ -269,7 +269,7 @@ const translations = {
         },
         {
           question:
-            "Hvilken af disse risikofaktor kan lede til en hjertesygdom?",
+            "Hvilken af disse faktorer kan øge risikoen for hjerte-kar-sygdom?",
           options: [
             " Rygning ",
             " Overvægt ",
@@ -293,20 +293,20 @@ const translations = {
           ],
           correct: 1,
           explanation:
-            "Fedt omkring maven og de indre organer er særligt skadeligt for hjertet. Mænds fedt sætter sig typisk omkring maven, mens kvinders fedt også sætter sig på lår, hofter og bryster. Derfor er mænds overvægt “farligere” end kvinders.",
+            "Fedt omkring maven og de indre organer er særligt skadeligt for hjertet. Mænds fedt sætter sig typisk omkring maven, mens kvinders fedt også sætter sig på lår, hofter og bryster. Derfor er mænds overvægt farligere for hjertet end kvinders overvægt.",
         },
         {
           question:
             "Kvinders hjerter er 'oversete' i forskningen, men på hvilken måde?",
           options: [
             "Forskere har historisk set troet, at mænd og kvinders syge hjerter skulle have samme behandling.",
-            "Der er mindre viden om, hvordan f.eks. rygning, depression og diabetes påvirker kvinders hjerter anderledes end mænds.",
+            "Man ved mindre om, hvordan f.eks. rygning påvirker kvinders hjerter anderledes end mænds",
             "Der er mindre viden om de hjerte-kar-sygdomme, som oftere rammer kvinder.",
           ],
           correct: [0, 1, 2],
           isMultiple: true,
           explanation:
-            "Kvinders hjerter er oversete på flere måder. Vi ved mindre om, hvad der gør særligt kvinders hjerter syge, og hvorfor det sker. Vi ved også mindre om de sygdomme, der især rammer kvinder. Dyk ned i organerne, eller se videoen for at få mere viden om kvinders oversete hjerter.",
+            "Kvinders hjerter er oversete på flere måder. Vi ved mindre om, hvad der gør kvinders hjerter syge, og hvorfor det sker. Vi ved også mindre om de sygdomme, der især rammer kvinder. Dyk ned i organerne, eller se videoen for at få mere viden om kvinders oversete hjerter.",
         },
       ],
     },
@@ -332,7 +332,7 @@ const translations = {
           "Today men and women smoke at equal rates, but research has shown that smoking has a more harmful effect on women's hearts. Researchers do not yet know why. If a woman smokes, her risk of developing cardiovascular disease increases with 25% more than a man’s.",
         body: "",
         stats: [
-          { value: "25%", description: "Higher risk for women than men" },
+          { value: "25%", description: "increased risk for women than men" },
         ],
       },
       dragLabel: "Smoking and cardiovascular disease — Past and present",
@@ -345,7 +345,7 @@ const translations = {
           hint: "Try to remove the tumour with radiation",
         },
         {
-          heading: "Radiation can damage the heart.",
+          heading: "Radiation can damage the heart",
           body: "You removed the tumor, but some of the radiation also hit the heart. This can cause scarring on the heart muscle, which can lead to cardiovascular disease. Research on the connection between breast cancer treatment and heart disease has increased over the past 20-25 years.",
           hint: "You removed the tumor - but the heart was also negatively affected!",
         },
@@ -353,7 +353,7 @@ const translations = {
     },
     startside: {
       heading: "The Overlooked Heart",
-      body: "Press on the body and dive into overlooked connections between gender and cardiovascular diseases.",
+      body: "Press on the body and dive into connections between gender and cardiovascular diseases.",
     },
     hjerteknap: {
       heading: "on heart disease",
@@ -374,7 +374,7 @@ const translations = {
           body: "New research shows that individuals who experience depression have a higher risk of developing cardiovascular disease later in life.",
         },
         {
-          heading: "Cardiovascular diseases are worsened by depression",
+          heading: "Cardiovascular disease is worsened by depression",
           body: "Those who already have cardiovascular disease and develop depression will experience a faster progression of the disease.",
         },
       ],
@@ -392,8 +392,8 @@ const translations = {
           hint: "Use the slider to learn more about how diabetes affects the risk of a cardiovascular disease",
         },
         {
-          heading: "The risk for cardiovascular disease\nwithout diabetes.",
-          body: "If 10 men without diabetes between the ages of 50 to 60 develop a cardiovascular disease, about 7 women without diabetes will be affected.",
+          heading: "The risk for cardiovascular disease\nwithout diabetes",
+          body: "Cardiovascular disease tends to occur earlier in men than in women. If 10 men without diabetes between the ages of 50 to 60 develop a cardiovascular disease, about 7 women without diabetes will be affected.",
         },
         {
           heading: "Women's hearts are more damaged by diabetes",
@@ -431,12 +431,12 @@ const translations = {
         },
         {
           heading: "Women's and men's blood vessels are equally affected",
-          body: "About 20-25 years after a woman enters menopause, her risk of developing a cardiovascular disease is the same as men's.",
+          body: "About 20-25 years after women enter menopause, their risk of developing a cardiovascular disease is the same as men's.",
           caption: "● Calcification and stiffening of blood vessels continues.",
         },
         {
           heading: "The overlooked connection",
-          body: "Men die 7 years earlier than women from cardiovascular disease because estrogen protects women's hearts. However, new research shows that hormonal related conditions, such as endometriosis and PCOS, can increase the risk of developing cardiovascular disease by up to 30%. More research in this area is still needed.",
+          body: "Men die seven years earlier than women from cardiovascular disease because estrogen protects women's hearts. However, new research shows that hormonal related conditions, such as endometriosis and PCOS, can increase the risk of developing cardiovascular disease by up to 30%. More research in this area is still needed.",
         },
       ],
     },
@@ -444,7 +444,7 @@ const translations = {
       labels: [
         "Pregnancy",
         "Gestational\n\ndiabetes",
-        "Pre-eclampsia",
+        "Preeclampsia",
         "Premature birth",
       ],
       steps: [
@@ -455,11 +455,11 @@ const translations = {
           hintEnd: "the gauge",
         },
         {
-          heading: "Gestational diabetes can damage the heart.",
+          heading: "Gestational diabetes can damage the heart",
           body: "About 3-4% of all pregnant women develop diabetes during pregnancy. The condition usually disappears shortly after giving birth. New research indicates that gestational diabetes can be an important indicator of increased risk of cardiovascular disease later in life.",
         },
         {
-          heading: "Pre-eclampsia and the heart",
+          heading: "Preeclampsia and the heart",
           body: "Preeclampsia is a condition you can develop while pregnant. Some of the symptoms include headaches and high blood pressure. New research shows that women who have had preeclampsia have a higher risk of developing a cardiovascular disease later in life.",
         },
         {
@@ -518,7 +518,7 @@ const translations = {
     quiz: {
       title: "Quiz",
       intro:
-        "Test your knowledge about the heart and heart disease. You will be asked 7 questions, and after each answer you will receive an explanation. Good luck!",
+        "Test your knowledge of the heart and cardiovascular disease. You will be asked seven questions, and you will receive an explanation after each answer. Have fun!",
       startBtn: "Start",
       nextBtn: "Next question",
       resultsTitle: "Results",
@@ -537,7 +537,7 @@ const translations = {
       resultsBasedOn: "(Based on",
       resultsAttempts: "attempts in total)",
       completionMessage:
-        "Congratulations! You have completed the quiz. Watch the video or explore the body to learn more about gender and cardiovascular disease.",
+        "Congratulations! You have completed the quiz. Watch the video or explore the different body parts to find out more about gender differences in cardiovascular disease",
       resultsCorrect: "correct answers",
       questions: [
         {
@@ -606,14 +606,14 @@ const translations = {
           ],
           correct: 0,
           explanation:
-            "Fat around the stomach area and the internal organs is especially harmful to the heart. Men’s fat typically sits around the stomach while women’s fat also sits onthe hips, thighs, and breasts. Men’s obesity is therefore, on average, more dangerous than women’s obesity.",
+            "Fat around the stomach area and the internal organs is especially harmful to the heart. Men’s fat typically sits around the stomach while women’s fat also sits on the hips, thighs, and breasts. Men’s obesity is therefore, on average, more dangerous than women’s obesity.",
         },
         {
           question:
             "Women’s hearts are “overlooked” in research, but in what way?",
           options: [
             "Researchers have historically believed that men and women’s hearts needed the same treatment.",
-            "There is less knowledge on how e.g. smoking, depression, and diabetes affect women’s hearts differently than men’s hearts.",
+            "There is less knowledge on how e.g. smoking, affect women’s hearts differently than men’s hearts.",
             "There is less knowledge on the cardiovascular diseases that more often affect women.",
           ],
           correct: [0, 1, 2],

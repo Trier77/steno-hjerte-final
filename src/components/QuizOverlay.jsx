@@ -379,8 +379,41 @@ function QuizOverlay({ onClose, visible }) {
           {/* FORKLARING */}
           {screen === SCREEN_EXPLANATION && (
             <div className="flex flex-col items-center justify-between h-full px-10 py-16">
-              <div className="mt-8">
-                <span className="font-display font-semibold text-primary text-7xl">
+              <div className="mt-8 flex items-center gap-4 bg-secondary rounded-full px-8 py-4">
+                <div className="flex items-center justify-center rounded-full bg-primary/20 w-16 h-16 shrink-0">
+                  {wasCorrect ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-9 h-9"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={3}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-9 h-9"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={3}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  )}
+                </div>
+                <span className="font-display font-semibold text-primary text-6xl">
                   {wasCorrect ? t.correctLabel : t.wrongLabel}
                 </span>
               </div>

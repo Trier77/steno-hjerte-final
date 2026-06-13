@@ -150,7 +150,7 @@ export default function Hormoner() {
           <motion.div
             key={activeIndex}
             className="shrink-0 overflow-hidden"
-            style={{ height: "335px" }}
+            style={{ height: "300px" }}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -174,7 +174,7 @@ export default function Hormoner() {
             </motion.p>
           </motion.div>
 
-          <div style={{ height: "2rem" }}>
+          <div className="mb-4" style={{ height: "2rem" }}>
             <AnimatePresence mode="wait">
               {content.caption && (
                 <motion.p
