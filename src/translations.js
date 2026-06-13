@@ -38,18 +38,18 @@ const translations = {
         },
         {
           heading: "Stråling mod brystkræft kan skade hjertet",
-          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem (behandling af) brystkræft og hjertesygdom er især vokset indenfor de seneste 20-25 år.",
+          body: "Du fjernede kræftknuden, men der var også en del af strålingen, der ramte hjertet. Det kan give ar på hjertemusklen og føre til sygdom. Forskningen i sammenhængen mellem behandling af brystkræft og hjertesygdom er især vokset indenfor de seneste 20-25 år.",
           hint: "Du fik fjernet kræftknuden, men du kom også til at ramme hjertet!",
         },
       ],
     },
     startside: {
       heading: "Det oversete hjerte",
-      body: "Tryk på kroppen, og undersøg oversete sammenhænge mellem køn og hjerte-kar-sygdomme.",
+      body: "Tryk på kroppen, og undersøg sammenhænge mellem køn og hjerte-kar-sygdomme.",
     },
     hjerteknap: {
       heading: "Om hjertet",
-      quiz: "Quiz om hjertet",
+      quiz: "Quiz",
     },
     depression: {
       neurons: [
@@ -85,7 +85,7 @@ const translations = {
         },
         {
           heading: "Risikoen for hjerte-kar-sygdom\nuden diabetes",
-          body: "Hvis 10 mænd omkring 50-60 år uden diabetes bliver ramt af en hjerte-kar-sygdom, vil omkring 7 kvinder uden diabetes blive ramt.",
+          body: "Flere mænd bliver ramt af hjerte-kar-sygdom tidligt i livet. Hvis 10 mænd omkring 50-60 år uden diabetes bliver ramt af en hjerte-kar-sygdom, vil omkring 7 kvinder uden diabetes blive ramt.",
         },
         {
           heading: "Kvinders hjerter tager større skade af diabetes",
@@ -332,7 +332,7 @@ const translations = {
           "Today men and women smoke at equal rates, but research has shown that smoking has a more harmful effect on women's hearts. Researchers do not yet know why. If a woman smokes, her risk of developing cardiovascular disease increases with 25% more than a man’s.",
         body: "",
         stats: [
-          { value: "25%", description: "Higher risk for women than men" },
+          { value: "25%", description: "increased risk for women than men" },
         ],
       },
       dragLabel: "Smoking and cardiovascular disease — Past and present",
@@ -345,7 +345,7 @@ const translations = {
           hint: "Try to remove the tumour with radiation",
         },
         {
-          heading: "Radiation can damage the heart.",
+          heading: "Radiation can damage the heart",
           body: "You removed the tumor, but some of the radiation also hit the heart. This can cause scarring on the heart muscle, which can lead to cardiovascular disease. Research on the connection between breast cancer treatment and heart disease has increased over the past 20-25 years.",
           hint: "You removed the tumor - but the heart was also negatively affected!",
         },
@@ -353,7 +353,7 @@ const translations = {
     },
     startside: {
       heading: "The Overlooked Heart",
-      body: "Press on the body and dive into overlooked connections between gender and cardiovascular diseases.",
+      body: "Press on the body and dive into connections between gender and cardiovascular diseases.",
     },
     hjerteknap: {
       heading: "on heart disease",
@@ -374,7 +374,7 @@ const translations = {
           body: "New research shows that individuals who experience depression have a higher risk of developing cardiovascular disease later in life.",
         },
         {
-          heading: "Cardiovascular diseases are worsened by depression",
+          heading: "Cardiovascular disease is worsened by depression",
           body: "Those who already have cardiovascular disease and develop depression will experience a faster progression of the disease.",
         },
       ],
@@ -392,8 +392,8 @@ const translations = {
           hint: "Use the slider to learn more about how diabetes affects the risk of a cardiovascular disease",
         },
         {
-          heading: "The risk for cardiovascular disease\nwithout diabetes.",
-          body: "If 10 men without diabetes between the ages of 50 to 60 develop a cardiovascular disease, about 7 women without diabetes will be affected.",
+          heading: "The risk for cardiovascular disease\nwithout diabetes",
+          body: "Cardiovascular disease tends to occur earlier in men than in women. If 10 men without diabetes between the ages of 50 to 60 develop a cardiovascular disease, about 7 women without diabetes will be affected.",
         },
         {
           heading: "Women's hearts are more damaged by diabetes",
@@ -431,7 +431,7 @@ const translations = {
         },
         {
           heading: "Women's and men's blood vessels are equally affected",
-          body: "About 20-25 years after a woman enters menopause, her risk of developing a cardiovascular disease is the same as men's.",
+          body: "About 20-25 years after women enter menopause, their risk of developing a cardiovascular disease is the same as men's.",
           caption: "● Calcification and stiffening of blood vessels continues.",
         },
         {
@@ -444,7 +444,7 @@ const translations = {
       labels: [
         "Pregnancy",
         "Gestational\n\ndiabetes",
-        "Pre-eclampsia",
+        "Preeclampsia",
         "Premature birth",
       ],
       steps: [
@@ -455,11 +455,11 @@ const translations = {
           hintEnd: "the gauge",
         },
         {
-          heading: "Gestational diabetes can damage the heart.",
+          heading: "Gestational diabetes can damage the heart",
           body: "About 3-4% of all pregnant women develop diabetes during pregnancy. The condition usually disappears shortly after giving birth. New research indicates that gestational diabetes can be an important indicator of increased risk of cardiovascular disease later in life.",
         },
         {
-          heading: "Pre-eclampsia and the heart",
+          heading: "Preeclampsia and the heart",
           body: "Preeclampsia is a condition you can develop while pregnant. Some of the symptoms include headaches and high blood pressure. New research shows that women who have had preeclampsia have a higher risk of developing a cardiovascular disease later in life.",
         },
         {
