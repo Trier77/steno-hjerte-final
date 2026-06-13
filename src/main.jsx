@@ -5,6 +5,11 @@ import { LanguageProvider } from "./context/LanguageContext";
 import "./App.css";
 import App from "./App.jsx";
 
+// Forhindrer browser-swipe-navigation (tilbage/frem) på touchskærme globalt
+document.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+}, { passive: false });
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <LanguageProvider>
