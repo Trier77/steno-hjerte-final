@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {motion} from "framer-motion";
 import BackButton from "../components/BackButton";
 import FlagButton from "../components/FlagButton";
@@ -9,12 +9,21 @@ import translations from "../translations";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useFadeNavigate } from "../hooks/useFadeNavigate";
 import { useIdleTimeout } from "../hooks/useIdleTimeout";
+import gravid from "../assets/gravid.png"
+import babymk from "../assets/babymk.png"
+import diabetes from "../assets/grDiabetes.png"
+import blodtryk from "../assets/blodtryk.png"
+import tidligBaby from "../assets/tidligBaby.png"
+import { div } from "framer-motion/client";
+
+
 
 function Graviditet() {
   const { language, visible } = useLanguage();
   const t = translations[language]?.graviditet;
   const fadeVisible = useFadeIn();
   const { fadeNavigate, fading } = useFadeNavigate();
+  
 
    // currentStep følger hvilket af de 4 segmenter der er aktivt i speedometeret (0-3)
   const [currentStep, setCurrentStep] = useState(0);
@@ -26,14 +35,44 @@ function Graviditet() {
   }, []);
 
   const step = t.steps[currentStep];
+  
+
+ 
 
   // Midlertidig placeholder,  udskift til rigtige billeder senere
-const PLACEHOLDERS = [
-  "https://placehold.co/800x200/c8cdd6/white?text=Graviditet-billede",
-  "https://placehold.co/800x200/c8cdd6/white?text=Graviditetsdiabetes-billede",
-  "https://placehold.co/800x200/c8cdd6/white?text=Svangerskabsforgiftning-billede",
-  "https://placehold.co/800x200/c8cdd6/white?text=For+tidlig+fødsel-billede",
+// Billeder der stables oven på hinanden til første step
+const ILLUSTRATIONS = [
+  <div className="relative flex justify-center h-full w-full" >
+  <img src={gravid} alt="" className="absolute inset-0 object-contain w-full  h-370 z-0" />
+  <img src={babymk} alt="" className="absolute inset-0 object-contain w-full h-67 z-1 top-167 opacity-40 rotate-270" />
+</div>,
+
+<div className="relative flex justify-center h-full w-full">
+    <img src={diabetes} alt="" className="absolute inset-0 object-contain w-full h-165 z-2 top-40 left-80" />
+    <div className="relative h-full w-full ">
+      <img src={babymk} alt="" className="absolute inset-0 object-contain w-full h-67 z-1 top-167 opacity-40 rotate-270" />
+      <img src={gravid} alt="" className="absolute inset-0 object-contain w-full  h-370 z-0" />
+    </div>
+    
+  </div>,
+  
+  <div className="relative flex justify-center h-full w-full">
+    <img src={blodtryk} alt="" className="absolute inset-0 object-contain w-full h-100 z-1 top-67 left-98"  />
+    <img src={gravid} alt="" className="absolute inset-0 object-contain w-full  h-370 z-0" />
+    <img src={babymk} alt="" className="absolute inset-0 object-contain w-full h-67 z-1 top-167 opacity-40 rotate-270" />
+  </div>,
+  
+  <div className="relative flex justify-center h-full w-full">
+    <img src={tidligBaby} alt="" className="absolute inset-0 object-contain w-full  h-370 z-0" />
+    </div>
 ];
+
+ const [illustrationVisible, setIllustrationVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIllustrationVisible(true), 1100);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className={`relative w-full h-screen overflow-hidden flex flex-col page-fade-in ${fadeVisible ? "visible" : ""}`}>
@@ -47,19 +86,18 @@ const PLACEHOLDERS = [
       
       <motion.div
         key={currentStep}
-        className="absolute z-20 flex justify-center"
-        style={{ bottom: "55vh", left: 0, right: 0 }}
+        className="absolute z-0 flex justify-center"
+        style={{ top: "-3vh", left: 0, right: 0, scale: 0.885 }}
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: illustrationVisible ? 1 : 0, y: illustrationVisible ? 0 : 20 }}
         transition={{ duration: 0.4 }}
       >
-        {/* Tjekker om der er illustration til step'et ellers tager den placeholderbilledet */}
-        <img
-          src={step.illustration ?? PLACEHOLDERS[currentStep]}
-          alt=""
-          className="object-contain"
-          style={{ height: "180px" }}
-        />
+        
+        
+        {step.illustration
+          ? <img src={step.illustration} alt="" className="object-contain " style={{ height: "180px" }} />
+          : ILLUSTRATIONS[currentStep]
+        }
       </motion.div>
 
       
