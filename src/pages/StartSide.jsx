@@ -91,8 +91,8 @@ export default function StartSide() {
           </h2>
         </section>
 
-        <HotspotButton 
-          className="depri-knap left-134.25 top-100" //Justér placering af hotspots her 
+        <HotspotButton
+          className="depri-knap left-134.25 top-100" //Justér placering af hotspots her
           onClick={() => goTo("/depression")}
         />
         <HotspotButton
@@ -127,7 +127,7 @@ export default function StartSide() {
           label={t.hjerteknap.heading}
           onClick={openVideo}
         />
-        <NavButton icon="quiz" label={t.hjerteknap.quiz} onClick={openQuiz} />
+        <NavButton icon="trophy" label={t.hjerteknap.quiz} onClick={openQuiz} />
       </section>
 
       {/* Fade to black overlay */}
