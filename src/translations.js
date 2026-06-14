@@ -356,8 +356,8 @@ const translations = {
       body: "Press on the body and dive into connections between gender and cardiovascular diseases.",
     },
     hjerteknap: {
-      heading: "on heart disease",
-      quiz: "heart quiz",
+      heading: "On heart disease",
+      quiz: "Heart quiz",
     },
     depression: {
       neurons: [
