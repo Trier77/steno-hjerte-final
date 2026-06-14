@@ -2,7 +2,7 @@ import krop from "../assets/kropudenbg.svg";
 import NavButton from "../components/NavButton";
 import HotspotButton from "../components/HotspotButton";
 import { useNavigate } from "react-router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import VideoOverlay from "../components/VideoOverlay";
 import HjerteDa from "../assets/mette7da.mp4";
 import HjerteEn from "../assets/mette7en.mp4";
@@ -48,6 +48,30 @@ export default function StartSide() {
     },
     [fading, navigate],
   );
+
+  useEffect(() => {
+  if (!showVideo && !showQuiz) return;
+
+  let timer;
+
+  const start = () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      closeVideo();
+      closeQuiz();
+    }, 2 * 60 * 1000);
+  };
+
+  const events = ["touchstart", "mousemove", "mousedown", "keydown"];
+  events.forEach((e) => window.addEventListener(e, start));
+  start(); // Start timeren med det samme
+
+  return () => {
+    clearTimeout(timer);
+    events.forEach((e) => window.removeEventListener(e, start));
+  };
+}, [showVideo, showQuiz]);
+
 
   return (
     <div
