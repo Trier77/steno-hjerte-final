@@ -21,7 +21,7 @@ function TekstModul({ step, currentStep }) {
       style={{
         height: "30vh",
         backgroundColor: "rgba(241,241,241,0.7)",
-        backdropFilter: "blur(12px)",
+        backdropFilter: "blur(52px)",
       }}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}

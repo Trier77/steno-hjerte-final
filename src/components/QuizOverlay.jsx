@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import translations from "../translations";
-import hjerte from "../assets/hjerte25n.mp4";
+import hjerte from "../assets/hjerte25ns.mp4";
 
 // Nøgler til localStorage så vi kan huske scores og forsøg på tværs af sessioner
 const STORAGE_KEY = "hjerteskærm_quiz_scores";
@@ -183,37 +183,49 @@ function QuizOverlay({ onClose, visible }) {
     transitionTo(SCREEN_QUESTION);
   };
 
-  const handleAnswer = (index) => {
-    if (selectedAnswer !== null) return;
-    const correct = question.isMultiple
-      ? question.correct.includes(index)
-      : index === question.correct;
-    setSelectedAnswer(index);
-    setWasCorrect(correct);
-    if (correct) setScore((s) => s + 1);
-    // Lille forsinkelse så brugeren kan se sit valg markeret inden farven skifter
-    setTimeout(() => setShowCorrect(true), 800);
-    setTimeout(() => transitionTo(SCREEN_EXPLANATION), 1600);
-  };
+  const answerTimersRef = useRef([]);
 
-  const handleNext = () => {
-    const nextQ = currentQ + 1;
-    // Nulstil svar-state FØR vi transitionerer, så fade-out ikke ser gammelt indhold
-    setSelectedAnswer(null);
-    setShowCorrect(false);
-    setWasCorrect(null);
-    if (nextQ >= t.questions.length) {
-      // Quizzen er færdig — gem score og beregn statistik
-      incrementAttempts();
-      const allScores = saveScore(score, t.questions.length);
-      const computed = calcStats(allScores, score, t.questions.length);
-      setStats(computed);
-      transitionTo(SCREEN_RESULTS);
-    } else {
+  const handleAnswer = (index) => {
+  if (selectedAnswer !== null) return;
+  const correct = question.isMultiple
+    ? question.correct.includes(index)
+    : index === question.correct;
+  setSelectedAnswer(index);
+  setWasCorrect(correct);
+  if (correct) setScore((s) => s + 1);
+
+  // Gem timer-referencer så de kan ryddes op
+  const t1 = setTimeout(() => setShowCorrect(true), 800);
+  const t2 = setTimeout(() => transitionTo(SCREEN_EXPLANATION), 1600);
+  answerTimersRef.current = [t1, t2];
+};
+
+ const handleNext = () => {
+  answerTimersRef.current.forEach(clearTimeout);
+  answerTimersRef.current = [];
+
+  const nextQ = currentQ + 1;
+  setSelectedAnswer(null);
+  setShowCorrect(false);
+  
+
+  if (nextQ >= t.questions.length) {
+    incrementAttempts();
+    const allScores = saveScore(score, t.questions.length);
+    const computed = calcStats(allScores, score, t.questions.length);
+    setStats(computed);
+    transitionTo(SCREEN_RESULTS);
+  } else {
+    // Fade ud først, skift spørgsmål BAGEFTER så det gamle ikke vises med nyt indhold
+    setFadeIn(false);
+    setTimeout(() => {
       setCurrentQ(nextQ);
-      transitionTo(SCREEN_QUESTION);
-    }
-  };
+      setWasCorrect(null);
+      setScreen(SCREEN_QUESTION);
+      setFadeIn(true);
+    }, 300);
+  }
+};
 
   const handlePlayAgain = () => {
     setCurrentQ(0);
